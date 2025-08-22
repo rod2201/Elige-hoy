@@ -13,6 +13,8 @@
       rel="stylesheet"
     />
     <link rel="icon" href="/img/elige_hoy.png" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css" />
+
     <style>
       :root {
         --morado: #522c84;
@@ -60,97 +62,7 @@
         }
       }
 
-      /* NAV */
-      nav {
-        background: #fff;
-        display: flex;
-        align-items: center;
-        padding: 10px 20px;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        box-shadow: var(--shadow-sm);
-        transition: 0.3s;
-      }
-      nav a {
-        color: #275f34;
-        text-decoration: none;
-        padding: 14px 20px;
-        display: inline-block;
-      }
-      nav a:hover {
-        background: var(--morado);
-        color: #fff;
-        border-radius: 8px;
-      }
-
-      .menu {
-        display: flex;
-        flex-grow: 1;
-        justify-content: center;
-      }
-      .hamburger {
-        display: none;
-      }
-
-      /* Submenú */
-      .has-submenu-container {
-        position: relative;
-      }
-
-      .submenu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 0.95),
-          rgba(255, 255, 255, 0.7)
-        );
-        backdrop-filter: blur(10px);
-        border-radius: 12px;
-        box-shadow: var(--shadow-md);
-        padding: 12px 0;
-        min-width: 220px;
-      }
-
-      .has-submenu-container:hover .submenu {
-        display: block;
-      }
-
-      /* Links del submenú */
-      .submenu a {
-        display: block;
-        padding: 10px 16px;
-        color: #3c5c48; /* ✅ verde siempre */
-        font-weight: 400; /* ✅ sin negritas */
-        text-align: center; /* ✅ centrado */
-        border-radius: 8px;
-        margin: 4px 10px;
-        transition: background 0.3s, color 0.3s;
-      }
-
-      .submenu a:hover {
-        background: var(--morado); /* ✅ fondo morado */
-        color: #fff; /* ✅ letras blancas */
-      }
-
-      /* Efecto vidrio en scroll */
-      nav.nav-glass {
-        background: rgba(82, 44, 132, 0.65);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.28);
-        box-shadow: 0 6px 22px rgba(82, 44, 132, 0.18);
-      }
-      nav.nav-glass a {
-        color: #fff;
-      }
-      nav.nav-glass a:hover {
-        background: rgba(255, 255, 255, 0.2);
-        color: #fff;
-      }
+      
 
       /* HERO */
       .hero-terapia {
@@ -399,10 +311,7 @@
         </p>
       </div>
       <div class="info-img">
-        <img
-          src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80"
-          alt="Terapia emocional"
-        />
+        <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80"alt="Terapia emocional"/>
       </div>
     </section>
 
@@ -480,5 +389,23 @@
         window.addEventListener("load", toggleNavGlass);
       })();
     </script>
+    <script>
+  function toggleMenu() {
+    const menu = document.querySelector(".menu");
+    menu.classList.toggle("show");
+  }
+
+  // Toggle submenú en móvil
+  document.addEventListener("DOMContentLoaded", () => {
+    const submenuBtn = document.querySelector(".has-submenu");
+    const submenuContainer = submenuBtn.closest(".has-submenu-container");
+
+    submenuBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      submenuContainer.classList.toggle("active");
+    });
+  });
+</script>
+
   </body>
 </html>

@@ -2,220 +2,260 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Terapia en Pareja - Elige Hoy</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="img/elige_hoy.png" type="image/png" />
   <style>
-    :root {
-      --morado: #7b1fa2;
-      --morado-oscuro: #4a0072;
-      --verde-wsp: #25d366;
-      --gris-suave: #f5f5f5;
-      --texto: #333;
-    }
+    /* HERO sección terapia */
+.hero-terapia {
+  position: relative;
+  height: 65vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+.hero-terapia::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(82, 44, 132, 0.65); /* filtro morado */
+  backdrop-filter: blur(6px);
+}
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: white;
-      color: var(--texto);
-    }
+.hero-terapia .hero-content {
+  position: relative;
+  z-index: 2;
+}
 
-    nav {
-      background-color: white;
-      padding: 10px 30px;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
+.hero-terapia h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
 
-    nav a {
-      color: var(--morado);
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
+.hero-terapia p {
+  font-size: 1.2rem;
+  margin: 12px 0 20px;
+}
 
-    nav a:hover {
-      color: var(--morado-oscuro);
-    }
+.btn-cta {
+  background: var(--verde);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
 
-    .logo-container {
-      text-align: center;
-      padding: 30px 0 10px;
-    }
+.btn-cta:hover {
+  background: #1ebd5a;
+  transform: translateY(-3px);
+}
 
-    .logo-container img {
-      max-width: 220px;
-    }
+/* INFO sección */
+.info-terapia {
+  max-width: 900px;
+  margin: 60px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
 
-    section {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
+.info-text h2 {
+  color: var(--morado);
+  margin-bottom: 16px;
+}
 
-    section img {
-      width: 60%;
-      max-width: 400px;
-      border-radius: 20px;
-      margin: 30px auto;
-      display: block;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    }
+.info-text p {
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
 
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: var(--morado);
-      text-align: center;
-    }
+.info-img img {
+  width: 60%;
+  max-width: 350px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  margin: 0 auto;
+}
 
-    .section-text {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      text-align: justify;
-    }
+/* BENEFICIOS */
+.beneficios {
+  text-align: center;
+  padding: 60px 20px;
+}
+.beneficios h2 {
+  color: var(--morado);
+  margin-bottom: 40px;
+}
+.benefit-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: auto;
+}
+.benefit {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: 0.3s;
+}
+.benefit:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+.benefit i {
+  font-size: 2.5rem;
+  color: var(--morado);
+  margin-bottom: 12px;
+}
 
-    .benefits {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    .benefit {
-      background-color: var(--gris-suave);
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .benefit:hover {
-      transform: translateY(-5px);
-    }
-
-    .benefit h3 {
-      color: var(--morado);
-      margin-bottom: 10px;
-    }
-
-    footer {
-      background-color: var(--morado);
-      color: white;
-      padding: 30px;
-      text-align: center;
-      font-size: 0.9rem;
-      margin-top: 60px;
-    }
-
-    @media (max-width: 600px) {
-      .section-title {
-        font-size: 1.5rem;
-      }
-
-      section img {
-        width: 90%;
-      }
-
-      nav {
-        flex-direction: column;
-        gap: 10px;
-      }
-    }
-
-    .whatsapp-button-container {
-      margin-top: 40px;
-      text-align: center;
-    }
-
-    .whatsapp-button {
-      display: inline-flex;
-      align-items: center;
-      background-color: var(--verde-wsp);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .whatsapp-button img {
-      width: 20px;
-      margin-right: 10px;
-    }
-
-    .whatsapp-button:hover {
-      background-color: #128c7e;
-    }
   </style>
 </head>
 <body>
-
-  <nav>
-    <a href="index.html">Inicio</a>
-    <a href="especialistas.html">Especialistas</a>
-    <a href="#">Blog</a>
-    <a href="#">Convenios</a>
-    <a href="#">Facturación</a>
-  </nav>
-
-  <div class="logo-container">
-    <img src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png" alt="Logo Elige Hoy AE Psicólogos" />
+  <!-- Logo -->
+  <div class="header">
+    <img src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png" alt="Logo" class="logo"/>
   </div>
 
-  <section>
-    <h2 class="section-title">¿Qué es la terapia en pareja?</h2>
-    <p class="section-text">
-      La terapia en pareja es un espacio de acompañamiento profesional diseñado para fortalecer la comunicación, resolver conflictos y mejorar la relación afectiva entre dos personas. Es ideal tanto para superar crisis como para crecer juntos emocionalmente.
-    </p>
-    <img src="img/img/1t_pareja.jpg" alt="Terapia en Pareja">
-    <p class="section-text">
-      En Elige Hoy AE Psicólogos, trabajamos contigo y tu pareja para construir vínculos más sanos, gestionar emociones y tomar decisiones conscientes sobre su futuro en común.
-    </p>
+  <!-- NAV -->
+  <nav>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <div class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="especialistas.html">Especialistas</a>
+      <div class="has-submenu-container">
+        <a href="#" class="has-submenu">Servicios</a>
+        <div class="submenu">
+          <a href="terapia_individual.html">Terapia Individual</a>
+          <a href="terapia_pareja.html">Terapia de Pareja</a>
+          <a href="terapia_adolescente.html">Terapia para Adolescentes</a>
+          <a href="terapia_infantil.html">Terapia Infantil y de Lenguaje</a>
+          <a href="terapia_familiar.html">Terapia Familiar</a>
+          <a href="terapia_grupal.html">Terapia Grupal</a>
+          <a href="terapia_alternativa.html">Terapia Alternativa</a>
+          <a href="orientacion_vocacional.html">Orientación Vocacional</a>
+          <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
+        </div>
+      </div>
+      <a href="blog.html">Blog</a>
+      <a href="convenios.html">Convenios</a>
+      <a href="facturacion.html">Facturación</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-terapia" style="background:url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;">
+    <div class="hero-content">
+      <h1>Terapia en Pareja</h1>
+      <p>Fortalezcan su relación, mejoren la comunicación y crezcan juntos</p>
+      <a href="https://wa.me/5217291797345?text=Hola,%20quiero%20agendar%20una%20cita%20de%20Terapia%20en%20Pareja" target="_blank" class="btn-cta">
+        <i class="fab fa-whatsapp"></i> Agendar cita ahora
+      </a>
+    </div>
   </section>
 
-  <section>
-    <h2 class="section-title">¿Cómo puede ayudarte?</h2>
-    <div class="benefits">
+  <!-- INFO -->
+  <section class="info-terapia">
+    <div class="info-text">
+      <h2>¿Qué es la terapia en pareja?</h2>
+      <p>
+        Es un proceso terapéutico orientado a ayudar a las parejas a mejorar su comunicación,
+        resolver conflictos y fortalecer su vínculo emocional. 
+      </p>
+      <p>
+        Nuestro objetivo es acompañarles en el desarrollo de habilidades que les permitan construir una relación
+        más sana, estable y enriquecedora.
+      </p>
+    </div>
+    <div class="info-img">
+      <img src="https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?auto=format&fit=crop&w=800&q=80" alt="Terapia en Pareja"/>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section class="beneficios">
+    <h2>Beneficios de acudir a terapia en pareja</h2>
+    <div class="benefit-cards">
       <div class="benefit">
-        <h3>💬 Comunicación efectiva</h3>
-        <p>Aprenden a expresar sus emociones y necesidades sin atacar ni herir al otro.</p>
+        <i class="fas fa-comments"></i>
+        <h3>Mejorar la comunicación</h3>
+        <p>Aprendan a expresar sus emociones y necesidades con respeto y empatía.</p>
       </div>
       <div class="benefit">
-        <h3>❤️ Reconexión emocional</h3>
-        <p>Recuperan la cercanía, el afecto y el sentido de compañerismo perdido.</p>
+        <i class="fas fa-heart"></i>
+        <h3>Fortalecer la confianza</h3>
+        <p>Reconstruyan la confianza y el compromiso en su relación.</p>
       </div>
       <div class="benefit">
-        <h3>🧠 Resolución de conflictos</h3>
-        <p>Abordan temas difíciles desde la comprensión y el respeto mutuo.</p>
+        <i class="fas fa-handshake"></i>
+        <h3>Resolver conflictos</h3>
+        <p>Encuentren soluciones prácticas y saludables a sus diferencias.</p>
       </div>
     </div>
   </section>
 
-  <div class="whatsapp-button-container">
-    <a class="whatsapp-button" href="https://wa.me/5217291797345?text=Hola,%20quiero%20agendar%20una%20cita%20de%20Terapia%20en%20Pareja" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
-      Agendar cita ahora
-    </a>
-  </div>
-
+  <!-- FOOTER -->
   <footer>
-    © 2025 Elige Hoy AE Psicólogos – contacto@eligehoy.com – Toluca, Edo. Méx.
+    <div class="footer-logo">
+      <img src="https://eligehoyaepsicologos.com/img/Frame-4.png" alt="Logo"/>
+    </div>
+    <h2>Síguenos en redes sociales</h2>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/eligehoyarmoniaemocional/about/?_rdr" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com/elige_hoy/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@eligehoyaepsicologos8712/featured" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p><a href="aviso.html">Aviso de privacidad</a></p>
+    <p>Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.</p>
   </footer>
 
+  <!-- Scripts -->
+  <script>
+    function toggleMenu() {
+      const menu = document.querySelector(".menu");
+      menu.classList.toggle("show");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const submenuBtn = document.querySelector(".has-submenu");
+      const submenuContainer = submenuBtn.closest(".has-submenu-container");
+
+      submenuBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        submenuContainer.classList.toggle("active");
+      });
+    });
+
+    (function () {
+      const nav = document.querySelector("nav");
+      const threshold = 12;
+      function toggleNavGlass() {
+        if (window.scrollY > threshold) {
+          nav.classList.add("nav-glass");
+        } else {
+          nav.classList.remove("nav-glass");
+        }
+      }
+      window.addEventListener("scroll", toggleNavGlass, { passive: true });
+      window.addEventListener("load", toggleNavGlass);
+    })();
+  </script>
 </body>
 </html>

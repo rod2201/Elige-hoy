@@ -1,25 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Especialistas - Elige Hoy</title>
-    <link
-      rel="icon"
-      href="../templates/img/elige_hoy.png"
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Especialistas - Elige Hoy</title>
+  <link rel="icon" href="img/elige_hoy.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
       /* ===== Variables de marca ===== */
@@ -418,6 +406,7 @@
       .whatsapp-pill-float {
         font-weight: 400 !important; /* “Chatea con nosotros” del botón WhatsApp */
       }
+
     </style>
   </head>
   <body>
@@ -429,31 +418,32 @@
       />
     </div>
 
-    <nav>
-      <div class="hamburger" onclick="toggleMenu()">☰</div>
-      <div class="menu">
-        <a href="index.html">Inicio</a>
-        <a href="especialistas.html">Especialistas</a>
-        <div class="has-submenu-container">
-          <a href="#" class="has-submenu">Servicios</a>
-          <div class="submenu">
-            <a href="img/1t_individual.png">Terapia Individual</a>
-            <a href="#terapia-pareja">Terapia de Pareja</a>
-            <a href="#terapia-adolescentes">Terapia para Adolescentes</a>
-            <a href="#terapia-infantil">Terapia Infantil y de Lenguaje</a>
-            <a href="#terapia-familiar">Terapia Familiar</a>
-            <a href="#terapia-grupal">Terapia Grupal</a>
-            <a href="#terapia-alternativa">Terapia Alternativa</a>
-            <a href="#orientacion-vocacional">Orientación Vocacional</a>
-            <a href="#peritaje-psicologico">Peritaje Psicológico</a>
-            <a href="#convenios">Convenios</a>
-          </div>
+<!-- NAV idéntico al index -->
+  <nav>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <div class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="especialistas.html">Especialistas</a>
+      <div class="has-submenu-container">
+        <a href="#" class="has-submenu">Servicios</a>
+        <div class="submenu">
+          <a href="terapia_individual.html">Terapia Individual</a>
+          <a href="terapia_pareja.html">Terapia de Pareja</a>
+          <a href="terapia_adolescentes.html">Terapia para Adolescentes</a>
+          <a href="terapia_infantil.html">Terapia Infantil y de Lenguaje</a>
+          <a href="terapia_familiar.html">Terapia Familiar</a>
+          <a href="terapia_grupal.html">Terapia Grupal</a>
+          <a href="terapia_alternativa.html">Terapia Alternativa</a>
+          <a href="orientacion_vocacional.html">Orientación Vocacional</a>
+          <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
+          <a href="convenios.html">Convenios</a>
         </div>
-        <a href="index.html">Blog</a>
-        <a href="index.html">Convenios</a>
-        <a href="index.html">Facturación</a>
       </div>
-    </nav>
+      <a href="blog.html">Blog</a>
+      <a href="convenios.html">Convenios</a>
+      <a href="facturacion.html">Facturación</a>
+    </div>
+  </nav>
 
     <section id="terapeutas" class="personal-section">
       <h2>Nuestros Especialistas</h2>
@@ -735,5 +725,28 @@
       <i class="fa-brands fa-whatsapp" style="margin-right: 8px"></i>
       Chatea con nosotros
     </a>
+     <!-- Scripts del nav -->
+  <script>
+    function toggleMenu() {
+      const menu = document.querySelector(".menu");
+      if (menu) menu.classList.toggle("show");
+    }
+  </script>
+
+  <script>
+    (function () {
+      const nav = document.querySelector("nav");
+      const threshold = 12;
+      function toggleNavGlass() {
+        if (window.scrollY > threshold) {
+          nav.classList.add("nav-glass");
+        } else {
+          nav.classList.remove("nav-glass");
+        }
+      }
+      window.addEventListener("scroll", toggleNavGlass, { passive: true });
+      window.addEventListener("load", toggleNavGlass);
+    })();
+  </script>
   </body>
 </html>
