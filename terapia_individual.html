@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terapia Individual - Elige Hoy</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/img/elige_hoy.png" type="image/x-icon" />
+    <style>
+      :root {
+        --morado: #522c84;
+        --morado-oscuro: #3f2166;
+        --verde: #2cc965;
+        --texto: #222;
+        --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.14);
+      }
+
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        color: var(--texto);
+        background: #fff;
+      }
+
+      /* Logo animado */
+      .header {
+        text-align: center;
+        margin-top: 85px;
+      }
+      .header .logo {
+        height: 90px;
+        filter: drop-shadow(0 0 8px rgba(150, 100, 220, 0.45));
+        animation: logoPulse 2.2s ease-in-out infinite,
+          logoGlow 3s ease-in-out infinite;
+      }
+      @keyframes logoPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+      @keyframes logoGlow {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 8px rgba(150, 100, 220, 0.45));
+        }
+        50% {
+          filter: drop-shadow(0 0 16px rgba(150, 100, 220, 0.7));
+        }
+      }
+
+      /* NAV */
+      nav {
+        background: #fff;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: var(--shadow-sm);
+        transition: 0.3s;
+      }
+      nav a {
+        color: #275f34;
+        text-decoration: none;
+        padding: 14px 20px;
+        display: inline-block;
+      }
+      nav a:hover {
+        background: var(--morado);
+        color: #fff;
+        border-radius: 8px;
+      }
+
+      .menu {
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+      }
+      .hamburger {
+        display: none;
+      }
+
+      /* Submenú */
+      .has-submenu-container {
+        position: relative;
+      }
+
+      .submenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.95),
+          rgba(255, 255, 255, 0.7)
+        );
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        box-shadow: var(--shadow-md);
+        padding: 12px 0;
+        min-width: 220px;
+      }
+
+      .has-submenu-container:hover .submenu {
+        display: block;
+      }
+
+      /* Links del submenú */
+      .submenu a {
+        display: block;
+        padding: 10px 16px;
+        color: #3c5c48; /* ✅ verde siempre */
+        font-weight: 400; /* ✅ sin negritas */
+        text-align: center; /* ✅ centrado */
+        border-radius: 8px;
+        margin: 4px 10px;
+        transition: background 0.3s, color 0.3s;
+      }
+
+      .submenu a:hover {
+        background: var(--morado); /* ✅ fondo morado */
+        color: #fff; /* ✅ letras blancas */
+      }
+
+      /* Efecto vidrio en scroll */
+      nav.nav-glass {
+        background: rgba(82, 44, 132, 0.65);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+        box-shadow: 0 6px 22px rgba(82, 44, 132, 0.18);
+      }
+      nav.nav-glass a {
+        color: #fff;
+      }
+      nav.nav-glass a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+
+      /* HERO */
+      .hero-terapia {
+        position: relative;
+        height: 65vh;
+        background: url("https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1500&q=80")
+          center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+      }
+      .hero-terapia::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(82, 44, 132, 0.65);
+        backdrop-filter: blur(6px);
+      }
+      .hero-terapia .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-terapia h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+      }
+      .hero-terapia p {
+        font-size: 1.2rem;
+        margin: 12px 0 20px;
+      }
+      .btn-cta {
+        background: var(--verde);
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+      }
+      .btn-cta:hover {
+        background: #1ebd5a;
+        transform: translateY(-3px);
+      }
+
+      /* INFO */
+      .info-terapia {
+        max-width: 900px;
+        margin: 60px auto;
+        display: flex;
+        flex-direction: column; /* ✅ texto arriba, imagen abajo */
+        gap: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: var(--shadow-sm);
+        text-align: center; /* centramos contenido */
+      }
+
+      .info-text h2 {
+        color: var(--morado);
+        margin-bottom: 16px;
+      }
+
+      .info-text p {
+        margin-bottom: 14px;
+        line-height: 1.6;
+      }
+
+      .info-img img {
+        width: 60%; /* ✅ imagen más pequeña */
+        max-width: 350px; /* límite de tamaño */
+        border-radius: 16px;
+        box-shadow: var(--shadow-md);
+        margin: 0 auto; /* centrar */
+      }
+
+      /* BENEFICIOS */
+      .beneficios {
+        text-align: center;
+        padding: 60px 20px;
+      }
+      .beneficios h2 {
+        color: var(--morado);
+        margin-bottom: 40px;
+      }
+      .benefit-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+        max-width: 1000px;
+        margin: auto;
+      }
+      .benefit {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(8px);
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: var(--shadow-sm);
+        transition: 0.3s;
+      }
+      .benefit:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-md);
+      }
+      .benefit i {
+        font-size: 2.5rem;
+        color: var(--morado);
+        margin-bottom: 12px;
+      }
+
+      /* CTA FINAL */
+      .cta-final {
+        background: linear-gradient(135deg, var(--morado), #7c3aed);
+        color: #fff;
+        text-align: center;
+        padding: 60px 20px;
+      }
+      .cta-final h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+      .cta-final .btn-cta {
+        background: #fff;
+        color: var(--morado);
+      }
+      .cta-final .btn-cta:hover {
+        background: #eee;
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--morado);
+        padding: 48px 20px;
+        text-align: center;
+        color: #fff;
+      }
+      footer h2 {
+        margin-bottom: 18px;
+      }
+      .footer-logo img {
+        width: 150px;
+        margin-bottom: 16px;
+      }
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin: 16px 0;
+      }
+      .social-icons a {
+        color: #fff;
+        font-size: 28px;
+      }
+      .social-icons a:hover {
+        color: #1db954;
+        transform: translateY(-2px);
+      }
+      footer a {
+        color: #fff;
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: #ddd;
+      }
+
+      /* Cuando el nav entra en modo vidrio (con scroll) */
+      nav.nav-glass .submenu a {
+        color: #3c5c48 !important; /* ✅ verde al hacer scroll */
+      }
+
+      nav.nav-glass .submenu a:hover {
+        background: rgba(60, 92, 72, 0.15); /* verde suave al fondo */
+        color: #3c5c48 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Logo animado -->
+    <div class="header">
+      <img
+        src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png"
+        alt="Logo"
+        class="logo"
+      />
+    </div>
+
+    <!-- NAV -->
+    <nav>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <div class="menu">
+        <a href="#">Inicio</a>
+        <a href="#">Especialistas</a>
+        <div class="has-submenu-container">
+          <a href="#" class="has-submenu">Servicios</a>
+          <div class="submenu">
+            <a href="#">Terapia Individual</a>
+            <a href="#">Terapia de Pareja</a>
+            <a href="#">Terapia para Adolescentes</a>
+            <a href="#">Terapia Infantil</a>
+            <a href="#">Terapia Familiar</a>
+            <a href="#">Terapia Grupal</a>
+            <a href="#">Terapia Alternativa</a>
+            <a href="#">Orientación Vocacional</a>
+            <a href="#">Peritaje Psicológico</a>
+          </div>
+        </div>
+        <a href="#">Blog</a>
+        <a href="#">Convenios</a>
+        <a href="#">Facturación</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-terapia">
+      <div class="hero-content">
+        <h1>Terapia Individual</h1>
+        <p>Un espacio seguro para tu bienestar emocional y mental</p>
+        <a
+          href="https://wa.me/5217291797345?text=Hola,%20quiero%20agendar%20una%20cita%20de%20Terapia%20Individual"
+          target="_blank"
+          class="btn-cta"
+        >
+          <i class="fab fa-whatsapp"></i> Agendar cita ahora
+        </a>
+      </div>
+    </section>
+
+    <!-- INFO -->
+    <section class="info-terapia">
+      <div class="info-text">
+        <h2>¿Qué es la terapia individual?</h2>
+        <p>
+          Es un proceso terapéutico donde trabajamos de forma personalizada
+          contigo para ayudarte a enfrentar dificultades emocionales, como
+          ansiedad, estrés, duelos, problemas de autoestima, depresión y
+          relaciones interpersonales.
+        </p>
+        <p>
+          Nuestro objetivo es que te sientas escuchado, comprendido y acompañado
+          en tu proceso, brindándote herramientas prácticas para tu bienestar
+          emocional y mental.
+        </p>
+      </div>
+      <div class="info-img">
+        <img
+          src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80"
+          alt="Terapia emocional"
+        />
+      </div>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section class="beneficios">
+      <h2>Beneficios de acudir a terapia</h2>
+      <div class="benefit-cards">
+        <div class="benefit">
+          <i class="fas fa-brain"></i>
+          <h3>Manejar el estrés</h3>
+          <p>
+            Aprende a regular tus emociones y manejar situaciones difíciles sin
+            colapsar.
+          </p>
+        </div>
+        <div class="benefit">
+          <i class="fas fa-heart"></i>
+          <h3>Fortalecer tu autoestima</h3>
+          <p>Reconecta con tu valor personal y mejora tu autoconfianza.</p>
+        </div>
+        <div class="benefit">
+          <i class="fas fa-leaf"></i>
+          <h3>Sanar heridas emocionales</h3>
+          <p>Acompañamiento en procesos de duelo, separación o trauma.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-logo">
+        <img
+          src="https://eligehoyaepsicologos.com/img/Frame-4.png"
+          alt="Logo"
+        />
+      </div>
+      <h2>Síguenos en redes sociales</h2>
+      <div class="social-icons">
+        <a
+          href="https://www.facebook.com/eligehoyarmoniaemocional/about/?_rdr"
+          target="_blank"
+          ><i class="fab fa-facebook"></i
+        ></a>
+        <a href="https://www.instagram.com/elige_hoy/" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.youtube.com/@eligehoyaepsicologos8712/featured"
+          target="_blank"
+          ><i class="fab fa-youtube"></i
+        ></a>
+      </div>
+      <p><a href="aviso.html">Aviso de privacidad</a></p>
+      <p>
+        Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.
+      </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      function toggleMenu() {
+        document.querySelector(".menu").classList.toggle("show");
+      }
+      (function () {
+        const nav = document.querySelector("nav");
+        const threshold = 12;
+        function toggleNavGlass() {
+          if (window.scrollY > threshold) {
+            nav.classList.add("nav-glass");
+          } else {
+            nav.classList.remove("nav-glass");
+          }
+        }
+        window.addEventListener("scroll", toggleNavGlass, { passive: true });
+        window.addEventListener("load", toggleNavGlass);
+      })();
+    </script>
+  </body>
+</html>

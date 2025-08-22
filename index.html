@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elige Hoy AE Psicólogos</title>
+    <!--
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='chatbot.css') }}">
+    -->
+    <link rel="stylesheet" href="../static/chatbot.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="icon" href="img/elige_hoy.png" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="loader">
+      <img src="img/elige_hoy.png" alt="" />
+    </div>
+
+    <div class="header">
+      <img
+        src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png"
+        alt="Logo"
+        class="logo"
+      />
+      <!-- Logo centrado -->
+    </div>
+
+    <nav>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <div class="menu">
+        <a href="index.html">Inicio</a>
+        <a href="especialistas.html">Especialistas</a>
+        <div class="has-submenu-container">
+          <a href="#" class="has-submenu">Servicios</a>
+          <div class="submenu">
+            <a href="terapia_individual.html">Terapia Individual</a>
+            <a href="terapia_pareja.html">Terapia de Pareja</a>
+            <a href="terapia_adolescente.html">Terapia para Adolescentes</a>
+            <a href="terapia_infantil.html">Terapia Infantil y de Lenguaje</a>
+            <a href="terapia_familiar.html">Terapia Familiar</a>
+            <a href="terapia_grupal.html">Terapia Grupal</a>
+            <a href="templates/terapia_alternativa.html">Terpaia Alternativa</a>
+            <a href="templates/orientacion_vocacional.html"
+              >Orientación Vocacional</a
+            >
+            <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
+            <a href="#convenios">Convenios</a>
+          </div>
+        </div>
+        <a href="index.html">Blog</a>
+        <a href="index.html">Convenios</a>
+        <a href="index.html">Facturación</a>
+      </div>
+    </nav>
+
+    <!-- Primera Sección: Carrete de servicios -->
+    <section class="hero-fade">
+      <video autoplay muted loop playsinline class="video-background">
+        <source src="./video/psicologia.mp4" type="video/mp4" />
+      </video>
+
+      <div class="fade-content">
+        <h2 id="rotating-text">Psicología para tu bienestar</h2>
+        <a id="rotating-btn" href="#servicios" class="btn-mas"
+          >Más información</a
+        >
+      </div>
+    </section>
+
+    <!-- Segunda Sección: Experiencia -->
+    <section class="experiencia-section">
+      <div class="container experiencia-container">
+        <!-- Imagen -->
+        <div class="image-container" data-aos="fade-right">
+          <img
+            src="https://lamenteesmaravillosa.com/wp-content/uploads/2020/04/familia-hablando-salon.jpg"
+            alt="Experiencia"
+          />
+        </div>
+
+        <!-- Texto -->
+        <div class="content" data-aos="fade-left">
+          <h1 class="titulo-experiencia">
+            <span class="numero" id="years">10</span> años brindando atención
+            integral y humana
+          </h1>
+          <p class="fade-up">
+            En <em>Psicólogos Elige Hoy</em>, nos dedicamos a acompañarte con
+            profesionalismo y calidez, ofreciendo soluciones personalizadas que
+            apoyan tu bienestar emocional, mental y nutricional en cada etapa de
+            tu vida.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tercera Sección: Misión y Visión -->
+    <section class="mission-vision" id="mision-vision">
+      <div class="container">
+        <div class="section-title">
+          <h2 class="reveal" data-anim="fade-down">Nuestra Misión y Visión</h2>
+          <p class="reveal" data-anim="fade-down">
+            "Crear un futuro donde la salud mental sea accesible y valorada por
+            todos."
+          </p>
+        </div>
+
+        <div class="cards">
+          <div class="card glass-card mission reveal" data-anim="fade-left">
+            <div class="icon"><i class="fas fa-hands-helping"></i></div>
+            <h3>Misión</h3>
+            <p>
+              Brindar atención psicológica profesional y humana, acompañando a
+              las personas en su proceso de crecimiento emocional y desarrollo
+              personal.
+            </p>
+          </div>
+
+          <div class="card glass-card vision reveal" data-anim="fade-right">
+            <div class="icon"><i class="fas fa-eye"></i></div>
+            <h3>Visión</h3>
+            <p>
+              Ser un centro de referencia en salud mental, reconocido por
+              nuestra calidad, ética y compromiso con el bienestar integral de
+              la comunidad.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cuarta Sección: Instalaciones -->
+    <section id="clinica" class="my-5">
+      <h2 class="text-center mb-4">Conoce nuestras instalaciones</h2>
+
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide instalaciones-carousel"
+        data-ride="carousel"
+        data-interval="3000"
+      >
+        <!-- Indicadores -->
+        <ol class="carousel-indicators">
+          <li
+            data-target="#carouselExampleIndicators"
+            data-slide-to="0"
+            class="active"
+          ></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+        </ol>
+
+        <!-- Carrusel -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              class="d-block w-100 img-carousel-mini"
+              src="img/lugar_1.jpg"
+              alt="Instalación 1"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100 img-carousel-mini"
+              src="img/lugar_2.jpg"
+              alt="Instalación 2"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100 img-carousel-mini"
+              src="img/lugar_3.jpg"
+              alt="Instalación 3"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100 img-carousel-mini"
+              src="img/lugar_4.jpg"
+              alt="Instalación 4"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100 img-carousel-mini"
+              src="img/lugar_5.jpg"
+              alt="Instalación 5"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100 img-carousel-mini"
+              src="img/lugar_6.jpg"
+              alt="Instalación 6"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100 img-carousel-mini"
+              src="img/lugar_7.jpg"
+              alt="Instalación 7"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              class="d-block w-100 img-carousel-mini"
+              src="img/lugar_8.jpg"
+              alt="Instalación 8"
+            />
+          </div>
+        </div>
+
+        <!-- Controles -->
+        <a
+          class="carousel-control-prev"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Siguiente</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Quinta Sección: Blog -->
+    <section id="blog">
+      <h2>Blog</h2>
+
+      <div class="container">
+        <div class="row">
+          <!-- Card 1 -->
+          <div class="col-md-4 my-5">
+            <div class="card h-100 border-hover shadow">
+              <a
+                href="https://eligehoyaepsicologos.com/nota/amigos-que-suman-amigos-que-restan-el-impacto-real-en-tu-vida"
+              >
+                <div
+                  class="portada-nota-thumb"
+                  style="
+                    background-image: url('https://eligehoyaepsicologos.com/img/portadas/u8HhXbQClL_20250806163928.jpg');
+                    height: 300px;
+                    background-size: cover;
+                    background-position: center;
+                  "
+                ></div>
+              </a>
+              <a
+                href="https://eligehoyaepsicologos.com/nota/amigos-que-suman-amigos-que-restan-el-impacto-real-en-tu-vida"
+              >
+                <div class="card-body">
+                  <h5 class="card-title text-azul">
+                    Amigos que Suman, Amigos que Restan: El Impacto Real en tu
+                    Vida
+                  </h5>
+                  <p>
+                    <small style="color: #a4a4a2">Publicado hace 6 días</small>
+                  </p>
+                  <p class="card-text">
+                    Durante la adolescencia, las amistades juegan un papel
+                    crucial en la construcción de la identidad, la autoestima y
+                    la manera en la que los jóvenes se relacionan con el mundo.
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-md-4 my-5">
+            <div class="card h-100 border-hover shadow">
+              <a
+                href="https://eligehoyaepsicologos.com/nota/por-qu-mi-pareja-no-me-etiqueta-en-instagram"
+              >
+                <div
+                  class="portada-nota-thumb"
+                  style="
+                    background-image: url('https://eligehoyaepsicologos.com/img/portadas/68xEjcJO5l_20250730201926.jpg');
+                    height: 300px;
+                    background-size: cover;
+                    background-position: center;
+                  "
+                ></div>
+              </a>
+              <a
+                href="https://eligehoyaepsicologos.com/nota/por-qu-mi-pareja-no-me-etiqueta-en-instagram"
+              >
+                <div class="card-body">
+                  <h5 class="card-title text-azul">
+                    ¿Por qué mi pareja no me etiqueta en Instagram?
+                  </h5>
+                  <p>
+                    <small style="color: #a4a4a2"
+                      >Publicado el 30 Jul 2025</small
+                    >
+                  </p>
+                  <p class="card-text">
+                    Las redes sociales se han convertido en una parte integral
+                    de nuestras vidas, influyendo en cómo nos comunicamos y nos
+                    relacionamos.
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-md-4 my-5">
+            <div class="card h-100 border-hover shadow">
+              <a
+                href="https://eligehoyaepsicologos.com/nota/orientacin-vocacional"
+              >
+                <div
+                  class="portada-nota-thumb"
+                  style="
+                    background-image: url('https://eligehoyaepsicologos.com/img/portadas/7betRTZVhH_20250724192143.jpg');
+                    height: 300px;
+                    background-size: cover;
+                    background-position: center;
+                  "
+                ></div>
+              </a>
+              <a
+                href="https://eligehoyaepsicologos.com/nota/orientacin-vocacional"
+              >
+                <div class="card-body">
+                  <h5 class="card-title text-azul">Orientación vocacional</h5>
+                  <p>
+                    <small style="color: #a4a4a2"
+                      >Publicado el 24 Jul 2025</small
+                    >
+                  </p>
+                  <p class="card-text">
+                    La orientación vocacional es un proceso esencial que ayuda a
+                    los estudiantes a descubrir sus intereses, habilidades y
+                    opciones profesionales.
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="col-md-4 my-5">
+            <div class="card h-100 border-hover shadow">
+              <a href="https://eligehoyaepsicologos.com/nota/terapia-de-pareja">
+                <div
+                  class="portada-nota-thumb"
+                  style="
+                    background-image: url('https://eligehoyaepsicologos.com/img/portadas/gznERvly6p_20250715022300.jpg');
+                    height: 300px;
+                    background-size: cover;
+                    background-position: center;
+                  "
+                ></div>
+              </a>
+              <a href="https://eligehoyaepsicologos.com/nota/terapia-de-pareja">
+                <div class="card-body">
+                  <h5 class="card-title text-azul">Terapia de Pareja</h5>
+                  <p>
+                    <small style="color: #a4a4a2"
+                      >Publicado el 14 Jul 2025</small
+                    >
+                  </p>
+                  <p class="card-text">
+                    La terapia de pareja es un enfoque terapéutico diseñado para
+                    ayudar a las parejas a mejorar su relación, resolver
+                    conflictos y fortalecer su conexión emocional.
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="col-md-4 my-5">
+            <div class="card h-100 border-hover shadow">
+              <a
+                href="https://eligehoyaepsicologos.com/nota/prevencin-de-la-violencia-cuidar-el-bienestar-desde-la-raz"
+              >
+                <div
+                  class="portada-nota-thumb"
+                  style="
+                    background-image: url('https://eligehoyaepsicologos.com/img/portadas/ZctFBMECk2_20250708174925.jpg');
+                    height: 300px;
+                    background-size: cover;
+                    background-position: center;
+                  "
+                ></div>
+              </a>
+              <a
+                href="https://eligehoyaepsicologos.com/nota/prevencin-de-la-violencia-cuidar-el-bienestar-desde-la-raz"
+              >
+                <div class="card-body">
+                  <h5 class="card-title text-azul">
+                    Prevención de la Violencia: Cuidar el Bienestar desde la
+                    Raíz
+                  </h5>
+                  <p>
+                    <small style="color: #a4a4a2"
+                      >Publicado el 08 Jul 2025</small
+                    >
+                  </p>
+                  <p class="card-text">
+                    La violencia no surge de la nada. Es el resultado de
+                    múltiples factores emocionales, sociales y culturales no
+                    resueltos.
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="col-md-4 my-5">
+            <div class="card h-100 border-hover shadow">
+              <a href="https://eligehoyaepsicologos.com/nota/qu-es-el-duelo">
+                <div
+                  class="portada-nota-thumb"
+                  style="
+                    background-image: url('https://eligehoyaepsicologos.com/img/portadas/2Qv35BTGje_20250630215928.jpg');
+                    height: 300px;
+                    background-size: cover;
+                    background-position: center;
+                  "
+                ></div>
+              </a>
+              <a href="https://eligehoyaepsicologos.com/nota/qu-es-el-duelo">
+                <div class="card-body">
+                  <h5 class="card-title text-azul">¿Qué es el duelo?</h5>
+                  <p>
+                    <small style="color: #a4a4a2"
+                      >Publicado el 30 Jun 2025</small
+                    >
+                  </p>
+                  <p class="card-text">
+                    El duelo es un proceso natural y emocional que
+                    experimentamos cuando enfrentamos una pérdida significativa.
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Botón Ver más -->
+          <div class="col-md-12 text-center py-3">
+            <a
+              href="https://eligehoyaepsicologos.com/blog"
+              class="btn"
+              style="
+                color: white;
+                background-color: #3e2668;
+                border-color: #3e2668;
+              "
+            >
+              Ver más artículos
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sexta Sección: Testimonios -->
+    <section class="testimonios">
+      <h2>Lo que dicen nuestros pacientes</h2>
+      <div class="testimonios-carousel" id="testimonios">
+        <div class="testimonio">
+          <img src="./img/elige_hoy.png" alt="" />
+          <h3>Edith Sanchez</h3>
+          <div class="estrellas">★★★★★</div>
+          <p>
+            "Bonitas instalaciones y una excelente atención y sesiones
+            psicológicas"
+          </p>
+        </div>
+        <div class="testimonio">
+          <img src="./img/elige_hoy.png" alt="" />
+          <h3>Belen Sánchez</h3>
+          <div class="estrellas">★★★★★</div>
+          <p>"Me ayudaron a superar mis problemas con mucha paciencia."</p>
+        </div>
+        <div class="testimonio">
+          <img src="./img/elige_hoy.png" alt="" />
+          <h3>Abraham Zaldivar</h3>
+          <div class="estrellas">★★★★☆</div>
+          <p>
+            "Grandes profesionales, muy buenas instalaciones y un valor justo
+            por la sesión."
+          </p>
+        </div>
+        <div class="testimonio">
+          <img src="./img/elige_hoy.png" alt="" />
+          <h3>clauszz surai</h3>
+          <div class="estrellas">★★★★☆</div>
+          <p>
+            "Mi hija es quien toma la terapia y desde que llega a la clínica
+            expresa sentir seguridad, confianza y sobre todo le gusta...quedó
+            encantada con las terapias alternativas ya que son muy diferentes a
+            las sesiones que toma con su terapeuta.. Muy buena opción en el
+            tratamiento con niños y adolescentes en mi opinión personal Les
+            agradezco tanto la atención recibida y el profesionalismo de la Dra.
+            Irupe"
+          </p>
+        </div>
+        <div class="testimonio">
+          <img src="./img/elige_hoy.png" alt="" />
+          <h3>Jess</h3>
+          <div class="estrellas">★★★★☆</div>
+          <p>
+            "Mi experiencia con la terapia ha sido buena, se mantiene un
+            ambiente agradable en las areas comunes asi como en el consultorio,
+            te da la confianza de seguir tu proceso en un ambiente adecuado"
+          </p>
+        </div>
+        <div class="testimonio">
+          <img src="./img/elige_hoy.png" alt="" />
+          <h3>laura hinojoza</h3>
+          <div class="estrellas">★★★★☆</div>
+          <p>
+            "Es un lugar muy cálido, el trato desde que te reciben es muy bueno,
+            y son muy atentas al recibirte. La profesional con la que nos tocó
+            muy profesional y con mucha experiencia, te hace dentro comoda y en
+            confianza."
+          </p>
+        </div>
+        <div class="testimonio">
+          <img src="./img/elige_hoy.png" alt="" />
+          <h3>Grace Dominguez</h3>
+          <div class="estrellas">★★★★☆</div>
+          <p>
+            "Muchas gracias por ser escucha , sin juzgar y dar herramientas
+            individuales para vernos a si Mismo, ser leal y siempre cuidar del
+            ser en esencia , por su responsabilidad y compromiso"
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Séptima Sección: Ubicación -->
+    <section class="ubicacion">
+      <h2 class="titulo reveal" data-anim="fade-down">Nuestra ubicación</h2>
+
+      <div class="ubicacion-contenido">
+        <!-- Mapa -->
+        <div class="mapa reveal" data-anim="fade-right">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3766.059281794322!2d-99.6625306898486!3d19.279788045469306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cd89e876200999%3A0x50c294baf9432781!2sElige%20Hoy%2C%20AE%20Psic%C3%B3logos.!5e0!3m2!1ses-419!2sus!4v1753397842620!5m2!1ses-419!2sus"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+
+        <!-- Datos de contacto -->
+        <div class="info reveal" data-anim="fade-left">
+          <h3>Contáctanos</h3>
+
+          <p>
+            <i
+              class="fas fa-map-marker-alt"
+              style="color: #522c84; margin-right: 8px"
+            ></i>
+            <strong>Dirección:</strong>
+            El Olmo 129, Residencial Colón y Col Ciprés, 50120 Toluca de Lerdo,
+            Méx., México
+          </p>
+
+          <p>
+            <i
+              class="fas fa-phone"
+              style="color: #522c84; margin-right: 8px"
+            ></i>
+            <strong>Teléfono:</strong>
+            <a href="tel:+525512345678">+52 729 179 7345</a>
+          </p>
+
+          <p>
+            <i
+              class="fas fa-envelope"
+              style="color: #522c84; margin-right: 8px"
+            ></i>
+            <strong>Email:</strong>
+            <a href="mailto:info@empresa.com"
+              >eligehoy.armoniaemocional@gmail.com</a
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-logo">
+        <img
+          src="https://eligehoyaepsicologos.com/img/Frame-4.png"
+          alt="Logo"
+        />
+      </div>
+      <h2>Síguenos en redes sociales</h2>
+      <div class="social-icons">
+        <a
+          href="https://www.facebook.com/eligehoyarmoniaemocional/about/?_rdr"
+          target="_blank"
+          ><i class="fab fa-facebook"></i
+        ></a>
+        <a href="https://www.instagram.com/elige_hoy/" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.youtube.com/@eligehoyaepsicologos8712/featured"
+          target="_blank"
+          ><i class="fab fa-youtube"></i
+        ></a>
+      </div>
+      <p><a href="./aviso.html">Aviso de privacidad</a></p>
+      <br />
+      <p>
+        Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.
+      </p>
+    </footer>
+
+    <script>
+      let currentFade = 0;
+      const fades = document.querySelectorAll(".fade-image");
+      const titles = [
+        "Terapia Individual",
+        "Terapia Infantil",
+        "Terapia Familiar",
+        "Terapia en Pareja",
+        "Terapia Adolescente",
+        "Terapia Grupal",
+        "Terapia Alternativa",
+        "Orientación Vocacional",
+        "Peritaje Psicológico",
+      ];
+      const links = [
+        "terapia_individual.html",
+        "terapia_infantil.html",
+        "terapia_familiar.html",
+        "terapia_pareja.html",
+        "terapia_adolescente.html",
+        "terapia_grupal.html",
+        "terapia_alternativa.html",
+        "orientacion_vocacional.html",
+        "peritaje_psicologico.html",
+      ];
+
+      const titleEl = document.getElementById("terapia-titulo");
+      const btnEl = document.getElementById("terapia-boton");
+
+      function fadeNext() {
+        // Oculta texto mientras cambia imagen
+        document.querySelector(".fade-content").classList.remove("visible");
+
+        setTimeout(() => {
+          // Cambia imagen
+          fades.forEach((img, i) => {
+            img.classList.toggle("visible", i === currentFade);
+          });
+
+          // Cambia texto
+          titleEl.textContent = titles[currentFade];
+          btnEl.href = links[currentFade];
+
+          // Muestra el texto con animación
+          document.querySelector(".fade-content").classList.add("visible");
+
+          currentFade = (currentFade + 1) % fades.length;
+        }, 300);
+      }
+
+      fadeNext();
+      setInterval(fadeNext, 2500);
+    </script>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
+      }
+
+      // Mobile submenu toggle
+      document.addEventListener("DOMContentLoaded", () => {
+        const submenuBtn = document.querySelector(".has-submenu");
+        const submenuContainer = submenuBtn.closest(".has-submenu-container");
+
+        submenuBtn.addEventListener("click", (e) => {
+          e.preventDefault(); // Evita salto de página
+          submenuContainer.classList.toggle("active");
+        });
+      });
+    </script>
+    <script>
+      window.addEventListener("load", function () {
+        const loader = document.getElementById("loader");
+        setTimeout(() => {
+          loader.classList.add("fade-out");
+          setTimeout(() => (loader.style.display = "none"), 2500); // fade-out dura 0.5s (500ms)
+        }, 2000); // tiempo visible antes de empezar a desaparecer
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              } else {
+                entry.target.classList.remove("visible"); // quita al salir de vista
+              }
+            });
+          },
+          { threshold: 0.3 }
+        ); // 30% visible
+
+        const elementosAnimables = document.querySelectorAll(
+          ".content, .image-container, .blog-card, .titulo-experiencia, .galeria-clinica img"
+        );
+        elementosAnimables.forEach((el) => observer.observe(el));
+      });
+    </script>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const carousel = document.getElementById("testimonios");
+        const cardWidth = 320; // ancho de cada testimonio + gap
+        let scrollPos = 0;
+
+        setInterval(() => {
+          scrollPos += cardWidth;
+          if (scrollPos >= carousel.scrollWidth - carousel.clientWidth) {
+            scrollPos = 0;
+          }
+          carousel.scrollTo({ left: scrollPos, behavior: "smooth" });
+        }, 3000);
+      });
+    </script>
+
+    <script>
+      const posts = [
+        {
+          titulo: "Beneficios del amor y la amistad para la salud mental",
+          fecha: "Publicado hace 3 días",
+          texto:
+            "El amor y las relaciones de amistad sanas y que nos ayudan a crecer...",
+          link: "https://eligehoyaepsicologos.com/nota/beneficios-del-amor-y-la-amistad-para-la-salud-mental",
+          imagen:
+            "https://eligehoyaepsicologos.com/img/portadas/hlJ9sbHwP6_20250217164729.jpg",
+        },
+        {
+          titulo: "Cómo Afecta la Separación de los Padres a los Niños",
+          fecha: "Publicado el 05 Feb 2025",
+          texto:
+            "La separación de los padres en algunos niños, conlleva a que crezcan con temores...",
+          link: "https://eligehoyaepsicologos.com/nota/cmo-afecta-la-separacin-de-los-padres-a-los-nios",
+          imagen:
+            "https://eligehoyaepsicologos.com/img/portadas/MPzeL4fsg6_20250206050517.jpg",
+        },
+        {
+          titulo: "Aceptación de Emociones",
+          fecha: "Publicado el 05 Feb 2025",
+          texto:
+            "La aceptación de emociones es fundamental para el bienestar emocional...",
+          link: "https://eligehoyaepsicologos.com/nota/aceptacin-de-emociones",
+          imagen:
+            "https://eligehoyaepsicologos.com/img/portadas/Qeu3qJmncC_20250204010156.jpg",
+        },
+      ];
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("blogPosts");
+
+        posts.forEach((post) => {
+          const card = document.createElement("div");
+          card.classList.add("blog-card");
+          card.innerHTML = `
+        <a href="${post.link}" target="_blank">
+          <div class="blog-thumb" style="background-image:url('${post.imagen}')"></div>
+        </a>
+        <div class="blog-content">
+          <h3>${post.titulo}</h3>
+          <p><small>${post.fecha}</small></p>
+          <p>${post.texto}</p>
+        </div>
+      `;
+          container.appendChild(card);
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        setTimeout(() => {
+          document
+            .querySelectorAll(".blog-card")
+            .forEach((card) => observer.observe(card));
+        }, 100);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const images = document.querySelectorAll(".galeria-clinica img");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry, index) => {
+              if (entry.isIntersecting) {
+                setTimeout(() => {
+                  entry.target.classList.add("visible");
+                }, index * 150); // delay escalonado
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        images.forEach((img) => observer.observe(img));
+      });
+    </script>
+
+    <a
+      href="https://wa.me/5217291797345"
+      class="whatsapp-pill-float"
+      target="_blank"
+    >
+      <i class="fab fa-whatsapp"></i>
+      Chatea con nosotros
+    </a>
+
+    <!-- Chatbot flotante -->
+    <div id="chat-container">
+      <div id="chat-box"></div>
+      <div id="chat-form">
+        <input
+          type="text"
+          id="user-input"
+          placeholder="Escribe un mensaje..."
+        />
+        <button onclick="sendMessage()">Enviar</button>
+      </div>
+    </div>
+
+    <script>
+      function sendMessage() {
+        const input = document.getElementById("user-input");
+        const message = input.value.trim();
+        if (!message) return;
+
+        const chatBox = document.getElementById("chat-box");
+        chatBox.innerHTML += `<div><strong>Tú:</strong> ${message}</div>`;
+        input.value = "";
+
+        fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ mensaje: message }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            chatBox.innerHTML += `<div><strong>Bot:</strong> ${data.respuesta}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+          });
+      }
+
+      document
+        .getElementById("user-input")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") sendMessage();
+        });
+    </script>
+
+    <!-- Botón flotante para abrir/cerrar chatbot -->
+    <button id="toggle-chatbot" title="Abrir Chat" onclick="toggleChatbot()">
+      💬
+    </button>
+
+    <style>
+      #toggle-chatbot {
+        position: fixed;
+        bottom: 90px;
+        right: 25px;
+        background-color: #6a0dad;
+        color: white;
+        font-size: 24px;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        z-index: 9999;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s, transform 0.2s;
+      }
+
+      #toggle-chatbot:hover {
+        background-color: #520c9b;
+        transform: scale(1.1);
+      }
+      #chat-container {
+        display: none;
+      }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const toggleButton = document.getElementById("toggle-chatbot");
+        const chatContainer = document.getElementById("chat-container");
+        const userInput = document.getElementById("user-input");
+
+        toggleButton.addEventListener("click", () => {
+          const visible = chatContainer.style.display === "block";
+          chatContainer.style.display = visible ? "none" : "block";
+        });
+
+        userInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") sendMessage();
+        });
+      });
+
+      function sendMessage() {
+        const input = document.getElementById("user-input");
+        const message = input.value.trim();
+        if (!message) return;
+
+        const chatBox = document.getElementById("chat-box");
+        chatBox.innerHTML += `<div><strong>Tú:</strong> ${message}</div>`;
+        input.value = "";
+
+        fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ mensaje: message }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            chatBox.innerHTML += `<div><strong>Bot:</strong> ${data.respuesta}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+          });
+      }
+
+      window.addEventListener("scroll", () => {
+        const titulo = document.querySelector(".titulo-experiencia");
+        const trigger = window.innerHeight * 0.8;
+
+        if (titulo.getBoundingClientRect().top < trigger) {
+          titulo.classList.add("visible");
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              } else {
+                entry.target.classList.remove("visible");
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+
+        const animables = document.querySelectorAll(".contacto-animado");
+        animables.forEach((el) => observer.observe(el));
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("animated"); // activa animación
+              }
+            });
+          },
+          {
+            threshold: 0.2,
+          }
+        );
+
+        document
+          .querySelectorAll(".fade-up, .fade-left, .fade-right")
+          .forEach((el) => {
+            observer.observe(el);
+          });
+      });
+    </script>
+
+    <!-- Bootstrap 4 JS y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const items = [...document.querySelectorAll(".ubicacion .reveal")];
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const el = entry.target;
+
+              if (entry.isIntersecting) {
+                // Escalonado: 0ms, 120ms, 240ms…
+                const idx = items.indexOf(el);
+                el.style.transitionDelay = idx * 120 + "ms";
+                el.classList.add("visible");
+              } else {
+                // Quita visible para que pueda re-animar al volver a entrar
+                el.classList.remove("visible");
+                el.style.transitionDelay = "0ms";
+              }
+            });
+          },
+          {
+            threshold: 0.25, // ~25% visible
+            rootMargin: "0px 0px -10% 0px", // evita parpadeos al borde inferior
+          }
+        );
+
+        items.forEach((el) => io.observe(el));
+      });
+    </script>
+
+    <script>
+      (function () {
+        const nav = document.querySelector("nav");
+        const threshold = 12; // píxeles de desplazamiento para activar el efecto
+
+        function toggleNavGlass() {
+          if (window.scrollY > threshold) {
+            nav.classList.add("nav-glass");
+          } else {
+            nav.classList.remove("nav-glass");
+          }
+        }
+
+        // Ejecuta al cargar y al hacer scroll
+        window.addEventListener("scroll", toggleNavGlass, { passive: true });
+        window.addEventListener("load", toggleNavGlass);
+      })();
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Si el usuario prefiere menos movimiento, no armamos el observador "loop"
+        const reduce = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+        if (reduce) return;
+
+        const easing = "cubic-bezier(.2,.7,.2,1)";
+        const items = Array.from(
+          document.querySelectorAll(".mission-vision .reveal")
+        );
+        if (!items.length) return;
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const el = entry.target;
+              const anim = (el.dataset.anim || "").toLowerCase();
+
+              // Define qué animación usamos
+              let name = "mvDropIn";
+              if (anim.includes("left")) name = "mvTiltInLeft";
+              if (anim.includes("right")) name = "mvTiltInRight";
+              if (anim.includes("down")) name = "mvDropIn";
+
+              if (entry.isIntersecting) {
+                // Re-inicia la animación cada vez que entra
+                el.style.animation = "none";
+                void el.offsetWidth; // reflow para resetear
+                const idx = items.indexOf(el); // stagger por orden en el DOM
+                el.style.animation = `${name} 900ms ${easing} ${
+                  idx * 130
+                }ms both`;
+
+                // Subrayado del título (reiniciamos para poder re-animarlo)
+                if (el.matches(".section-title h2")) {
+                  el.classList.remove("underline-on");
+                  void el.offsetWidth;
+                  el.classList.add("underline-on");
+                }
+              } else {
+                // Al salir de vista, vuelve al estado base para poder re-entrar animando
+                el.style.animation = "none";
+                el.style.opacity = "";
+                el.style.transform = "";
+                el.style.filter = "";
+                if (el.matches(".section-title h2")) {
+                  el.classList.remove("underline-on");
+                }
+              }
+            });
+          },
+          {
+            threshold: 0.35, // entra cuando ~35% es visible
+            rootMargin: "0px 0px -12% 0px", // pequeño margen para evitar parpadeos
+          }
+        );
+
+        items.forEach((el) => io.observe(el));
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const items = [...document.querySelectorAll(".ubicacion .reveal")];
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const el = entry.target;
+
+              if (entry.isIntersecting) {
+                // Escalonado: 0ms, 120ms, 240ms…
+                const idx = items.indexOf(el);
+                el.style.transitionDelay = idx * 120 + "ms";
+                el.classList.add("visible");
+              } else {
+                // Quita visible para que pueda re-animar al volver a entrar
+                el.classList.remove("visible");
+                el.style.transitionDelay = "0ms";
+              }
+            });
+          },
+          {
+            threshold: 0.25, // ~25% visible
+            rootMargin: "0px 0px -10% 0px", // evita parpadeos al borde inferior
+          }
+        );
+
+        items.forEach((el) => io.observe(el));
+      });
+
+      // Mensajes con sus enlaces
+      const slides = [
+        { text: "Terapia Individual", link: "#individual" },
+        { text: "Terapia de Pareja", link: "#pareja" },
+        { text: "Terapia Familiar", link: "#familiar" },
+        { text: "Terapia Infantil", link: "#infantil" },
+        { text: "Terapia Adolecentes", link: "#pareja" },
+        { text: "Terapia Grupal", link: "#pareja" },
+        { text: "Peritaje Psicologico", link: "#pareja" },
+        { text: "Orientación vocacional", link: "#servicios" },
+      ];
+
+      let index = 0;
+      const textElement = document.getElementById("rotating-text");
+      const buttonElement = document.getElementById("rotating-btn");
+
+      function changeSlide() {
+        textElement.classList.remove("show"); // quitar animación
+        setTimeout(() => {
+          textElement.textContent = slides[index].text;
+          buttonElement.href = slides[index].link;
+          textElement.classList.add("show"); // animación de entrada
+          index = (index + 1) % slides.length;
+        }, 500);
+      }
+
+      // iniciar
+      textElement.classList.add("show");
+      setInterval(changeSlide, 4000);
+
+      const faders = document.querySelectorAll(".fade-up");
+
+      const appearOptions = {
+        threshold: 0.2, // porcentaje visible para activar
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const appearOnScroll = new IntersectionObserver(function (
+        entries,
+        appearOnScroll
+      ) {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            entry.target.classList.remove("show"); // desaparece al salir
+            return;
+          } else {
+            entry.target.classList.add("show"); // aparece al entrar
+          }
+        });
+      },
+      appearOptions);
+
+      faders.forEach((fader) => {
+        appearOnScroll.observe(fader);
+      });
+    </script>
+  </body>
+</html>

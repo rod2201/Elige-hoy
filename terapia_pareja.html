@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terapia en Pareja - Elige Hoy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --morado: #7b1fa2;
+      --morado-oscuro: #4a0072;
+      --verde-wsp: #25d366;
+      --gris-suave: #f5f5f5;
+      --texto: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: white;
+      color: var(--texto);
+    }
+
+    nav {
+      background-color: white;
+      padding: 10px 30px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    nav a {
+      color: var(--morado);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--morado-oscuro);
+    }
+
+    .logo-container {
+      text-align: center;
+      padding: 30px 0 10px;
+    }
+
+    .logo-container img {
+      max-width: 220px;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section img {
+      width: 60%;
+      max-width: 400px;
+      border-radius: 20px;
+      margin: 30px auto;
+      display: block;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--morado);
+      text-align: center;
+    }
+
+    .section-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .benefit {
+      background-color: var(--gris-suave);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .benefit:hover {
+      transform: translateY(-5px);
+    }
+
+    .benefit h3 {
+      color: var(--morado);
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background-color: var(--morado);
+      color: white;
+      padding: 30px;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 600px) {
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      section img {
+        width: 90%;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    .whatsapp-button-container {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .whatsapp-button {
+      display: inline-flex;
+      align-items: center;
+      background-color: var(--verde-wsp);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .whatsapp-button img {
+      width: 20px;
+      margin-right: 10px;
+    }
+
+    .whatsapp-button:hover {
+      background-color: #128c7e;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="especialistas.html">Especialistas</a>
+    <a href="#">Blog</a>
+    <a href="#">Convenios</a>
+    <a href="#">Facturación</a>
+  </nav>
+
+  <div class="logo-container">
+    <img src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png" alt="Logo Elige Hoy AE Psicólogos" />
+  </div>
+
+  <section>
+    <h2 class="section-title">¿Qué es la terapia en pareja?</h2>
+    <p class="section-text">
+      La terapia en pareja es un espacio de acompañamiento profesional diseñado para fortalecer la comunicación, resolver conflictos y mejorar la relación afectiva entre dos personas. Es ideal tanto para superar crisis como para crecer juntos emocionalmente.
+    </p>
+    <img src="img/img/1t_pareja.jpg" alt="Terapia en Pareja">
+    <p class="section-text">
+      En Elige Hoy AE Psicólogos, trabajamos contigo y tu pareja para construir vínculos más sanos, gestionar emociones y tomar decisiones conscientes sobre su futuro en común.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title">¿Cómo puede ayudarte?</h2>
+    <div class="benefits">
+      <div class="benefit">
+        <h3>💬 Comunicación efectiva</h3>
+        <p>Aprenden a expresar sus emociones y necesidades sin atacar ni herir al otro.</p>
+      </div>
+      <div class="benefit">
+        <h3>❤️ Reconexión emocional</h3>
+        <p>Recuperan la cercanía, el afecto y el sentido de compañerismo perdido.</p>
+      </div>
+      <div class="benefit">
+        <h3>🧠 Resolución de conflictos</h3>
+        <p>Abordan temas difíciles desde la comprensión y el respeto mutuo.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="whatsapp-button-container">
+    <a class="whatsapp-button" href="https://wa.me/5217291797345?text=Hola,%20quiero%20agendar%20una%20cita%20de%20Terapia%20en%20Pareja" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
+      Agendar cita ahora
+    </a>
+  </div>
+
+  <footer>
+    © 2025 Elige Hoy AE Psicólogos – contacto@eligehoy.com – Toluca, Edo. Méx.
+  </footer>
+
+</body>
+</html>
