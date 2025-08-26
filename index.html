@@ -7,8 +7,7 @@
     <!--
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='chatbot.css') }}">
-    -->
-    <link rel="stylesheet" href="../static/chatbot.css"/>
+    <link rel="stylesheet" href="../static/chatbot.css"/> -->
     <link rel="stylesheet" href="styles.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
@@ -42,10 +41,10 @@
             <a href="terapia_alternativa.html">Terpaia Alternativa</a>
             <a href="orientacion_vocacional.html">Orientación Vocacional</a>
             <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
-            <a href="#convenios">Convenios</a>
+            <a href="index.html">Convenios</a>
           </div>
         </div>
-        <a href="index.html">Blog</a>
+        <a href="https://eligehoyaepsicologos.com/blog" target="_blank" rel="noopener noreferrer">Blog</a>
         <a href="index.html">Convenios</a>
         <a href="factura.html">Facturación</a>
       </div>
@@ -122,6 +121,67 @@
               nuestra calidad, ética y compromiso con el bienestar integral de
               la comunidad.
             </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TERAPIAS -->
+    <section id="terapias" class="py-5" style="background-color: #f8f4fb">
+      <div class="container">
+        <!-- Título y subtítulo -->
+        <div class="text-center mb-5">
+          <h2 class="fw-bold display-5 animate-title">
+            Terapias Disponibles
+            <!-- Línea decorativa -->
+            <span class="title-line"></span>
+          </h2>
+          <p class="text-muted mt-2">
+            Descubre nuestras opciones de atención personalizada para tu
+            bienestar emocional.
+          </p>
+        </div>
+
+        <!-- Cards -->
+        <div class="row g-4">
+          <!-- Terapia en Línea -->
+          <div class="col-md-6">
+            <div
+              class="card h-100 shadow-lg border-0 rounded-4 terapia-card reveal-left"
+            >
+              <div class="card-body p-5 text-center">
+                <div class="icon-wrap mb-4">
+                  <i class="fa-solid fa-video fa-3x float-icon"></i>
+                </div>
+                <h3 class="fw-bold mb-3 card-title" style="color: #8b5cf6">
+                  Terapia en Línea
+                </h3>
+                <p class="text-muted">
+                  Conéctate desde cualquier lugar con sesiones seguras por
+                  videollamada.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Terapia Presencial -->
+          <div class="col-md-6">
+            <div
+              class="card h-100 shadow-lg border-0 rounded-4 terapia-card reveal-right"
+            >
+              <div class="card-body p-5 text-center">
+                <div class="icon-wrap mb-4">
+                  <i class="fa-solid fa-users fa-3x float-icon"></i>
+                </div>
+                <h3 class="fw-bold mb-3 card-title" style="color: #522c84">
+                  Terapia Presencial
+                </h3>
+                <p class="text-muted">
+                  Vive la experiencia de un encuentro cercano en un espacio
+                  cálido y profesional.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1211,6 +1271,48 @@
 
       faders.forEach((fader) => {
         appearOnScroll.observe(fader);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Animación de título y línea
+        const title = document.querySelector(".animate-title");
+        const line = document.querySelector(".title-line");
+        const titleObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                title.classList.add("show");
+                line.classList.add("show");
+              } else {
+                title.classList.remove("show");
+                line.classList.remove("show");
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+        if (title) titleObserver.observe(title);
+
+        // Animación de cards y párrafos
+        const cards = document.querySelectorAll(".reveal-left, .reveal-right");
+        const cardObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const index = Array.from(cards).indexOf(entry.target);
+              if (entry.isIntersecting) {
+                setTimeout(() => {
+                  entry.target.classList.add("show");
+                }, index * 200); // efecto escalonado
+              } else {
+                entry.target.classList.remove("show");
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+        cards.forEach((card) => cardObserver.observe(card));
       });
     </script>
   </body>
