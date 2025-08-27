@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Solicitud de Factura - Elige Hoy</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="/img/elige_hoy.png" type="image/x-icon" />
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+    
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
@@ -210,12 +208,32 @@
     </style>
   </head>
   <body>
+   
     <!-- NAV -->
-    <nav>
-      <div class="menu">
-        <a href="index.html">Inicio</a>
+  <nav>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <div class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="especialistas.html">Especialistas</a>
+      <div class="has-submenu-container">
+        <a href="#" class="has-submenu">Servicios</a>
+        <div class="submenu">
+          <a href="terapia_individual.html">Terapia Individual</a>
+          <a href="terapia_pareja.html">Terapia de Pareja</a>
+          <a href="terapia_adolescente.html">Terapia para Adolescentes</a>
+          <a href="terapia_infantil.html">Terapia Infantil y de Lenguaje</a>
+          <a href="terapia_familiar.html">Terapia Familiar</a>
+          <a href="terapia_grupal.html">Terapia Grupal</a>
+          <a href="terapia_alternativa.html">Terapia Alternativa</a>
+          <a href="orientacion_vocacional.html">Orientación Vocacional</a>
+          <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
+        </div>
       </div>
-    </nav>
+      <a href="blog.html">Blog</a>
+      <a href="convenios.html">Convenios</a>
+      <a href="facturacion.html">Facturación</a>
+    </div>
+  </nav>
 
     <!-- MAIN -->
     <main>

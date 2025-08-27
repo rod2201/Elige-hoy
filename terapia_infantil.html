@@ -1,294 +1,398 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terapia Infantil y de Lenguaje - Elige Hoy</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
-  <link rel="icon" href="img/elige_hoy.png" type="image/png" />
-  <style>
-    /* HERO sección terapia */
-.hero-terapia {
-  position: relative;
-  height: 65vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terapia Infantil y de Lenguaje - Elige Hoy</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="img/elige_hoy.png" type="image/png" />
+    <style>
+      :root {
+        --morado: #522d88;
+        --verde: #28a745;
+        --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
 
-.hero-terapia::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(82, 44, 132, 0.65); /* filtro morado */
-  backdrop-filter: blur(6px);
-}
+      /* HERO sección terapia */
+      .hero-terapia {
+        position: relative;
+        height: 65vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        overflow: hidden;
+      }
+      .hero-terapia::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(82, 44, 132, 0.6);
+        backdrop-filter: blur(6px);
+      }
+      .hero-terapia .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-terapia h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+      }
+      .hero-terapia p {
+        font-size: 1.2rem;
+        margin: 12px 0 20px;
+      }
+      .btn-cta {
+        background: var(--verde);
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+      }
+      .btn-cta:hover {
+        background: #1ebd5a;
+        transform: translateY(-3px);
+      }
 
-.hero-terapia .hero-content {
-  position: relative;
-  z-index: 2;
-}
+      /* INFO sección */
+      .info-terapia {
+        max-width: 900px;
+        margin: 60px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: var(--shadow-sm);
+        text-align: center;
+      }
+      .info-text h2 {
+        color: var(--morado);
+        margin-bottom: 16px;
+      }
+      .info-text p {
+        margin-bottom: 14px;
+        line-height: 1.6;
+      }
+      .info-img img {
+        width: 60%;
+        max-width: 350px;
+        border-radius: 16px;
+        box-shadow: var(--shadow-md);
+        margin: 0 auto;
+      }
 
-.hero-terapia h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-}
+      /* BENEFICIOS */
+      .beneficios {
+        text-align: center;
+        padding: 60px 20px;
+      }
+      .beneficios h2 {
+        color: var(--morado);
+        margin-bottom: 40px;
+      }
+      .benefit-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+        max-width: 1000px;
+        margin: auto;
+      }
+      .benefit {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(8px);
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: var(--shadow-sm);
+        transition: 0.3s;
+      }
+      .benefit:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-md);
+      }
+      .benefit i {
+        font-size: 2.5rem;
+        color: var(--morado);
+        margin-bottom: 12px;
+      }
 
-.hero-terapia p {
-  font-size: 1.2rem;
-  margin: 12px 0 20px;
-}
-
-.btn-cta {
-  background: var(--verde);
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-}
-
-.btn-cta:hover {
-  background: #1ebd5a;
-  transform: translateY(-3px);
-}
-
-/* INFO sección */
-.info-terapia {
-  max-width: 900px;
-  margin: 60px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: var(--shadow-sm);
-  text-align: center;
-}
-
-.info-text h2 {
-  color: var(--morado);
-  margin-bottom: 16px;
-}
-
-.info-text p {
-  margin-bottom: 14px;
-  line-height: 1.6;
-}
-
-.info-img img {
-  width: 60%;
-  max-width: 350px;
-  border-radius: 16px;
-  box-shadow: var(--shadow-md);
-  margin: 0 auto;
-}
-
-/* BENEFICIOS */
-.beneficios {
-  text-align: center;
-  padding: 60px 20px;
-}
-.beneficios h2 {
-  color: var(--morado);
-  margin-bottom: 40px;
-}
-.benefit-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  max-width: 1000px;
-  margin: auto;
-}
-.benefit {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(8px);
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: var(--shadow-sm);
-  transition: 0.3s;
-}
-.benefit:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
-}
-.benefit i {
-  font-size: 2.5rem;
-  color: var(--morado);
-  margin-bottom: 12px;
-}
-
-.stickers {
-  position: fixed; /* 👈 se quedan en la pantalla aunque hagas scroll */
-  inset: 0;        /* ocupa todo el viewport */
-  pointer-events: none; /* no estorban clics */
-  z-index: 0;      /* detrás del contenido */
-}
-
-.sticker {
-  position: absolute;
-  width: 120px;
-  opacity: 0.9;
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
-  animation-iteration-count: infinite;
-}
-
-/* Distribución por página */
-.sticker1 { top: 10%; left: 5%; animation: bounce 6s infinite; }
-.sticker2 { top: 30%; right: 8%; animation: float 7s infinite; }
-.sticker3 { bottom: 20%; left: 15%; animation: spin 8s infinite; }
-.sticker4 { bottom: 10%; right: 5%; animation: float 9s infinite; }
-.sticker5 { top: 70%; left: 45%; animation: bounce 7s infinite; }
-.sticker6 { top: 50%; right: 40%; animation: spin 10s infinite; }
-
-  </style>
-</head>
-<body>
-  <!-- Logo -->
-  <div class="header">
-    <img src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png" alt="Logo" class="logo"/>
-  </div>
-
-  <!-- NAV -->
-  <nav>
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-    <div class="menu">
-      <a href="index.html">Inicio</a>
-      <a href="especialistas.html">Especialistas</a>
-      <div class="has-submenu-container">
-        <a href="#" class="has-submenu">Servicios</a>
-        <div class="submenu">
-          <a href="terapia_individual.html">Terapia Individual</a>
-          <a href="terapia_pareja.html">Terapia de Pareja</a>
-          <a href="terapia_adolescente.html">Terapia para Adolescentes</a>
-          <a href="terapia_infantil.html">Terapia Infantil y de Lenguaje</a>
-          <a href="terapia_familiar.html">Terapia Familiar</a>
-          <a href="terapia_grupal.html">Terapia Grupal</a>
-          <a href="terapia_alternativa.html">Terapia Alternativa</a>
-          <a href="orientacion_vocacional.html">Orientación Vocacional</a>
-          <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
-        </div>
-      </div>
-      <a href="blog.html">Blog</a>
-      <a href="convenios.html">Convenios</a>
-      <a href="facturacion.html">Facturación</a>
-    </div>
-  </nav>
-
-     <!-- Añade esto dentro del <body>, justo después de <nav> -->
-    <div class="stickers">
-      <img src="img/mono.png" alt="Sticker Animales" class="sticker sticker1"/>
-      <img src="img/koala.png" alt="Sticker Animales" class="sticker sticker2"/>
-      <img src="img/panda.png" alt="Sticker Animales" class="sticker sticker3"/>
-      <img src="img/perro.png" alt="Sticker Animales" class="sticker sticker4"/>
-      <img src="img/cerdo.png" alt="Sticker Animales" class="sticker sticker5"/>
-      <img src="img/panda.png" alt="Sticker Animales" class="sticker sticker6"/>
-    </div>
-
-  <!-- HERO -->
-  <section class="hero-terapia" style="background:url('https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;">
-    <div class="hero-content">
-      <h1>Terapia Infantil y de Lenguaje</h1>
-      <p>Apoyamos a los niños en su desarrollo emocional y habilidades comunicativas</p>
-      <a href="https://wa.me/5217291797345?text=Hola,%20quiero%20agendar%20una%20cita%20de%20Terapia%20Infantil%20y%20de%20Lenguaje" target="_blank" class="btn-cta">
-        <i class="fab fa-whatsapp"></i> Agendar cita ahora
-      </a>
-    </div>
-  </section>
-
-  <!-- INFO -->
-  <section class="info-terapia">
-    <div class="info-text">
-      <h2>¿Qué es la terapia infantil y de lenguaje?</h2>
-      <p>
-        La terapia infantil se centra en brindar apoyo emocional a niños, ayudándoles a expresar sus sentimientos,
-        mejorar su conducta y fortalecer su autoestima.
-      </p>
-      <p>
-        La terapia de lenguaje se enfoca en desarrollar habilidades de comunicación,
-        mejorar la pronunciación, el vocabulario y la comprensión, favoreciendo su rendimiento académico y social.
-      </p>
-    </div>
-    <div class="info-img">
-      <img src="https://www.esneca.lat/wp-content/uploads/terapia-infantil.jpg" alt="Terapia infantil"/>
-    </div>
-  </section>
-
-  <!-- BENEFICIOS -->
-  <section class="beneficios">
-    <h2>Beneficios de la terapia infantil y de lenguaje</h2>
-    <div class="benefit-cards">
-      <div class="benefit">
-        <i class="fas fa-child"></i>
-        <h3>Expresión emocional</h3>
-        <p>Ayuda a los niños a identificar y comunicar sus emociones de manera saludable.</p>
-      </div>
-      <div class="benefit">
-        <i class="fas fa-comments"></i>
-        <h3>Mejor comunicación</h3>
-        <p>Fortalece las habilidades de lenguaje y comprensión verbal.</p>
-      </div>
-      <div class="benefit">
-        <i class="fas fa-star"></i>
-        <h3>Desarrollo integral</h3>
-        <p>Impulsa la confianza, la autoestima y el rendimiento académico.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo">
-      <img src="https://eligehoyaepsicologos.com/img/Frame-4.png" alt="Logo"/>
-    </div>
-    <h2>Síguenos en redes sociales</h2>
-    <div class="social-icons">
-      <a href="https://www.facebook.com/eligehoyarmoniaemocional/about/?_rdr" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://www.instagram.com/elige_hoy/" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.youtube.com/@eligehoyaepsicologos8712/featured" target="_blank"><i class="fab fa-youtube"></i></a>
-    </div>
-    <p><a href="aviso.html">Aviso de privacidad</a></p>
-    <p>Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.</p>
-  </footer>
-
-  <!-- Scripts -->
-  <script>
-    function toggleMenu() {
-      const menu = document.querySelector(".menu");
-      menu.classList.toggle("show");
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const submenuBtn = document.querySelector(".has-submenu");
-      const submenuContainer = submenuBtn.closest(".has-submenu-container");
-
-      submenuBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        submenuContainer.classList.toggle("active");
-      });
-    });
-
-    (function () {
-      const nav = document.querySelector("nav");
-      const threshold = 12;
-      function toggleNavGlass() {
-        if (window.scrollY > threshold) {
-          nav.classList.add("nav-glass");
-        } else {
-          nav.classList.remove("nav-glass");
+      /* ANIMALES ANIMADOS - TIPO JUNGLA */
+      .jungle-animals {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .jungle-animals img {
+        position: absolute;
+        width: 80px;
+        opacity: 0.9;
+        transition: transform 0.3s ease-in-out;
+      }
+      @keyframes floatY {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
         }
       }
-      window.addEventListener("scroll", toggleNavGlass, { passive: true });
-      window.addEventListener("load", toggleNavGlass);
-    })();
-  </script>
-</body>
+      @keyframes floatX {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(12px);
+        }
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(180deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      /* Posiciones animales */
+      .animal1 {
+        top: 10%;
+        left: 5%;
+        animation: floatY 6s ease-in-out infinite;
+      }
+      .animal2 {
+        top: 15%;
+        right: 10%;
+        animation: floatX 7s ease-in-out infinite;
+      }
+      .animal3 {
+        top: 25%;
+        left: 40%;
+        animation: floatY 8s ease-in-out infinite;
+      }
+      .animal4 {
+        top: 40%;
+        right: 25%;
+        animation: floatY 9s ease-in-out infinite;
+      }
+      .animal5 {
+        top: 55%;
+        left: 10%;
+        animation: floatX 10s ease-in-out infinite;
+      }
+      .animal6 {
+        top: 65%;
+        right: 15%;
+        animation: spin 12s linear infinite;
+      }
+      .animal7 {
+        bottom: 15%;
+        left: 20%;
+        animation: floatY 9s ease-in-out infinite;
+      }
+      .animal8 {
+        bottom: 10%;
+        right: 5%;
+        animation: floatY 8s ease-in-out infinite;
+      }
+      .animal9 {
+        bottom: 20%;
+        left: 40%;
+        animation: floatX 10s ease-in-out infinite;
+      }
+      .animal10 {
+        bottom: 25%;
+        right: 35%;
+        animation: spin 11s linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Logo -->
+    <div class="header">
+      <img
+        src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png"
+        alt="Logo"
+        class="logo"
+      />
+    </div>
+
+    <!-- NAV -->
+    <nav>
+      <div class="hamburger" onclick="toggleMenu()">?</div>
+      <div class="menu">
+        <a href="index.html">Inicio</a>
+        <a href="especialistas.html">Especialistas</a>
+        <div class="has-submenu-container">
+          <a href="#" class="has-submenu">Servicios</a>
+          <div class="submenu">
+            <a href="terapia_individual.html">Terapia Individual</a>
+            <a href="terapia_pareja.html">Terapia de Pareja</a>
+            <a href="terapia_adolescente.html">Terapia para Adolescentes</a>
+            <a href="terapia_infantil.html">Terapia Infantil y de Lenguaje</a>
+            <a href="terapia_familiar.html">Terapia Familiar</a>
+            <a href="terapia_grupal.html">Terapia Grupal</a>
+            <a href="terapia_alternativa.html">Terapia Alternativa</a>
+            <a href="orientacion_vocacional.html">Orientación Vocacional</a>
+            <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
+          </div>
+        </div>
+        <a href="blog.html">Blog</a>
+        <a href="convenios.html">Convenios</a>
+        <a href="facturacion.html">Facturación</a>
+      </div>
+    </nav>
+
+    <!-- ANIMALES JUNGLA -->
+    <div class="jungle-animals">
+      <img src="img/mono.png" class="animal1" alt="Mono" />
+      <img src="./img/elefante.png" class="animal2" alt="Koala" />
+      <img src="img/panda.png" class="animal3" alt="Panda" />
+      <img src="img/mono.png" class="animal4" alt="Perro" />
+      <img src="./img/cebra.png" class="animal5" alt="Cerdo" />
+      <img src="img/panda.png" class="animal6" alt="Panda" />
+      <img src="img/leon.png" class="animal7" alt="León" />
+      <img src="img/elefante.png" class="animal8" alt="Elefante" />
+      <img src="img/jirafa.png" class="animal9" alt="Jirafa" />
+    </div>
+
+    <!-- HERO -->
+    <section
+      class="hero-terapia"
+      style="
+        background: url('https://humanidades.com/wp-content/uploads/2016/09/ni%C3%B1ez-4-e1560651931694.jpg')
+          center/cover no-repeat;
+      "
+    >
+      <div class="hero-content">
+        <h1>Terapia Infantil y de Lenguaje</h1>
+        <p>
+          Apoyamos a los niños en su desarrollo emocional y habilidades
+          comunicativas
+        </p>
+        <a
+          href="https://wa.me/5217291797345?text=Hola,%20quiero%20agendar%20una%20cita%20de%20Terapia%20Infantil%20y%20de%20Lenguaje"
+          target="_blank"
+          class="btn-cta"
+        >
+          <i class="fab fa-whatsapp"></i> Agendar cita ahora
+        </a>
+      </div>
+    </section>
+
+    <!-- INFO -->
+    <section class="info-terapia">
+      <div class="info-text">
+        <h2>¿Qué es la terapia infantil y de lenguaje?</h2>
+        <p>
+          La terapia infantil se centra en brindar apoyo emocional a niños,
+          ayudándoles a expresar sus sentimientos, mejorar su conducta y
+          fortalecer su autoestima.
+        </p>
+        <p>
+          La terapia de lenguaje se enfoca en desarrollar habilidades de
+          comunicación, mejorar la pronunciación, el vocabulario y la
+          comprensión, favoreciendo su rendimiento académico y social.
+        </p>
+      </div>
+      <div class="info-img">
+        <img
+          src="https://www.esneca.lat/wp-content/uploads/terapia-infantil.jpg"
+          alt="Terapia infantil"
+        />
+      </div>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section class="beneficios">
+      <h2>Beneficios de la terapia infantil y de lenguaje</h2>
+      <div class="benefit-cards">
+        <div class="benefit">
+          <i class="fas fa-child"></i>
+          <h3>Expresión emocional</h3>
+          <p>
+            Ayuda a los niños a identificar y comunicar sus emociones de manera
+            saludable.
+          </p>
+        </div>
+        <div class="benefit">
+          <i class="fas fa-comments"></i>
+          <h3>Mejor comunicación</h3>
+          <p>Fortalece las habilidades de lenguaje y comprensión verbal.</p>
+        </div>
+        <div class="benefit">
+          <i class="fas fa-star"></i>
+          <h3>Desarrollo integral</h3>
+          <p>Impulsa la confianza, la autoestima y el rendimiento académico.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-logo">
+        <img
+          src="https://eligehoyaepsicologos.com/img/Frame-4.png"
+          alt="Logo"
+        />
+      </div>
+      <h2>Síguenos en redes sociales</h2>
+      <div class="social-icons">
+        <a
+          href="https://www.facebook.com/eligehoyarmoniaemocional/about/?_rdr"
+          target="_blank"
+          ><i class="fab fa-facebook"></i
+        ></a>
+        <a href="https://www.instagram.com/elige_hoy/" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.youtube.com/@eligehoyaepsicologos8712/featured"
+          target="_blank"
+          ><i class="fab fa-youtube"></i
+        ></a>
+      </div>
+      <p><a href="aviso.html">Aviso de privacidad</a></p>
+      <p>
+        Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.
+      </p>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const submenuBtn = document.querySelector(".has-submenu");
+        const submenuContainer = submenuBtn.closest(".has-submenu-container");
+
+        submenuBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          submenuContainer.classList.toggle("active");
+        });
+      });
+    </script>
+  </body>
 </html>
