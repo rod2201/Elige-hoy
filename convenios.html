@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Convenios – Elige Hoy AE Psicólogos</title>
+  <link rel="icon" href="img/elige_hoy.png" type="image/x-icon" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+
+  <style>
+    /* Ajustes suaves específicos para esta página */
+    .hero-convenios {
+      position: relative; height: 70vh; display:flex; align-items:center; justify-content:center; text-align:center; color:#fff;
+      background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.55)), url('https://cdn.diferenciador.com/imagenes/contrato-y-convenio-og.jpg');
+      background-size: cover; background-position: center; margin-top: 10px; /* despeje del nav fijo */
+    }
+    .hero-contenido { max-width: 900px; padding: 0 20px; }
+    .hero-contenido h1 { font-size: var(--fs-hero); line-height:1.1; margin-bottom: 12px; }
+    .hero-contenido p { font-size: 1.15rem; opacity:.95; }
+
+    .badge-descuento { display:inline-flex; align-items:center; gap:10px; margin-top:16px; background: rgba(255,255,255,.2); border:2px solid #fff; color:#fff; padding:10px 16px; border-radius: 999px; font-weight:800; box-shadow: var(--shadow-sm); }
+
+    .seccion { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+    .seccion h2 { font-size: var(--fs-h2); color: var(--morado); text-align:center; margin-bottom: 14px; }
+    .seccion p.lead { text-align:center; max-width: 900px; margin: 0 auto 28px; color:#444; }
+
+    /* Grid de beneficios / con quién hacemos convenios */
+    .grid-4 { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .card-soft { background:#fff; border-radius: 16px; padding: 22px; box-shadow: var(--shadow-sm); text-align:center; }
+    .card-soft .icono { font-size: 2rem; color: var(--morado); margin-bottom: 8px; }
+    .card-soft h3 { margin: 6px 0 6px; font-size: 1.15rem; color:#2c3e50; }
+    .card-soft p { color:#555; font-size: .98rem; }
+
+    /* Bloque dos columnas (unidad móvil / NOM-035) */
+    .dos-col { display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items:center; }
+    .dos-col img, .dos-col .media-shadow { border-radius: 16px; box-shadow: var(--shadow-sm); }
+    .check-list { list-style: none; padding: 0; margin: 0; }
+    .check-list li { display:flex; align-items:flex-start; gap: 10px; margin-bottom: 10px; }
+    .check-list i { color: var(--verde); margin-top: 2px; }
+
+    /* Tarjetas de "¿Qué incluye el convenio?" */
+    .grid-3 { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .include-card { background: #f6f7f9; border-radius: 18px; padding: 22px; box-shadow: var(--shadow-sm); }
+    .include-card h4 { color:#2c3e50; font-size:1.05rem; margin:8px 0 6px; }
+
+    /* Bloque CTA */
+    .cta { background: linear-gradient(135deg, var(--morado), var(--morado-oscuro)); color:#fff; border-radius: 20px; padding: 28px; text-align:center; box-shadow: var(--shadow-brand-sm); }
+    .cta p { opacity:.95; }
+
+    @media (max-width: 900px){
+      .dos-col { grid-template-columns: 1fr; }
+      .hero-convenios { height: 58vh; }
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <img src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png" alt="Logo Elige Hoy" class="logo" />
+  </div>
+
+  <!-- NAV (reutiliza comportamiento/hamburguesa/hover del sitio) -->
+  <nav>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <div class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="especialistas.html">Especialistas</a>
+      <div class="has-submenu-container">
+        <a href="#" class="has-submenu">Servicios</a>
+        <div class="submenu">
+          <a href="terapia_individual.html">Terapia Individual</a>
+          <a href="terapia_pareja.html">Terapia de Pareja</a>
+          <a href="terapia_adolescente.html">Terapia para Adolescentes</a>
+          <a href="terapia_infantil.html">Terapia Infantil y de Lenguaje</a>
+          <a href="terapia_familiar.html">Terapia Familiar</a>
+          <a href="terapia_grupal.html">Terapia Grupal</a>
+          <a href="terapia_alternativa.html">Terapia Alternativa</a>
+          <a href="orientacion_vocacional.html">Orientación Vocacional</a>
+          <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
+        </div>
+      </div>
+      <a href="#blog">Blog</a>
+      <a href="factura.html">Facturación</a>
+    </div>
+  </nav>
+
+  <!-- HERO Convenios -->
+  <section class="hero-convenios">
+    <div class="hero-contenido reveal visible" data-anim="fade-down">
+      <h1>Convenios Institucionales</h1>
+      <p class="subtitle" style="font-style: italic;">Elige Hoy, donde tu vida empieza a cambiar.</p>
+      <div class="badge-descuento" title="Descuento para colaboradores">
+        <i class="fa-solid fa-tag"></i>
+        <span><strong>10% de descuento</strong> para toda tu plantilla</span>
+      </div>
+      <p class="mt-3">Todas las consultas de tus colaboradores cuentan con <strong>10% de ahorro</strong> en nuestros servicios de <em>psicología</em>, <em>terapia alternativa</em> y <em>psiquiatría</em>.</p>
+      <a href="https://wa.me/527291797345?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20convenio%20institucional" class="btn btn-success mt-2">Solicitar información por WhatsApp</a>
+    </div>
+  </section>
+
+  <!-- ¿Con quién hacemos convenios? -->
+  <section class="seccion" id="convenios">
+    <h2>¿Con quién realizamos convenios?</h2>
+    <p class="lead">Trabajamos con instituciones que buscan <strong>prevenir</strong>, <strong>atender oportunamente</strong> y <strong>fortalecer</strong> la salud mental de sus integrantes, con respaldo clínico y un enfoque multidisciplinario.</p>
+    <div class="grid-4">
+      <div class="card-soft reveal" data-anim="fade-up">
+        <div class="icono"><i class="fa-solid fa-school"></i></div>
+        <h3>Centros educativos</h3>
+        <p>Escuelas, preparatorias y universidades que impulsan el bienestar de su comunidad escolar.</p>
+      </div>
+      <div class="card-soft reveal" data-anim="fade-up">
+        <div class="icono"><i class="fa-solid fa-building"></i></div>
+        <h3>Empresas y corporativos</h3>
+        <p>Industrias y oficinas que desean equipos más sanos, productivos y enfocados.</p>
+      </div>
+      <div class="card-soft reveal" data-anim="fade-up">
+        <div class="icono"><i class="fa-solid fa-landmark"></i></div>
+        <h3>Gobierno y OSC</h3>
+        <p>Dependencias públicas y organizaciones civiles comprometidas con el tejido social.</p>
+      </div>
+      <div class="card-soft reveal" data-anim="fade-up">
+        <div class="icono"><i class="fa-solid fa-people-group"></i></div>
+        <h3>ONG y comunidades</h3>
+        <p>Asociaciones, comunidades religiosas y proyectos locales que buscan apoyo profesional.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unidad Móvil / Enlace Móvil -->
+  <section class="seccion">
+    <div class="dos-col"><div class="reveal" data-anim="fade-left">
+        <img class="media-shadow" src="https://blog.talentlab.group/hubfs/TL.png" alt="Unidad móvil de apoyo psicológico" />
+      </div>
+      <div>
+        <h2>Elige Hoy: la atención llega hasta tu sede</h2>
+        <p>Contamos con una <strong>unidad móvil de apoyo psicológico</strong> que acerca nuestros servicios a tu institución. Así eliminamos barreras y facilitamos el acceso a la atención.</p>
+        <ul class="check-list mt-3">
+          <li><i class="fa-solid fa-circle-check"></i><span>Aplicaciones breves para detectar <strong>ansiedad</strong>, <strong>autoestima</strong> y <strong>estrés</strong>.</span></li>
+          <li><i class="fa-solid fa-circle-check"></i><span>Activaciones y <strong>ferias de salud mental</strong> con orientación directa.</span></li>
+          <li><i class="fa-solid fa-circle-check"></i><span><strong>Talleres exprés</strong> de prevención y habilidades emocionales.</span></li>
+          <li><i class="fa-solid fa-circle-check"></i><span>Charlas con especialistas <strong>presenciales</strong> o <strong>en línea</strong>.</span></li>
+          <li><i class="fa-solid fa-circle-check"></i><span>Vinculación inmediata con servicios de <strong>Elige Hoy AE Psicólogos</strong>.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ¿Qué incluye un convenio? -->
+  <section class="seccion">
+    <h2>¿Qué incluye un convenio institucional?</h2>
+    <div class="grid-3 mt-3">
+      <div class="include-card reveal" data-anim="fade-up">
+        <div class="icono"><i class="fa-solid fa-hand-holding-heart"></i></div>
+        <h4>Tarifas preferenciales</h4>
+        <p>Descuentos en psicoterapia, nutrición y psiquiatría para tu comunidad.</p>
+      </div>
+      <div class="include-card reveal" data-anim="fade-up">
+        <div class="icono"><i class="fa-solid fa-seedling"></i></div>
+        <h4>Intervención temprana</h4>
+        <p>Programas de detección oportuna y seguimiento para evitar riesgos mayores.</p>
+      </div>
+      <div class="include-card reveal" data-anim="fade-up">
+        <div class="icono"><i class="fa-solid fa-chalkboard-user"></i></div>
+        <h4>Talleres y charlas</h4>
+        <p>Sesiones presenciales o en línea: ansiedad, autoestima, manejo del estrés, violencia y más.</p>
+      </div>
+      <div class="include-card reveal" data-anim="fade-up">
+        <div class="icono"><i class="fa-solid fa-users-between-lines"></i></div>
+        <h4>Evaluaciones grupales</h4>
+        <p>Mediciones de riesgo psicosocial, depresión, ansiedad y autoconcepto.</p>
+      </div>
+      <div class="include-card reveal" data-anim="fade-up">
+        <div class="icono"><i class="fa-solid fa-user-tie"></i></div>
+        <h4>Capacitación especializada</h4>
+        <p>Formación para docentes, directivos, RH y áreas de prevención.</p>
+      </div>
+      <div class="include-card reveal" data-anim="fade-up">
+        <div class="icono"><i class="fa-solid fa-bolt"></i></div>
+        <h4>Atención prioritaria</h4>
+        <p>Canales preferenciales para derivaciones rápidas y seguimiento continuo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cumplimiento NOM-035 -->
+  <section class="seccion">
+    <div class="dos-col">
+      <div class="reveal" data-anim="fade-right">
+        <h2>Cumple con la NOM-035-STPS-2018</h2>
+        <p>La norma establece lineamientos para <strong>identificar, analizar y prevenir</strong> factores de riesgo psicosocial en el trabajo, así como para promover un entorno organizacional saludable.</p>
+        <p>Te acompañamos con una <strong>solución digital</strong> que facilita el proceso y te ayuda a mantener evidencia.</p>
+        <ul class="check-list mt-3">
+          <li><i class="fa-solid fa-clipboard-check"></i><span>Aplicación automática de <strong>cuestionarios</strong> de factores de riesgo psicosocial.</span></li>
+          <li><i class="fa-solid fa-clock"></i><span>Evaluación ágil y segura de <strong>acontecimientos traumáticos severos</strong>, conforme a la norma.</span></li>
+        </ul>
+      </div>
+      <div>
+        <img class="media-shadow" src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?q=80&w=1600&auto=format&fit=crop" alt="Evaluaciones NOM-035" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="seccion">
+    <div class="cta">
+      <h2 style="color:#fff">¿Te interesa un convenio para tu institución?</h2>
+      <p class="mt-2">Atendemos en <strong>Toluca</strong> y <strong>en línea</strong> en toda la República Mexicana. Ofrecemos <strong>opciones de pago accesibles</strong> y <strong>flexibles</strong> según el volumen.</p>
+      <div class="mt-2">
+        <a href="mailto:eligehoy.armoniaemocional@gmail.com?subject=Convenio%20institucional" class="btn btn-info">Escríbenos por correo</a>
+        <a href="https://wa.me/527291797345?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20convenio%20institucional" class="btn btn-success">Contáctanos por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (igual al sitio) -->
+  <footer>
+    <div class="footer-logo">
+      <img src="https://eligehoyaepsicologos.com/img/Frame-4.png" alt="Logo" />
+    </div>
+    <h2>Síguenos en redes sociales</h2>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/eligehoyarmoniaemocional/about/?_rdr" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com/elige_hoy/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@eligehoyaepsicologos8712/featured" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p><a href="./aviso.html">Aviso de privacidad</a></p>
+    <br/>
+    <p>Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Scripts reutilizados del sitio -->
+  <script>
+    function toggleMenu(){
+      const menu = document.querySelector('.menu');
+      menu.classList.toggle('show');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const submenuBtn = document.querySelector('.has-submenu');
+      const submenuContainer = submenuBtn?.closest('.has-submenu-container');
+      submenuBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        submenuContainer?.classList.toggle('active');
+      });
+    });
+  </script>
+
+  <!-- Animación de aparición para elementos con .reveal -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          } else {
+            entry.target.classList.remove('visible');
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    });
+  </script>
+
+  <!-- Efecto NAV glass morado al hacer scroll (igual que index) -->
+  <script>
+    (function(){
+      const nav = document.querySelector('nav');
+      const threshold = 12; // px de desplazamiento para activar el vidrio
+      function toggleNavGlass(){
+        if (window.scrollY > threshold) nav.classList.add('nav-glass');
+        else nav.classList.remove('nav-glass');
+      }
+      window.addEventListener('scroll', toggleNavGlass, { passive:true });
+      window.addEventListener('load', toggleNavGlass);
+    })();
+  </script>
+
+  <!-- Entrada suave del título del hero -->
+  <script>
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.hero-contenido').forEach((el) => {
+        el.classList.add('visible');
+      });
+    });
+  </script>
+</body>
+</html>
