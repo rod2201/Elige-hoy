@@ -1863,3 +1863,131 @@ nav.nav-glass a:focus-visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* --- Submenú estable (desktop) y usable (móvil) --- */
+nav .has-submenu-container{ position: relative; }
+
+/* “Puente” invisible para que no se pierda el hover al bajar al submenú */
+nav .has-submenu-container::after{
+  content:"";
+  position:absolute; left:0; right:0; top:100%;
+  height:0; /* sin puente por defecto */
+}
+nav .has-submenu-container:hover::after{ height:10px; } /* puente de 10px */
+
+/* Panel del submenú */
+nav .submenu{
+  position:absolute; left:0; top:100%;
+  min-width: 240px;
+  background:#fff;
+  border-radius:12px;
+  padding:8px 0;
+  margin:0;                    /* ¡sin margenes que abran huecos! */
+  box-shadow:0 12px 28px rgba(0,0,0,.14);
+  border:1px solid rgba(82,44,132,.12);
+  opacity:0; visibility:hidden; transform: translateY(8px);
+  transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
+  pointer-events:none;
+  z-index: 2000;
+}
+nav .submenu a{
+  display:block; padding:10px 16px; white-space: nowrap;
+  color:#275f34; text-decoration:none;
+}
+nav .submenu a:hover{
+  background: #522c84; color:#fff;
+}
+
+/* Mostrar en DESKTOP por hover y por focus (accesible) */
+@media (hover:hover){
+  nav .has-submenu-container:hover > .submenu,
+  nav .has-submenu-container:focus-within > .submenu{
+    opacity:1; visibility:visible; transform: translateY(0); pointer-events:auto;
+    transition-delay: 0s;
+  }
+}
+
+/* MÓVIL: el submenú se hace “estático” y solo se abre con .active */
+@media (max-width: 980px){
+  nav .submenu{
+    position: static; top:auto; left:auto;
+    box-shadow:none; border:none; background:transparent;
+    padding: 0; transform:none; opacity:1; visibility:visible;
+    pointer-events:auto; display:none;
+  }
+  nav .has-submenu-container.active > .submenu{ display:block; }
+}
+
+/* ===== Nuestros Valores (mismo estilo que mission-vision) ===== */
+.valores .card { text-align: left; } /* títulos centrados por la card, pero texto/lista a la izquierda */
+
+.values-list{
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  columns: 1;
+  column-gap: 28px;
+}
+@media (min-width: 900px){
+  .values-list{ columns: 2; } /* 2 columnas en pantallas grandes */
+}
+.values-list li{
+  break-inside: avoid;
+  margin: 8px 0 10px;
+  line-height: 1.55;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  padding-left: 28px;
+  position: relative;
+  color: #444;
+}
+.values-list li::before{
+  content: "\f00c"; /* check de Font Awesome */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 0; top: 0.1rem;
+  font-size: 0.95rem;
+  color: var(--morado);
+  text-shadow: 0 0 10px rgba(82,44,132,.25);
+}
+
+/* Icono superior coherente con M/V */
+.valores .card .icon{
+  font-size: 2.6rem;
+  color: var(--morado);
+  margin-bottom: 10px;
+  filter: drop-shadow(0 6px 16px rgba(82,44,132,.25));
+}
+
+/* Texto blanco al pasar el cursor en "Nuestros valores",
+   igual que en Misión / Visión */
+.valores .glass-card * { transition: color .2s ease; } /* suaviza cambio */
+
+.valores .glass-card:hover,
+.valores .glass-card:focus-within { 
+  color: #fff;                   /* color por defecto dentro de la card */
+}
+
+/* Fuerza blanco en elementos que tenían color propio */
+.valores .glass-card:hover h2,
+.valores .glass-card:hover h3,
+.valores .glass-card:hover p,
+.valores .glass-card:hover li,
+.valores .glass-card:hover strong,
+.valores .glass-card:hover a,
+.valores .glass-card:hover span {
+  color: #fff;
+}
+
+/* Icono superior y checks de la lista en blanco también */
+.valores .glass-card:hover .icon { 
+  color: #fff; 
+  filter: drop-shadow(0 0 14px rgba(255,255,255,.35));
+}
+.valores .glass-card:hover .values-list li::before{
+  color:#fff;
+  text-shadow: 0 0 10px rgba(255,255,255,.35);
+}
+

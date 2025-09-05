@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Solicitud de Factura - Elige Hoy</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="/img/elige_hoy.png" type="image/x-icon" />
-    
+    <link rel="icon" href="img/elige_hoy.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
@@ -33,7 +35,7 @@
       }
 
       main {
-        flex: 1; /* Ocupa el espacio restante */
+        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -113,6 +115,13 @@
       .form-group {
         margin-bottom: 15px;
         text-align: left;
+        display: none; /* ocultos al inicio */
+        opacity: 0;
+        transition: opacity 0.4s ease-in-out;
+      }
+      .form-group.show {
+        display: block;
+        opacity: 1;
       }
       label {
         font-weight: bold;
@@ -132,6 +141,17 @@
         border-color: var(--morado);
         box-shadow: 0 0 5px rgba(82, 44, 132, 0.4);
       }
+
+      /* VALIDACIÓN VISUAL */
+      input.error {
+        border: 2px solid red !important;
+        box-shadow: 0 0 6px rgba(255, 0, 0, 0.4);
+      }
+      input.success {
+        border: 2px solid var(--verde) !important;
+        box-shadow: 0 0 6px rgba(44, 201, 101, 0.4);
+      }
+
       .btn-whatsapp {
         background: #25d366;
         color: white;
@@ -148,12 +168,17 @@
         gap: 10px;
         transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: none; /* oculto hasta el final */
+      }
+      .btn-whatsapp.show {
+        display: flex;
       }
       .btn-whatsapp:hover {
         background: #1ebc5a;
         transform: scale(1.05);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
       }
+
       @keyframes pulse {
         0% {
           transform: scale(1);
@@ -205,35 +230,17 @@
       footer a:hover {
         color: #ddd;
       }
+
+      footer h2 { color:#fff !important; }
     </style>
   </head>
   <body>
-   
     <!-- NAV -->
-  <nav>
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-    <div class="menu">
-      <a href="index.html">Inicio</a>
-      <a href="especialistas.html">Especialistas</a>
-      <div class="has-submenu-container">
-        <a href="#" class="has-submenu">Servicios</a>
-        <div class="submenu">
-          <a href="terapia_individual.html">Terapia Individual</a>
-          <a href="terapia_pareja.html">Terapia de Pareja</a>
-          <a href="terapia_adolescente.html">Terapia para Adolescentes</a>
-          <a href="terapia_infantil.html">Terapia Infantil y de Lenguaje</a>
-          <a href="terapia_familiar.html">Terapia Familiar</a>
-          <a href="terapia_grupal.html">Terapia Grupal</a>
-          <a href="terapia_alternativa.html">Terapia Alternativa</a>
-          <a href="orientacion_vocacional.html">Orientación Vocacional</a>
-          <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
-        </div>
+    <nav>
+      <div class="menu">
+        <a href="index.html">Inicio</a>
       </div>
-      <a href="blog.html">Blog</a>
-      <a href="convenios.html">Convenios</a>
-      <a href="facturacion.html">Facturación</a>
-    </div>
-  </nav>
+    </nav>
 
     <!-- MAIN -->
     <main>
@@ -242,8 +249,8 @@
         <img src="img/elige_hoy.png" alt="Logo" class="logo" />
         <h2>Solicitar Factura</h2>
         <form id="facturaForm">
-          <div class="form-group">
-            <label for="cliente">Nombre completo</label>
+          <div class="form-group show">
+            <label for="cliente">Nombre Del Paciente</label>
             <input type="text" id="cliente" required />
           </div>
           <div class="form-group">
@@ -254,7 +261,36 @@
             <label for="telefono">Número de teléfono</label>
             <input type="tel" id="telefono" required />
           </div>
-          <button type="submit" class="btn-whatsapp">
+          <div class="form-group">
+            <label for="rfc">RFC</label>
+            <input type="text" id="rfc" required />
+          </div>
+          <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" required />
+          </div>
+          <div class="form-group">
+            <label for="cp">C.P.</label>
+            <input type="text" id="cp" required />
+          </div>
+          <div class="form-group">
+            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" required />
+          </div>
+          <div class="form-group">
+            <label for="formaPago">Forma de Pago</label>
+            <input type="text" id="formaPago" required />
+          </div>
+          <div class="form-group">
+            <label for="usoCfdi">Uso del CFDI</label>
+            <input type="text" id="usoCfdi" required />
+          </div>
+          <div class="form-group">
+            <label for="regimenFiscal">Régimen Fiscal</label>
+            <input type="text" id="regimenFiscal" required />
+          </div>
+
+          <button type="submit" class="btn-whatsapp" id="btnEnviar">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
               alt="WhatsApp"
@@ -266,7 +302,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer>
+<footer>
       <div class="footer-logo">
         <img
           src="https://eligehoyaepsicologos.com/img/Frame-4.png"
@@ -278,34 +314,104 @@
         <a
           href="https://www.facebook.com/eligehoyarmoniaemocional/about/?_rdr"
           target="_blank"
-        >
-          <i class="fab fa-facebook"></i>
-        </a>
-        <a href="https://www.instagram.com/elige_hoy/" target="_blank">
-          <i class="fab fa-instagram"></i>
-        </a>
+          ><i class="fab fa-facebook"></i
+        ></a>
+        <a href="https://www.instagram.com/elige_hoy/" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
         <a
           href="https://www.youtube.com/@eligehoyaepsicologos8712/featured"
           target="_blank"
-        >
-          <i class="fab fa-youtube"></i>
-        </a>
+          ><i class="fab fa-youtube"></i
+        ></a>
+        <a
+          href="https://www.tiktok.com/@eligehoyaepsiclog"
+          target="_blank"
+          ><i class="fab fa-tiktok"></i
+        ></a>
+        <a href="https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Doctoralia"><i class="fa-solid fa-user-doctor"></i></a>
       </div>
-      <p><a href="aviso.html">Aviso de privacidad</a></p>
-      <p>
-        Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.
-      </p>
+      <p><a href="./aviso.html">Aviso de privacidad</a></p>
+      <p><a href="./politicas.html">Consulta Nuestras Políticas</a></p>
+      <p>Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.</p>
     </footer>
 
     <script>
+      const inputs = document.querySelectorAll("#facturaForm input");
+      const btnEnviar = document.getElementById("btnEnviar");
+
+      // Función para validar cada input según su tipo
+      function validarInput(input) {
+        let valid = input.value.trim() !== "";
+
+        if (input.type === "email") {
+          valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
+        }
+
+        if (input.id === "telefono") {
+          valid = /^\d{10}$/.test(input.value.trim()); // 10 dígitos
+        }
+
+        if (input.id === "rfc") {
+          // RFC genérico: 12-13 caracteres alfanuméricos, simplificado
+          valid = /^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/.test(
+            input.value.trim().toUpperCase()
+          );
+        }
+
+        if (input.id === "cp") {
+          valid = /^\d{5}$/.test(input.value.trim()); // 5 dígitos
+        }
+
+        if (input.id === "cantidad") {
+          valid = Number(input.value.trim()) > 0;
+        }
+
+        input.classList.remove("error", "success");
+        if (!valid) input.classList.add("error");
+        else input.classList.add("success");
+
+        return valid;
+      }
+
+      // Actualiza el botón solo si todos los campos son válidos
+      function actualizarBoton() {
+        const todosValidos = Array.from(inputs).every(validarInput);
+        if (todosValidos) btnEnviar.classList.add("show");
+        else btnEnviar.classList.remove("show");
+      }
+
+      // Manejo de la aparición de los campos siguientes
+      inputs.forEach((input, index) => {
+        input.addEventListener("input", () => {
+          const esValido = validarInput(input);
+
+          // Solo mostrar siguiente campo si el actual es válido
+          if (esValido && inputs[index + 1]) {
+            inputs[index + 1].parentElement.classList.add("show");
+          } else if (!esValido && inputs[index + 1]) {
+            inputs[index + 1].parentElement.classList.remove("show");
+            // Ocultar todos los campos siguientes
+            for (let i = index + 2; i < inputs.length; i++) {
+              inputs[i].parentElement.classList.remove("show");
+              inputs[i].classList.remove("success", "error");
+              inputs[i].value = "";
+            }
+          }
+
+          actualizarBoton();
+        });
+      });
+
       document
         .getElementById("facturaForm")
         .addEventListener("submit", function (e) {
           e.preventDefault();
 
-          const cliente = document.getElementById("cliente").value.trim();
-          const correo = document.getElementById("correo").value.trim();
-          const telefono = document.getElementById("telefono").value.trim();
+          const datos = {};
+          inputs.forEach((input) => {
+            datos[input.id] = input.value.trim();
+          });
 
           const fecha = new Date();
           const fechaStr = fecha.toLocaleDateString("es-MX", {
@@ -322,15 +428,22 @@
           }${fecha.getDate()}-${Math.floor(Math.random() * 9000 + 1000)}`;
 
           const mensaje =
-            `* FACTURA ELECTRÓNICA - ELIGE HOY\n` +
+            `* FACTURA ELECTRÓNICA - ELIGE HOY*\n` +
             `─────────────────────────────\n` +
             `* Número de Solicitud: ${numeroSolicitud}\n` +
             `* Fecha: ${fechaStr}\n` +
             `* Hora: ${horaStr}\n` +
             `─────────────────────────────\n` +
-            `* Cliente: ${cliente}\n` +
-            `* Correo: ${correo}\n` +
-            `* Teléfono: ${telefono}\n` +
+            `* Cliente: ${datos.cliente}\n` +
+            `* Correo: ${datos.correo}\n` +
+            `* Teléfono: ${datos.telefono}\n` +
+            `* RFC: ${datos.rfc}\n` +
+            `* Dirección: ${datos.direccion}\n` +
+            `* C.P.: ${datos.cp}\n` +
+            `* Cantidad: ${datos.cantidad}\n` +
+            `* Forma de Pago: ${datos.formaPago}\n` +
+            `* Uso del CFDI: ${datos.usoCfdi}\n` +
+            `* Régimen Fiscal: ${datos.regimenFiscal}\n` +
             `─────────────────────────────\n` +
             `* Detalle: Solicitud de factura correspondiente a los servicios recibidos.\n` +
             `* Estado: Pendiente de emisión\n` +
@@ -341,7 +454,7 @@
           const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(
             mensaje
           )}`;
-          window.open(url, "_blank"); // abre WhatsApp pero no muestra nada en la página
+          window.open(url, "_blank");
         });
     </script>
   </body>

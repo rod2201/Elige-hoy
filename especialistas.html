@@ -6,419 +6,194 @@
   <title>Especialistas - Elige Hoy</title>
   <link rel="icon" href="img/elige_hoy.png" type="image/png">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ==================== Variables de marca ==================== */
+    :root{
+      --morado:#522c84;
+      --morado-osc:#3e1b65;
+      --verde:#218b45;
+      --gris-900:#1a1a1a;
+      --gris-700:#4a4a4a;
+      --gris-500:#888;
+      --gris-borde:rgba(82,44,132,.12);
+      --bg-suave:#f6f4fa;
+    }
 
-    <style>
-      /* ===== Variables de marca ===== */
-      :root {
-        --morado: #522c84;
-        --morado-osc: #3e1b65;
-        --verde: #218b45;
-        --gris-900: #1a1a1a;
-        --gris-700: #4a4a4a;
-        --gris-500: #888;
-        --gris-borde: rgba(82, 44, 132, 0.12);
-        --bg-suave: #f6f4fa;
-      }
+    body{
+      font-family:"Poppins","Montserrat",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--gris-900);
+      background:#fff;
+      margin:0;
+    }
 
-      /* ===== Tipografía global ===== */
-      body {
-        font-family: "Poppins", "Montserrat", system-ui, -apple-system, Segoe UI,
-          Roboto, Arial, sans-serif;
-        color: var(--gris-900);
-      }
+    /* ==================== Sección especialistas ==================== */
+    .personal-section{
+      padding:18px 20px 56px;
+      background:
+        radial-gradient(1200px 500px at 10% -10%, rgba(82,44,132,.06), transparent 60%),
+        radial-gradient(1000px 400px at 90% -20%, rgba(33,139,69,.05), transparent 60%),
+        var(--bg-suave);
+      overflow:hidden;
+      text-align:center;
+      position:relative;
+    }
 
-      /* ===== Sección especialistas ===== */
-      .personal-section {
-        padding: 18px 20px 56px;
-        background: radial-gradient(
-            1200px 500px at 10% -10%,
-            rgba(82, 44, 132, 0.06),
-            transparent 60%
-          ),
-          radial-gradient(
-            1000px 400px at 90% -20%,
-            rgba(33, 139, 69, 0.05),
-            transparent 60%
-          ),
-          var(--bg-suave);
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-      }
+    .personal-section h2{
+      font-size:clamp(28px,4vw,40px);
+      font-weight:800;
+      letter-spacing:.3px;
+      margin:16px 0 36px;
+      display:inline-block;
+      background:linear-gradient(90deg,#6d45a6,#8c5cd6,#6d45a6);
+      background-size:200% auto;
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      transform:translateY(calc(var(--t,0) * -12px)) scale(calc(1 + var(--t,0) * .04));
+      letter-spacing:calc(.3px + var(--t,0) * .6px);
+      text-shadow:0 0 calc(var(--t,0) * 4px) rgba(82,44,132,.25);
+    }
+    .personal-section h2::after{
+      content:""; display:block; height:4px; width:56%;
+      margin:12px auto 0; border-radius:6px;
+      background:linear-gradient(90deg,var(--morado),var(--morado-osc));
+      opacity:.9; transform:scaleX(calc(.9 + var(--t,0) * .2));
+      transition:transform .15s linear;
+    }
+    @media (prefers-reduced-motion:reduce){
+      .personal-section h2{ background-size:auto; transform:none !important; text-shadow:none !important; letter-spacing:.3px !important; }
+      .personal-section h2::after{ transform:none !important; }
+    }
 
-      .personal-section h2 {
-        font-size: clamp(28px, 4vw, 40px);
-        font-weight: 800;
-        letter-spacing: 0.3px;
-        margin-bottom: 36px;
-        position: relative;
-        display: inline-block;
+    .personal-container{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+      gap:28px;
+      max-width:1100px;
+      margin:0 auto;
+      align-items:stretch;
+    }
 
-        /* Gradiente en el texto + parallax sutil con scroll */
-        background: linear-gradient(90deg, #6d45a6, #8c5cd6, #6d45a6);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+    /* ==================== Card ==================== */
+    .personal-card{
+      background:#fff;
+      border-radius:20px;
+      padding:24px 20px 22px;
+      text-align:center;
+      border:1px solid var(--gris-borde);
+      /* sombra base + brillo morado exterior */
+      box-shadow:
+        0 10px 25px rgba(0,0,0,.08),
+        0 26px 60px rgba(82,44,132,.38);
+      position:relative;
+      overflow:hidden;
+      opacity:0; transform:translateY(18px) scale(.98);
+    }
+    .personal-card.reveal{ opacity:1; transform:translateY(0) scale(1); animation:fadeUp .6s ease var(--stagger,0ms) both; }
+    .personal-card:hover{ transform:translateY(-8px); box-shadow:0 18px 40px rgba(82,44,132,.18), 0 30px 70px rgba(82,44,132,.45); }
 
-        /* variables controladas por JS */
-        transform: translateY(calc(var(--t, 0) * -12px))
-          scale(calc(1 + var(--t, 0) * 0.04));
-        letter-spacing: calc(0.3px + var(--t, 0) * 0.6px);
-        text-shadow: 0 0 calc(var(--t, 0) * 4px) rgba(82, 44, 132, 0.25);
-      }
+    @keyframes fadeUp{ from{opacity:0; transform:translateY(18px) scale(.98);} to{opacity:1; transform:translateY(0) scale(1);} }
 
-      .personal-section h2::after {
-        content: "";
-        display: block;
-        height: 4px;
-        width: 56%;
-        margin: 12px auto 0;
-        border-radius: 6px;
-        background: linear-gradient(90deg, var(--morado), var(--morado-osc));
-        opacity: 0.9;
-        transform: scaleX(calc(0.9 + var(--t, 0) * 0.2));
-        transform-origin: center;
-        transition: transform 0.15s linear;
-      }
+    /* —— contenedor de la imagen (para posicionar overlay) —— */
+    .personal-card .photo{
+      position:relative;
+      width:220px; height:320px;
+      margin:10px auto 16px;
+      cursor:pointer;
+    }
 
-      /* Fallback accesible si el usuario reduce movimiento */
-      @media (prefers-reduced-motion: reduce) {
-        .personal-section h2 {
-          background-size: auto;
-          transform: none !important;
-          letter-spacing: 0.3px !important;
-          text-shadow: none !important;
-        }
-        .personal-section h2::after {
-          transform: none !important;
-        }
-      }
+    /* —— imagen ovalada con aro degradado girando —— */
+    @property --ring-angle{ syntax:"<angle>"; initial-value:0deg; inherits:false; }
+    .personal-card .photo > img{
+      width:100%; height:100%;
+      border-radius:50%; object-fit:cover; object-position:center;
+      /* aro degradado */
+      --ring:7px; --ring-angle:0deg; --c1:#522c84; --c2:#b48cf0;
+      border:var(--ring) solid transparent;
+      background:
+        linear-gradient(#fff,#fff) padding-box,
+        conic-gradient(from var(--ring-angle), var(--c1), var(--c2), var(--c1)) border-box;
+      box-shadow:0 6px 22px rgba(0,0,0,.14);
+      transition:transform .35s ease, filter .35s ease;
+      position:relative; z-index:1;
+      animation:spin-ring 2s linear infinite;
+    }
+    .personal-card:hover .photo > img{ transform:scale(1.03); filter:brightness(.95); animation-duration:1.6s; }
+    @keyframes spin-ring{ to{ --ring-angle:360deg; } }
+    @media (prefers-reduced-motion:reduce){ .personal-card .photo > img{ animation:none; } }
 
-      /* Grid responsivo para cards */
-      .personal-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 28px;
-        max-width: 1100px;
-        margin: 0 auto;
-        align-items: stretch;
-      }
+    /* ==================== Overlay que sube ==================== */
+    .hover-card{
+      position:absolute;
+      left:50%; bottom:10px;
+      transform:translate(-50%,110%);
+      width:calc(100% + 16px);
+      padding:12px 14px;
+      background:rgba(255,255,255,.98);
+      border-radius:14px;
+      border:1px solid rgba(82,44,132,.14);
+      box-shadow:0 16px 36px rgba(82,44,132,.40);
+      backdrop-filter:blur(6px);
+      z-index:2; opacity:0; pointer-events:none;
+      transition:transform .35s ease, opacity .35s ease;
+    }
+    .personal-card:hover .hover-card,
+    .personal-card:focus-within .hover-card{
+      transform:translate(-50%,0);
+      opacity:1; pointer-events:auto;
+    }
+    /* también cuando se abre por JS en móvil */
+    .personal-card.overlay-open .hover-card{
+      transform:translate(-50%,0);
+      opacity:1; pointer-events:auto;
+    }
+    .hover-card h4{ margin:0 0 2px; font-size:16px; font-weight:800; color:var(--morado); }
+    .hover-card .role{ margin:0 0 8px; font-size:13px; color:var(--gris-700); }
+    .hover-card ul.mini{ margin:0 0 10px; padding-left:18px; font-size:13px; line-height:1.35; color:#333; }
+    .hover-card .btn-mini{
+      display:inline-block; padding:8px 14px; border-radius:999px;
+      font-size:13px; font-weight:700; text-decoration:none; color:#fff;
+      background:linear-gradient(135deg,var(--morado),var(--morado-osc));
+      box-shadow:0 8px 18px rgba(0,0,0,.12);
+    }
+    .hover-card .btn-mini:hover{ filter:brightness(1.05); }
 
-      /* ===== Card con diseño más vistoso + hover ===== */
-      .personal-card {
-        background: #fff;
-        border-radius: 20px;
-        padding: 24px 20px;
-        text-align: center;
-        border: 1px solid var(--gris-borde);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        position: relative;
-        overflow: hidden;
-        opacity: 0;
-        transform: translateY(18px) scale(0.98);
-      }
+    /* Oculta el panel .info antiguo si existiera */
+    .personal-card .info{ display:none !important; }
 
-      /* halo sutil en hover */
-      .personal-card::before {
-        content: "";
-        position: absolute;
-        inset: -60% -60% auto auto;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(
-          circle at center,
-          var(--morado),
-          var(--morado-osc)
-        );
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        z-index: 0;
-      }
+    /* Accesibilidad motion */
+    @media (prefers-reduced-motion:reduce){
+      .hover-card{ transform:translate(-50%,0); opacity:1; }
+      .personal-card:hover .photo > img{ transform:none; filter:none; }
+    }
 
-      .personal-card.reveal {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        animation: fadeUp 0.6s ease var(--stagger, 0ms) both;
-      }
+    /* ===== Footer ajustes mínimos para asegurar contraste ===== */
+    footer{ background:var(--morado); color:#fff; text-align:center; padding:48px 20px; }
+    footer h2{ color:#fff !important; font-weight:400; margin-bottom:18px; }
+    .social-icons{ display:flex; justify-content:center; gap:24px; margin:16px 0; }
+    .social-icons a{ color:#fff; font-size:28px; display:inline-flex; width:44px; height:44px; align-items:center; justify-content:center; transition:transform .2s ease, opacity .2s ease; }
+    .social-icons a:hover{ transform:translateY(-2px) scale(1.06); opacity:.9; }
+    footer a{ color:#fff; text-decoration:none; }
+    footer a:hover{ color:#ddd; }
 
-      .personal-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 18px 40px rgba(82, 44, 132, 0.18);
-      }
-      .personal-card:hover::before {
-        opacity: 0.08;
-      }
+    /* Botón WhatsApp flotante */
+    .whatsapp-pill-float{
+      position:fixed; left:20px; bottom:20px; z-index:9999;
+      display:inline-flex; align-items:center; gap:8px;
+      background:#30814e; color:#fff; padding:10px 14px; border-radius:999px;
+      text-decoration:none; box-shadow:0 12px 28px rgba(0,0,0,.18);
+      font-weight:600;
+    }
+    @media print{ .whatsapp-pill-float{ display:none !important; } }
+  </style>
+</head>
+<body>
 
-      /* Imagen ovalada (vertical) con aro elegante */
-      .personal-card img {
-        width: 210px; /* más ancho si la quieres más “gordita” */
-        height: 260px; /* más alto si la quieres más “larga”  */
-        object-fit: cover;
-        border-radius: 50% / 60%; /* ← hace la elipse */
-        border: 4px solid #fff;
-        display: block;
-        margin: 10px auto 16px;
-        background: #fff;
-        box-shadow: 0 6px 22px rgba(0, 0, 0, 0.14);
-        outline: 3px solid rgba(82, 44, 132, 0.25);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        position: relative;
-        z-index: 1;
-      }
-      .personal-card:hover img {
-        transform: scale(1.06);
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
-      }
+  <div class="header">
+    <img src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png" alt="Logo" class="logo" />
+  </div>
 
-      /* Ajuste responsivo: oválalas menos en móviles pequeños */
-      @media (max-width: 480px) {
-        .personal-card img {
-          width: 190px;
-          height: 230px;
-          border-radius: 50% / 58%;
-        }
-      }
-
-      /* Títulos / textos encima del halo */
-      .personal-card h3,
-      .personal-card p,
-      .personal-card .btn {
-        position: relative;
-        z-index: 1;
-      }
-
-      /* Panel de info con apertura suave */
-      .info {
-        background: #faf9fd;
-        border: 1px solid var(--gris-borde);
-        color: #333;
-        border-radius: 16px;
-        padding: 14px 16px;
-        margin-top: 14px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease, opacity 0.4s ease;
-      }
-      .info.show {
-        max-height: 420px;
-        opacity: 1;
-      }
-      .info ul {
-        padding-left: 18px;
-        margin: 0;
-      }
-
-      /* ===== Botones pill con gradiente ===== */
-      .btn {
-        display: inline-block;
-        padding: 10px 18px;
-        border-radius: 999px;
-        text-decoration: none;
-        color: #fff;
-        font-weight: 700;
-        letter-spacing: 0.2px;
-        border: 0;
-        transition: transform 0.15s ease, box-shadow 0.3s ease, filter 0.3s ease;
-        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-        margin: 10px auto;
-      }
-      .btn-info {
-        background: linear-gradient(135deg, var(--verde), #1a6b38);
-      }
-      .btn-success {
-        background: linear-gradient(135deg, var(--morado), var(--morado-osc));
-      }
-      .btn:hover {
-        transform: translateY(-2px);
-        filter: brightness(1.05);
-      }
-      .btn:active {
-        transform: translateY(0);
-      }
-
-      /* Hover redes footer */
-      .social-icons a {
-        transition: transform 0.2s ease, opacity 0.2s ease;
-      }
-      .social-icons a:hover {
-        transform: translateY(-2px) scale(1.06);
-        opacity: 0.9;
-      }
-
-      /* Accesibilidad: reduce motion */
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          animation: none !important;
-          transition: none !important;
-        }
-        .personal-card {
-          opacity: 1 !important;
-          transform: none !important;
-        }
-      }
-
-      /* Garantiza visibilidad del footer y botón flotante */
-      footer {
-        position: relative;
-        z-index: 10;
-      }
-      .whatsapp-pill-float {
-        position: fixed;
-        left: 20px;
-        bottom: 20px;
-        z-index: 9999;
-      }
-
-      /* Animación */
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(18px) scale(0.98);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-
-      /* === OVÁLIDAS VERTICALES (override) === */
-      .personal-card img {
-        /* Tamaño de la elipse (ajústalo a tu gusto) */
-        width: 220px !important; /* ancho */
-        height: 320px !important; /* alto  -> más alto = más alargada */
-
-        /* Forma oval: con 50% basta cuando width != height */
-        border-radius: 50% !important;
-
-        /* Aro limpio y sombra */
-        border: 4px solid #fff !important;
-        outline: 3px solid rgba(82, 44, 132, 0.25) !important;
-        box-shadow: 0 6px 22px rgba(0, 0, 0, 0.14) !important;
-
-        /* Mantén la foto centrada sin deformarse */
-        object-fit: cover !important;
-        object-position: center center !important;
-      }
-
-      /* Opcional: un poquito más grande en pantallas >1200px */
-      @media (min-width: 1200px) {
-        .personal-card img {
-          width: 240px !important;
-          height: 340px !important;
-        }
-      }
-
-      /* Opcional: más compacto en móviles */
-      @media (max-width: 480px) {
-        .personal-card img {
-          width: 200px !important;
-          height: 280px !important;
-        }
-      }
-
-      /* ====== RING GRADIENT ANIMADO EN HOVER ====== */
-      /* Propiedad custom animable (para que el giro sea suave) */
-      @property --ring-angle {
-        syntax: "<angle>";
-        initial-value: 0deg;
-        inherits: false;
-      }
-
-      /* Ajusta grosor y colores del aro aquí */
-      .personal-card img {
-        --ring: 7px; /* grosor del aro */
-        --ring-angle: 0deg; /* se anima con @keyframes */
-        --c1: #522c84; /* morado 1 */
-        --c2: #b48cf0; /* morado 2 (más claro) */
-
-        /* Si ya tenías width/height/border-radius para el óvalo, se mantienen */
-        border-radius: 50% !important; /* elipse por tener width!=height */
-
-        /* El truco: doble background para “borde degradado” */
-        border: var(--ring) solid transparent !important;
-        background: linear-gradient(#fff, #fff) padding-box,
-          /* interior blanco (o el fondo que quieras) */
-            conic-gradient(
-              from var(--ring-angle),
-              var(--c1),
-              var(--c2),
-              var(--c1)
-            )
-            border-box; /* aro */
-
-        /* Tu sombra sigue funcionando */
-        box-shadow: 0 6px 22px rgba(0, 0, 0, 0.14) !important;
-
-        /* Quitamos outline/border antiguos para que se vea el aro */
-        outline: none !important;
-        /* (si tenías border blanco fijo, ya no hace falta) */
-
-        /* Que no cambie el tamaño del óvalo que ya definiste */
-        object-fit: cover !important;
-        object-position: center center !important;
-      }
-
-      /* Animación: el aro gira al pasar el cursor o al enfocar algo dentro de la card */
-      .personal-card:hover img,
-      .personal-card:focus-within img {
-        animation: spin-ring 1.6s linear infinite;
-      }
-
-      @keyframes spin-ring {
-        to {
-          --ring-angle: 360deg;
-        }
-      }
-
-      /* Respeto a accesibilidad: sin animación si el usuario la reduce */
-      @media (prefers-reduced-motion: reduce) {
-        .personal-card:hover img,
-        .personal-card:focus-within img {
-          animation: none !important;
-        }
-      }
-
-      .personal-card img {
-        width: 220px !important; /* ajusta a gusto */
-        height: 320px !important; /* más alto = más alargada */
-      }
-      .personal-card img {
-        animation: spin-ring 2s linear infinite;
-      }
-      .personal-card:hover img {
-        animation-duration: 1.6s;
-      } /* acelera en hover */
-
-      /* ——— Quitar negritas en footer y botón flotante ——— */
-      footer h2 {
-        font-weight: 400 !important; /* “Síguenos en redes sociales” */
-      }
-
-      footer p a {
-        font-weight: 400 !important; /* “Aviso de privacidad” */
-      }
-
-      .whatsapp-pill-float {
-        font-weight: 400 !important; /* “Chatea con nosotros” del botón WhatsApp */
-      }
-
-    </style>
-  </head>
-  <body>
-    <div class="header">
-      <img
-        src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png"
-        alt="Logo"
-        class="logo"
-      />
-    </div>
-
-<!-- NAV idéntico al index -->
+  <!-- NAV idéntico al index -->
   <nav>
     <div class="hamburger" onclick="toggleMenu()">☰</div>
     <div class="menu">
@@ -444,223 +219,123 @@
     </div>
   </nav>
 
-    <section id="terapeutas" class="personal-section">
-      <h2>Nuestros Especialistas</h2>
-      <div class="personal-container">
-        <!-- Tarjeta de Mtra. Irupé Domínguez -->
-        <div class="personal-card" id="card-irupe">
-          <img src="img/mtrairupe.jpeg" alt="Mtra. Irupé Domínguez" />
-          <h3>Mtra. Irupé Domínguez</h3>
-          <p>Psicóloga, Sexóloga</p>
-          <button
-            class="btn btn-info"
-            onclick="window.location.href='https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy'"
-          >
-            Información
-          </button>
-          <div class="info" id="info-irupe" style="display: none">
-            <ul>
-              <li>Psicopatología forense</li>
-              <li>Posgrado en Criminología</li>
-              <li>Perito Forense y Psicológico</li>
+  <section id="terapeutas" class="personal-section">
+    <h2>Nuestros Especialistas</h2>
+
+    <div class="personal-container">
+
+      <!-- Irupé -->
+      <div class="personal-card" id="card-irupe" tabindex="0">
+        <div class="photo">
+          <img src="img/mtrairupe.jpeg" alt="Mtra. Irupé Domínguez">
+          <div class="hover-card" aria-hidden="true">
+            <div class="role"></div>
+            <ul class="mini">
+              <li>Corriente cognitivo conductual</li>
+              <li>Perito forense y psicológico</li>
+              <li>Perito en Sexualidad Humana </li>
               <li>Perito en Grafología</li>
-              <li>Sexualidad Humana</li>
+              <li>Perito en Violencia de Géreno y Feminicidio</li>
+              <li>Atención Víctimas de Violencia</li>
+              <li>Terapia Sexual · Terapia familiar · Terapia de pareja · Terapia individual</li>
             </ul>
-            <a
-              href="https://wa.me/5217291797345?text=Hola%20quiero%20agendar%20una%20cita%20con%20Mtra.%20Irupé%20Domínguez"
-              target="_blank"
-              class="btn btn-success"
-              >Agenda Cita</a
-            >
+            <a class="btn-mini" target="_blank"
+               href="https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy">
+              Ver más...
+            </a>
           </div>
         </div>
-
-        <!-- Tarjeta de Mtra. Sandra Arzaluz -->
-        <div class="personal-card" id="card-sandra">
-          <img src="img/mtrasandra.jpeg" alt="Mtra. Sandra Arzaluz" />
-          <h3>Mtra. Sandra Arzaluz</h3>
-          <p>Psicóloga</p>
-          <button
-            class="btn btn-info"
-            onclick="window.location.href='https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy'"
-          >
-            Información
-          </button>
-          <div class="info" id="info-sandra" style="display: none">
-            <ul>
-              <li>Terapia individual</li>
-              <li>Terapia infantil y adolescentes</li>
-              <li>Terapia de pareja</li>
-              <li>Ansiedad</li>
-              <li>Depresión</li>
-              <li>Problemas de conducta</li>
-              <li>Problemas de aprendizaje</li>
-              <li>Bullying</li>
-              <li>Mobbing/ acoso laboral</li>
-              <li>Tanatología duelo</li>
-              <li>Autoestima</li>
-              <li>Terapia Corporal</li>
-            </ul>
-            <a
-              href="https://wa.me/5217291797345?text=Hola%20quiero%20agendar%20una%20cita%20con%20Lic.%20Sandra%20Arzaluz"
-              target="_blank"
-              class="btn btn-success"
-              >Agenda Cita</a
-            >
-          </div>
-        </div>
-
-        <!-- Tarjeta de Mtra. Karla -->
-        <div class="personal-card" id="card-karla">
-          <img src="img/lickarla.jpg" alt="Mtra. Karla" />
-          <h3>Mtra. Karla Estrada</h3>
-          <p>Terapia Preventiva</p>
-          <button
-            class="btn btn-info"
-            onclick="window.location.href='https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy'"
-          >
-            Información
-          </button>
-          <div class="info" id="info-karla" style="display: none">
-            <ul>
-              <li>Terapia Cognitivo-Conductual</li>
-              <li>Manejo del Estrés</li>
-              <li>Psicología Positiva</li>
-              <li>Orientación Familiar</li>
-            </ul>
-            <a
-              href="https://wa.me/5217291797345?text=Hola%20quiero%20agendar%20una%20cita%20con%20Dra.%20Ana%20López"
-              target="_blank"
-              class="btn btn-success"
-              >Agenda Cita</a
-            >
-          </div>
-        </div>
-
-        <!-- Tarjeta de Dra. Claudia Díaz Ledezma -->
-        <div class="personal-card" id="card-claudia">
-          <img src="img/arqirazu.jpeg" alt="" />
-          <h3>Mtra Viviana Gómez</h3>
-          <p>Terapeuta Complementario</p>
-          <button
-            class="btn btn-info"
-            onclick="window.location.href='https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy'"
-          >
-            Información
-          </button>
-          <div class="info" id="info-claudia" style="display: none">
-            <ul>
-              <li>Sexología Forense</li>
-              <li>Psicoterapia de Pareja</li>
-              <li>Intervención en Crisis</li>
-              <li>Orientación Sexual</li>
-            </ul>
-            <a
-              href="https://wa.me/5217291797345?text=Hola%20quiero%20agendar%20una%20cita%20con%20Dra.%20Claudia%20Díaz%20Ledezma"
-              target="_blank"
-              class="btn btn-success"
-              >Agenda Cita</a
-            >
-          </div>
-        </div>
-
-        <!-- Tarjeta de Prof Arlette Azul -->
-        <div class="personal-card" id="card-javier">
-          <img src="./img/coachazul.jpeg" alt="Prof. Arlette Azul Jaimes" />
-          <h3>Coach fitness</h3>
-          <p>Terapeuta Complementario</p>
-          <button
-            class="btn btn-info"
-            onclick="window.location.href='https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy'"
-          >
-            Información
-          </button>
-          <div class="info" id="info-javier" style="display: none">
-            <ul>
-              <li>Psicología Clínica</li>
-              <li>Terapia Cognitiva Conductual</li>
-              <li>Trastornos de Ansiedad</li>
-              <li>Psicología Infantil</li>
-            </ul>
-            <a
-              href="https://wa.me/5217291797345?text=Hola%20quiero%20agendar%20una%20cita%20con%20Dr.%20Javier%20Martínez"
-              target="_blank"
-              class="btn btn-success"
-              >Agenda Cita</a
-            >
-          </div>
-        </div>
+        <h3>Mtra. Irupé Domínguez</h3>
+        <p>Licenciada en Psicología y Maestra en Criminología</p>
       </div>
-    </section>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const cards = document.querySelectorAll(".personal-card");
+      <!-- Sandra -->
+      <div class="personal-card" id="card-sandra" tabindex="0">
+        <div class="photo">
+          <img src="img/mtrasandra.jpeg" alt="Mtra. Sandra Arzaluz">
+          <div class="hover-card" aria-hidden="true">
+            <div class="role"></div>
+            <ul class="mini">
+              <li>Corriente Humanista</li>
+              <li>Terapia individual · Terapia infantil y adolescentes · Terapia de pareja</li>
+              <li>Ansiedad · Depresión · Duelo · Problemas de conducta · Problemas de aprendizaje · Bullying</li>
+              <li>Tanatologia · Autoestima</li>
+            </ul>
+            <a class="btn-mini" target="_blank"
+               href="https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy">
+              Ver más...
+            </a>
+          </div>
+        </div>
+        <h3>Mtra. Sandra Arzaluz</h3>
+        <p>Licenciada en Psicología · Humanista</p>
+      </div>
 
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((e) => {
-              if (e.isIntersecting) {
-                e.target.classList.add("reveal");
-                io.unobserve(e.target);
-              }
-            });
-          },
-          { threshold: 0.05 }
-        );
+      <!-- Lic Karla -->
+      <div class="personal-card" id="card-karla" tabindex="0">
+        <div class="photo">
+          <img src="img/lickarla.jpeg" alt="Mtra. Karla Estrada">
+          <div class="hover-card" aria-hidden="true">
+            <div class="role">Licenciada en Sociología y Maestra en Crimología</div>
+            <ul class="mini">
+              <li>Especialista en Terapia Neural</li>
+              <li>Ansiedad · Trastorno de ansiedad generalizada</li>
+            </ul>
+            <a class="btn-mini" target="_blank"
+               href="https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy">
+              Ver más...
+            </a>
+          </div>
+        </div>
+        <h3>Mtra. Karla Estrada</h3>
+        <p>Terapia Preventiva</p>
+      </div>
 
-        cards.forEach((c, i) => {
-          c.style.setProperty("--stagger", `${i * 90}ms`);
-          io.observe(c);
-        });
+      <!-- Mtra. Viviana -->
+      <div class="personal-card" id="card-claudia" tabindex="0">
+        <div class="photo">
+          <img src="img/arq2.jpeg" alt="Mtra. Viviana Gómez">
+          <div class="hover-card" aria-hidden="true">
+            <div class="role"></div>
+            <ul class="mini">
+              <li>Aromaterapia</li>
+              <li>Bioenergética</li>
+              <li>Reiki</li>
+            </ul>
+            <a class="btn-mini" target="_blank"
+               href="https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy">
+              Ver más...
+            </a>
+          </div>
+        </div>
+        <h3>Mtra Viviana Gómez</h3>
+        <p>Terapeuta Complementario</p>
+      </div>
 
-        document.querySelectorAll(".btn.btn-info").forEach((btn) => {
-          btn.addEventListener("click", (ev) => {
-            const card = btn.closest(".personal-card");
-            const info = card ? card.querySelector(".info") : null;
-            if (info) {
-              info.classList.toggle("show");
-            }
-          });
-        });
-      });
+      <!-- Coach Azul -->
+      <div class="personal-card" id="card-javier" tabindex="0">
+        <div class="photo">
+          <img src="img/coachazul.jpeg" alt="Coach Azul">
+          <div class="hover-card" aria-hidden="true">
+            <div class="role">Coach fitness</div>
+            <ul class="mini">
+              <li>Hábitos · Movimiento · Bienestar</li>
+              <li>Acompañamiento integral</li>
+            </ul>
+            <a class="btn-mini" target="_blank"
+               href="https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy">
+              Ver más...
+            </a>
+          </div>
+        </div>
+        <h3>Coach Arlette Azul Gómez</h3>
+        <p>Terapeuta Complementario</p>
+      </div>
 
-      function toggleMenu() {
-        const menu = document.querySelector(".menu");
-        if (menu) menu.classList.toggle("show");
-      }
-    </script>
+    </div>
+  </section>
 
-    <script>
-      // --- efecto de scroll para el título ---
-      (function () {
-        const section = document.querySelector(".personal-section");
-        if (!section) return;
-        const title = section.querySelector("h2");
-
-        function updateTitleMotion() {
-          const r = section.getBoundingClientRect();
-          const vh = window.innerHeight || 1;
-
-          // progreso -1..1 respecto al centro de la pantalla
-          const center = r.top + r.height / 2;
-          const p = Math.max(-1, Math.min(1, (vh / 2 - center) / vh));
-
-          // lo convertimos a 0..1 con sensibilidad suave
-          const t = Math.max(0, p + 0.5); // empieza a animar cuando el centro se acerca
-          title.style.setProperty("--t", t.toFixed(3));
-
-          // animar gradiente del texto con el mismo valor
-          title.style.backgroundPosition = `calc(50% + ${t * 50}%) 0`;
-        }
-
-        updateTitleMotion();
-        window.addEventListener("scroll", updateTitleMotion, { passive: true });
-        window.addEventListener("resize", updateTitleMotion);
-      })();
-    </script>
-
-    <footer>
+<footer>
       <div class="footer-logo">
         <img
           src="https://eligehoyaepsicologos.com/img/Frame-4.png"
@@ -672,53 +347,135 @@
         <a
           href="https://www.facebook.com/eligehoyarmoniaemocional/about/?_rdr"
           target="_blank"
-          ><i class="fa-brands fa-facebook"></i
+          ><i class="fab fa-facebook"></i
         ></a>
         <a href="https://www.instagram.com/elige_hoy/" target="_blank"
-          ><i class="fa-brands fa-instagram"></i
+          ><i class="fab fa-instagram"></i
         ></a>
         <a
           href="https://www.youtube.com/@eligehoyaepsicologos8712/featured"
           target="_blank"
-          ><i class="fa-brands fa-youtube"></i
+          ><i class="fab fa-youtube"></i
         ></a>
+        <a
+          href="https://www.tiktok.com/@eligehoyaepsiclog"
+          target="_blank"
+          ><i class="fab fa-tiktok"></i
+        ></a>
+        <a href="https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Doctoralia"><i class="fa-solid fa-user-doctor"></i></a>
       </div>
-      <p><a href="aviso.html">Aviso de privacidad</a></p>
-      <p>
-        Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.
-      </p>
+      <p><a href="./aviso.html">Aviso de privacidad</a></p>
+      <p><a href="./politicas.html">Consulta Nuestras Políticas</a></p>
+      <p>Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.</p>
     </footer>
 
-    <a
-      href="https://wa.me/5217291797345"
-      class="whatsapp-pill-float"
-      target="_blank"
-    >
-      <i class="fa-brands fa-whatsapp" style="margin-right: 8px"></i>
-      Chatea con nosotros
-    </a>
-     <!-- Scripts del nav -->
+
+  <!-- Botón WhatsApp flotante -->
+  <a href="https://wa.me/5217291797345" class="whatsapp-pill-float" target="_blank" aria-label="Agendar una cita">
+    <i class="fa-brands fa-whatsapp" style="margin-right:8px"></i> Agendar una cita
+  </a>
+
+  <!-- ==================== JS ==================== -->
   <script>
-    function toggleMenu() {
+    // Mostrar cards con "reveal" al entrar al viewport
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll(".personal-card");
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add("reveal");
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      cards.forEach((c, i) => { c.style.setProperty("--stagger", `${i*90}ms`); io.observe(c); });
+    });
+
+    // Parallax sutil en el título
+    (function () {
+      const section = document.querySelector(".personal-section");
+      if (!section) return;
+      const title = section.querySelector("h2");
+      function updateTitleMotion() {
+        const r = section.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        const center = r.top + r.height / 2;
+        const p = Math.max(-1, Math.min(1, (vh / 2 - center) / vh));
+        const t = Math.max(0, p + 0.5);
+        title.style.setProperty("--t", t.toFixed(3));
+        title.style.backgroundPosition = `calc(50% + ${t * 50}%) 0`;
+      }
+      updateTitleMotion();
+      window.addEventListener("scroll", updateTitleMotion, { passive:true });
+      window.addEventListener("resize", updateTitleMotion);
+    })();
+
+    // Menú hamburguesa (móvil)
+    function toggleMenu(){
       const menu = document.querySelector(".menu");
       if (menu) menu.classList.toggle("show");
     }
-  </script>
 
-  <script>
+    // Nav glass al hacer scroll
     (function () {
       const nav = document.querySelector("nav");
+      if (!nav) return;
       const threshold = 12;
-      function toggleNavGlass() {
-        if (window.scrollY > threshold) {
-          nav.classList.add("nav-glass");
-        } else {
-          nav.classList.remove("nav-glass");
-        }
+      function toggleNavGlass(){
+        if (window.scrollY > threshold) nav.classList.add("nav-glass");
+        else nav.classList.remove("nav-glass");
       }
-      window.addEventListener("scroll", toggleNavGlass, { passive: true });
+      window.addEventListener("scroll", toggleNavGlass, { passive:true });
       window.addEventListener("load", toggleNavGlass);
     })();
+
+    // Overlay en móvil / teclado: primer tap abre, segundo ya permite pulsar botones
+    (function () {
+      const cards = document.querySelectorAll('.personal-card');
+      function open(card){
+        card.classList.add('overlay-open');
+        const overlay = card.querySelector('.hover-card');
+        if (overlay) overlay.setAttribute('aria-hidden','false');
+      }
+      function close(card){
+        card.classList.remove('overlay-open');
+        const overlay = card.querySelector('.hover-card');
+        if (overlay) overlay.setAttribute('aria-hidden','true');
+      }
+      cards.forEach(card => {
+        const photo = card.querySelector('.photo');
+        const overlay = card.querySelector('.hover-card');
+        if (!photo || !overlay) return;
+
+        overlay.setAttribute('aria-hidden','true');
+
+        // 1er tap/click en la foto abre o cierra
+        photo.addEventListener('click', (ev) => {
+          if (!card.classList.contains('overlay-open')){
+            ev.preventDefault(); ev.stopPropagation(); open(card);
+          } else { close(card); }
+        });
+
+        // Cerrar tocando fuera
+        document.addEventListener('click', (ev) => {
+          if (card.classList.contains('overlay-open') && !card.contains(ev.target)){
+            close(card);
+          }
+        }, true);
+
+        // Teclado: Enter / Space alternan; Esc cierra
+        card.addEventListener('keydown', (ev) => {
+          if (ev.key === 'Escape') close(card);
+          if ((ev.key === 'Enter' || ev.key === ' ') && document.activeElement === card){
+            ev.preventDefault();
+            card.classList.contains('overlay-open') ? close(card) : open(card);
+          }
+        });
+
+        // Evitar burbujeo dentro del overlay
+        overlay.addEventListener('click', (ev) => ev.stopPropagation());
+      });
+    })();
   </script>
-  </body>
+</body>
 </html>
