@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Semanal</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- AOS Animations -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --morado: #6c63ff;
+        --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+        --shadow-brand-sm: 0 2px 8px rgba(108, 99, 255, 0.4);
+      }
+
+      body {
+        background: #f8f9fa;
+        font-family: "Segoe UI", sans-serif;
+        padding-top: 100px; /* espacio para nav fijo */
+      }
+
+      /* =============== NAV / MENÚ =============== */
+      nav {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        border-radius: 0;
+        box-shadow: var(--shadow-sm);
+      }
+      .menu {
+        margin: 0;
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+        position: relative;
+      }
+      nav a {
+        display: inline-block;
+        color: #275f34;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      nav a:hover,
+      nav a:focus-visible {
+        background-color: var(--morado);
+        color: #fff;
+        box-shadow: var(--shadow-brand-sm);
+        border-radius: 8px;
+      }
+      nav a:focus-visible {
+        outline: 3px solid var(--morado);
+        outline-offset: 2px;
+      }
+
+      /* Submenú */
+      .menu .has-submenu {
+        position: relative;
+      }
+      .has-submenu-container {
+        position: relative;
+      }
+      .has-submenu-container .submenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 5px;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.95),
+          rgba(255, 255, 255, 0.7)
+        );
+        backdrop-filter: blur(10px);
+        min-width: 220px;
+        padding: 12px 0;
+        border-radius: 12px;
+        box-shadow: var(--shadow-md);
+        z-index: 999;
+      }
+      .has-submenu-container:hover .submenu {
+        display: block;
+      }
+      .menu .submenu a {
+        padding: 10px 16px;
+        display: block;
+        color: #275f34;
+        border-radius: 8px;
+        margin: 4px 10px;
+      }
+      .menu .submenu a:hover {
+        background: var(--morado);
+        color: #fff;
+      }
+
+      /* Hamburguesa */
+      .hamburger {
+        display: none;
+        font-size: 30px;
+        color: #275f34;
+        padding: 10px 20px;
+        cursor: pointer;
+        z-index: 1100;
+        position: absolute;
+        right: 20px;
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .menu {
+          flex-direction: column;
+          position: fixed;
+          top: 60px;
+          right: -100%;
+          background: #fff;
+          width: 250px;
+          height: 100vh;
+          padding-top: 20px;
+          box-shadow: var(--shadow-md);
+          transition: right 0.3s ease-in-out;
+        }
+        .menu.active {
+          right: 0;
+        }
+        .menu a {
+          padding: 12px 20px;
+          text-align: left;
+        }
+        .has-submenu-container .submenu {
+          position: relative;
+          box-shadow: none;
+          background: transparent;
+          backdrop-filter: none;
+          padding-left: 15px;
+        }
+        .hamburger {
+          display: block;
+        }
+      }
+
+      /* HEADER */
+      header {
+        background: linear-gradient(135deg, #522c84);
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      header h1 {
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      /* TARJETAS */
+      .blog-card {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .blog-card img {
+        max-height: 200px;
+        object-fit: cover;
+        width: 100%;
+        transition: transform 0.3s ease;
+      }
+      .blog-card:hover img {
+        transform: scale(1.05);
+      }
+      .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+      .card-body h5 {
+        font-weight: bold;
+        color: #333;
+      }
+      .card-text {
+        color: #555;
+      }
+
+      /* MODAL */
+      .modal-content {
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      }
+      .modal-header {
+        background: linear-gradient(135deg, #09e24b);
+        color: white;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+      .blog-img {
+        max-width: 100%;
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin: 15px 0;
+      }
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: background-color 0.25s ease, backdrop-filter 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .nav-glass {
+        background: rgba(82, 44, 132, 0.55); /* #522c84 con transparencia */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12); /* opcional */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <div class="menu">
+        <a href="index.html">Inicio</a>
+        <a href="especialistas.html">Especialistas</a>
+        <div class="has-submenu-container">
+          <a href="#" class="has-submenu">Servicios</a>
+          <div class="submenu">
+            <a href="terapia_individual.html">Terapia Individual</a>
+            <a href="terapia_pareja.html">Terapia de Pareja</a>
+            <a href="terapia_adolescente.html">Terapia para Adolescentes</a>
+            <a href="terapia_infantil.html">Terapia Infantil y de Lenguaje</a>
+            <a href="terapia_familiar.html">Terapia Familiar</a>
+            <a href="terapia_grupal.html">Terapia Grupal</a>
+            <a href="terapia_alternativa.html">Terapia Alternativa</a>
+            <a href="orientacion_vocacional.html">Orientación Vocacional</a>
+            <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
+          </div>
+        </div>
+        <a href="#">Blog</a>
+        <a href="convenios.html">Convenios</a>
+        <a href="factura.html">Facturación</a>
+      </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header data-aos="fade-down">
+      <h1><i class="fa-solid fa-blog"></i> Blog Semanal</h1>
+      <p>Lee nuestros artículos más recientes</p>
+    </header>
+
+    <!-- BLOG -->
+    <div class="container mt-5">
+      <div class="row" id="blog-list"></div>
+    </div>
+
+    <!-- Modal Detalle -->
+    <div class="modal fade" id="detalleModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p><small class="text-muted" id="modalDate"></small></p>
+            <img
+              id="modalImage"
+              class="blog-img"
+              src=""
+              alt="Imagen del blog"
+            />
+            <p id="modalContent"></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script>
+      // MENU RESPONSIVE
+      function toggleMenu() {
+        document.querySelector(".menu").classList.toggle("active");
+      }
+
+      const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+      const container = document.getElementById("blog-list");
+
+      if (blogs.length === 0) {
+        container.innerHTML =
+          '<p class="text-center">No hay artículos publicados.</p>';
+      } else {
+        blogs.forEach((blog, index) => {
+          container.innerHTML += `
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="${
+        index * 100
+      }">
+        <div class="card blog-card" onclick="openModal(${index})">
+          ${
+            blog.image
+              ? `<img src="${blog.image}" class="card-img-top">`
+              : `<img src="https://via.placeholder.com/400x200" class="card-img-top">`
+          }
+          <div class="card-body">
+            <h5 class="card-title">${blog.title}</h5>
+            <p class="card-text"><small class="text-muted">${
+              blog.date
+            }</small></p>
+            <p class="card-text">${blog.content.substring(0, 100)}...</p>
+          </div>
+        </div>
+      </div>
+    `;
+        });
+      }
+
+      function openModal(index) {
+        const blog = blogs[index];
+        document.getElementById("modalTitle").innerText = blog.title;
+        document.getElementById("modalDate").innerText = blog.date;
+        document.getElementById("modalContent").innerText = blog.content;
+        if (blog.image) {
+          document.getElementById("modalImage").src = blog.image;
+          document.getElementById("modalImage").style.display = "block";
+        } else {
+          document.getElementById("modalImage").style.display = "none";
+        }
+
+        const modal = new bootstrap.Modal(
+          document.getElementById("detalleModal")
+        );
+        modal.show();
+      }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      AOS.init({ duration: 800, once: true });
+    </script>
+    <script>
+      (function () {
+        const nav = document.querySelector("nav");
+        const threshold = 12; // píxeles de scroll para activar
+
+        function toggleNavGlass() {
+          if (window.scrollY > threshold) {
+            nav.classList.add("nav-glass");
+          } else {
+            nav.classList.remove("nav-glass");
+          }
+        }
+
+        window.addEventListener("scroll", toggleNavGlass, { passive: true });
+        window.addEventListener("load", toggleNavGlass);
+      })();
+    </script>
+  </body>
+</html>
