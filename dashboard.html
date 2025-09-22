@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Nuevo Artículo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      :root {
+        --morado: #522c84;
+        --morado-oscuro: #3a1f60;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #f8f8f8;
+        margin: 0;
+        padding: 0;
+      }
+
+      .logo {
+        display: block;
+        margin: 30px auto 10px auto;
+        max-height: 80px;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      h2 {
+        text-align: center;
+        color: var(--morado);
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .container {
+        background: #fff;
+        margin-top: 10px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+      }
+
+      .form-label {
+        color: var(--morado);
+        font-weight: 700;
+      }
+
+      #previewImg {
+        max-width: 200px;
+        margin-top: 10px;
+        display: none;
+        border-radius: 8px;
+      }
+
+      .btn-morado {
+        background-color: var(--morado);
+        border: none;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .btn-morado:hover {
+        background-color: var(--morado-oscuro);
+      }
+
+      table img {
+        width: 80px;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="./img/elige_hoy.png" alt="Logo" class="logo" />
+    <h2>Agregar / Editar Artículo</h2>
+
+    <!-- FORM BLOG -->
+    <div class="container mb-4">
+      <form id="blogForm">
+        <input type="hidden" id="editIndex" value="-1" />
+        <div class="mb-3">
+          <label for="title" class="form-label">Título</label>
+          <input type="text" class="form-control" id="title" required />
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Fecha</label>
+          <input type="date" class="form-control" id="date" required />
+        </div>
+        <div class="mb-3">
+          <label for="content" class="form-label">Contenido</label>
+          <textarea
+            class="form-control"
+            id="content"
+            rows="5"
+            required
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="imageFile" class="form-label">Imagen</label>
+          <input
+            type="file"
+            class="form-control"
+            id="imageFile"
+            accept="image/*"
+          />
+          <img id="previewImg" alt="Vista previa" />
+        </div>
+        <button type="submit" class="btn btn-morado">
+          <i class="fas fa-upload me-2"></i
+          ><span id="submitText">Publicar</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- HISTORIAL BLOGS -->
+    <div class="container">
+      <h4 class="mb-3">Historial de Publicaciones</h4>
+      <table class="table table-bordered text-center">
+        <thead class="table-light">
+          <tr>
+            <th>Imagen</th>
+            <th>Título</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="blogList"></tbody>
+      </table>
+    </div>
+
+    <script>
+      let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+      const imageInput = document.getElementById("imageFile");
+      const previewImg = document.getElementById("previewImg");
+      const blogList = document.getElementById("blogList");
+      const blogForm = document.getElementById("blogForm");
+      const editIndexInput = document.getElementById("editIndex");
+      const submitText = document.getElementById("submitText");
+
+      // Vista previa imagen
+      imageInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function () {
+            previewImg.src = reader.result;
+            previewImg.style.display = "block";
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Renderizar historial
+      function renderBlogs() {
+        blogList.innerHTML = "";
+        blogs.forEach((blog, index) => {
+          blogList.innerHTML += `
+            <tr>
+              <td>${
+                blog.image ? `<img src="${blog.image}" />` : "Sin imagen"
+              }</td>
+              <td>${blog.title}</td>
+              <td>${blog.date}</td>
+              <td>
+                <button class="btn btn-sm btn-warning" onclick="editBlog(${index})">
+                  <i class="fas fa-edit"></i> Editar
+                </button>
+                <button class="btn btn-sm btn-danger" onclick="deleteBlog(${index})">
+                  <i class="fas fa-trash"></i> Borrar
+                </button>
+              </td>
+            </tr>`;
+        });
+      }
+
+      // Guardar blogs en localStorage
+      function saveBlogs() {
+        localStorage.setItem("blogs", JSON.stringify(blogs));
+        renderBlogs();
+      }
+
+      // Crear o actualizar blog
+      blogForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const title = document.getElementById("title").value;
+        const date = document.getElementById("date").value;
+        const content = document.getElementById("content").value;
+        const editIndex = parseInt(editIndexInput.value);
+
+        const saveBlogData = (imageData) => {
+          if (editIndex === -1) {
+            blogs.push({ title, date, content, image: imageData });
+          } else {
+            blogs[editIndex] = { title, date, content, image: imageData };
+            editIndexInput.value = -1;
+            submitText.textContent = "Publicar";
+          }
+          saveBlogs();
+          blogForm.reset();
+          previewImg.style.display = "none";
+          previewImg.src = "";
+          alert("Artículo guardado correctamente!");
+        };
+
+        const file = imageInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = () => saveBlogData(reader.result);
+          reader.readAsDataURL(file);
+        } else {
+          const existingImage = editIndex !== -1 ? blogs[editIndex].image : "";
+          saveBlogData(existingImage);
+        }
+      });
+
+      // Editar blog
+      window.editBlog = function (index) {
+        const blog = blogs[index];
+        document.getElementById("title").value = blog.title;
+        document.getElementById("date").value = blog.date;
+        document.getElementById("content").value = blog.content;
+        previewImg.src = blog.image;
+        previewImg.style.display = blog.image ? "block" : "none";
+        editIndexInput.value = index;
+        submitText.textContent = "Actualizar";
+      };
+
+      // Borrar blog
+      window.deleteBlog = function (index) {
+        if (confirm("¿Seguro que deseas eliminar este artículo?")) {
+          blogs.splice(index, 1);
+          saveBlogs();
+        }
+      };
+
+      // Inicial
+      renderBlogs();
+    </script>
+  </body>
+</html>

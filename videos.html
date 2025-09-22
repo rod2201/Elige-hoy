@@ -1,413 +1,332 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shorts - Elige Hoy</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
-  <link rel="icon" href="img/elige_hoy.png" type="image/png" />
-  <style>
-    /* ===== Shorts Layout ===== */
-    .shorts-wrap{max-width:1200px;margin:clamp(16px,2vw,32px) auto;padding:0 16px}
-    .shorts-toolbar{display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:14px}
-    .shorts-chips{display:flex;gap:8px;overflow:auto;padding-bottom:6px}
-    .chip{border:1px solid rgba(82,44,132,.35);background:rgba(82,44,132,.08);backdrop-filter:saturate(140%) blur(2px);
-    color:#2a2140;padding:.45rem .8rem;border-radius:999px;font:600 14px/1.1 Poppins,system-ui;cursor:pointer;transition:all .2s}
-    .chip:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(82,44,132,.18)}
-    .chip.is-active{background:rgba(82,44,132,.22);border-color:#522c84;color:#fff}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shorts - Elige Hoy</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="img/elige_hoy.png" type="image/png" />
+    <style>
+    body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
 
-    .shorts-search{position:relative;min-width:220px;flex:1 1 280px;max-width:420px}
-    .shorts-search input{width:100%;padding:.65rem 2.4rem .65rem .9rem;border-radius:12px;border:1px solid rgba(0,0,0,.08);
-    outline:0;background:rgba(255,255,255,.7);backdrop-filter:blur(6px);font:500 14px/1.2 Poppins,system-ui}
-    .shorts-search i{position:absolute;right:10px;top:50%;transform:translateY(-50%);opacity:.65}
+/* Contenedor principal de tarjetas */
+/* Contenedor principal de tarjetas */
+.video-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 40px 20px;
+  justify-items: center;
+}
 
-    /* Grid de tarjetas 9:16 */
-    .shorts-grid{
-    --min: 240px; /* ancho base de la tarjeta */
-    display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(var(--min),1fr));
-    }
-    @media (min-width:900px){.shorts-grid{--min: 260px}}
-    @media (min-width:1200px){.shorts-grid{--min: 280px}}
+/* Tarjeta individual */
+.video {
+  width: 100%;
+  max-width: 350px;       /* Tamaño máximo para mantener consistencia */
+  height: 500px;          /* Altura fija para todas las tarjetas */
+  border-radius: 18px;
+  overflow: hidden;
+  background: #1f1f2e;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
 
-    .short-card{
-    position:relative;overflow:hidden;border-radius:18px;isolation:isolate;cursor:pointer;
-    background:#0b0b12;aspect-ratio:9/16;display:flex;align-items:flex-end;box-shadow:0 12px 24px rgba(0,0,0,.14)
-    }
-    .short-card video,
-    .short-card .thumb{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(105%) contrast(105%);
-    transition:transform .35s ease, filter .35s ease
-    }
-    .short-card:hover video,
-    .short-card:hover .thumb{transform:scale(1.03)}
+/* Hover efecto */
+.video:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
 
-    .short-overlay{
-    position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.65) 70% 100%),
-                        radial-gradient(60% 30% at 50% 10%, rgba(82,44,132,.22), transparent 60%);
-    z-index:1;pointer-events:none
-    }
-    .short-info{
-    position:relative;z-index:2;width:100%;padding:12px;display:flex;gap:8px;align-items:flex-end
-    }
-    .short-badge{
-    background:rgba(82,44,132,.75);color:#fff;font:700 11px/1 Poppins;padding:.35rem .5rem;border-radius:8px;
-    backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15)
-    }
-    .short-title{
-    margin:0;color:#fff;font:600 14px/1.25 Poppins;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden
-    }
+/* Imagen o video dentro de la tarjeta */
+.video iframe,
+.video img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  display: block;
+  border-radius: 18px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
 
-    /* Botón “Ver más” */
-    .shorts-load{display:flex;justify-content:center;margin:18px 0 8px}
-    .btn-more{
-    border:1px solid rgba(82,44,132,.35);background:rgba(82,44,132,.12);color:#2b2142;
-    padding:.6rem 1rem;border-radius:12px;font:600 14px Poppins;cursor:pointer;transition:.2s
-    }
-    .btn-more:hover{background:rgba(82,44,132,.22);color:#fff;box-shadow:0 10px 24px rgba(82,44,132,.22)}
+/* Oscurecer al hacer hover */
+.video:hover iframe,
+.video:hover img {
+  filter: brightness(0.85) contrast(1.05);
+  transform: scale(1.05);
+}
 
-    /* ===== Modal Player ===== */
-    .shorts-modal{position:fixed;inset:0;display:none}
-    .shorts-modal.is-open{display:block}
-    .shorts-modal__backdrop{
-    position:absolute;inset:0;background:rgba(10,8,15,.55);backdrop-filter:blur(6px)
-    }
-    .shorts-modal__content{
-    position:absolute;inset:0;display:grid;place-items:center;padding:24px
-    }
-    .shorts-player{
-    width:min(520px,90vw);aspect-ratio:9/16;border-radius:22px;overflow:hidden;position:relative;
-    box-shadow:0 30px 70px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.06) inset
-    }
-    .shorts-player video{width:100%;height:100%;object-fit:cover}
-    .shorts-modal__close{
-    position:absolute;top:22px;right:22px;z-index:3;border:none;cursor:pointer;
-    background:rgba(82,44,132,.85);color:#fff;border-radius:999px;width:40px;height:40px;
-    display:grid;place-items:center;box-shadow:0 10px 30px rgba(82,44,132,.35)
-    }
+/* Título y overlay */
+.video p {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  margin: 0;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  z-index: 2;
+}
 
-    /* Meta en modal */
-    .shorts-meta{margin-top:14px;text-align:center}
-    .shorts-title{color:#fff;margin:6px 0 8px;font:700 16px/1.2 Poppins}
-    .shorts-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-    .shorts-tags .chip{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);color:#fff}
+/* Overlay degradado suave */
+.video::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 80%);
+  z-index: 1;
+  pointer-events: none;
+}
 
-    /* Accesibilidad: foco */
-    .chip:focus,.btn-more:focus,.short-card:focus-visible,.shorts-modal__close:focus{
-    outline:3px solid rgba(82,44,132,.55);outline-offset:2px
-    }
-  </style>
-</head>
-<body>
-  <!-- Logo -->
-  <div class="header">
-    <img src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png" alt="Logo" class="logo"/>
-  </div>
+/* Responsividad */
+@media (max-width: 768px) {
+  .video {
+    max-width: 90%;
+    height: 400px;
+  }
+}
 
-  <!-- NAV -->
-  <nav>
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-    <div class="menu">
-      <a href="index.html">Inicio</a>
-      <a href="especialistas.html">Especialistas</a>
-      <div class="has-submenu-container">
-        <a href="#" class="has-submenu">Servicios</a>
-        <div class="submenu">
-          <a href="terapia_individual.html">Terapia Individual</a>
-          <a href="terapia_pareja.html">Terapia de Pareja</a>
-          <a href="terapia_adolescente.html">Terapia para Adolescentes</a>
-          <a href="terapia_infantil.html">Terapia Infantil y de Lenguaje</a>
-          <a href="terapia_familiar.html">Terapia Familiar</a>
-          <a href="terapia_grupal.html">Terapia Grupal</a>
-          <a href="terapia_alternativa.html">Terapia Alternativa</a>
-          <a href="orientacion_vocacional.html">Orientación Vocacional</a>
-          <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
-        </div>
-      </div>
-      <a href="blog.html">Blog</a>
-      <a href="convenios.html">Convenios</a>
-      <a href="factura.html">Facturación</a>
-    </div>
-  </nav>
-
-  <!-- SHORTS -->
-  <main class="shorts-wrap">
-    <!-- Toolbar -->
-    <div class="shorts-toolbar">
-      <div class="shorts-chips" id="chips">
-        <button class="chip is-active" data-tag="all">Todos</button>
-        <button class="chip" data-tag="ansiedad">Ansiedad</button>
-        <button class="chip" data-tag="pareja">Pareja</button>
-        <button class="chip" data-tag="autoestima">Autoestima</button>
-        <button class="chip" data-tag="tips">Tips</button>
-      </div>
-      <div class="shorts-search">
-        <input id="shortsSearch" type="search" placeholder="Buscar shorts..." />
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div>
+@media (max-width: 480px) {
+  .video {
+    max-width: 100%;
+    height: 320px;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <!-- Logo -->
+    <div class="header">
+      <img
+        src="https://eligehoyaepsicologos.com/img/cropped-logologoi-1.png"
+        alt="Logo"
+        class="logo"
+      />
     </div>
 
-    <!-- Grid -->
-    <section class="shorts-grid" id="shortsGrid" aria-live="polite"></section>
-
-    <!-- Loader (infinite/“ver más”) -->
-    <div class="shorts-load">
-      <button id="btnMore" class="btn-more">
-        <i class="fa-solid fa-rotate"></i> Ver más
-      </button>
-    </div>
-  </main>
-
-  <!-- Modal Viewer -->
-  <div class="shorts-modal" id="shortsModal" aria-hidden="true">
-    <div class="shorts-modal__backdrop" data-close></div>
-    <div class="shorts-modal__content" role="dialog" aria-modal="true" aria-label="Reproductor de short">
-      <button class="shorts-modal__close" data-close aria-label="Cerrar">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <div class="shorts-player">
-        <!-- El <video> se inyecta dinámicamente -->
-      </div>
-      <div class="shorts-meta">
-        <h3 class="shorts-title" id="modalTitle">Título del Short</h3>
-        <div class="shorts-tags" id="modalTags"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo">
-      <img src="https://eligehoyaepsicologos.com/img/Frame-4.png" alt="Logo" />
-    </div>
-    <h2>Síguenos en redes sociales</h2>
-    <div class="social-icons">
-      <a href="https://www.facebook.com/eligehoyarmoniaemocional/about/?_rdr" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://www.instagram.com/elige_hoy/" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.youtube.com/@eligehoyaepsicologos8712/featured" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.tiktok.com/@eligehoyaepsiclog" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Doctoralia"><i class="fa-solid fa-user-doctor"></i></a>
-    </div>
-    <p><a href="./aviso.html">Aviso de privacidad</a></p>
-    <p><a href="./politicas.html">Consulta Nuestras Políticas</a></p>
-    <p>Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.</p>
-  </footer>
-
-  <!-- Scripts -->
-  <script>
-    function toggleMenu() {
-      const menu = document.querySelector(".menu");
-      menu.classList.toggle("show");
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const submenuBtn = document.querySelector(".has-submenu");
-      const submenuContainer = submenuBtn.closest(".has-submenu-container");
-
-      submenuBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        submenuContainer.classList.toggle("active");
-      });
-    });
-
-    (function () {
-      const nav = document.querySelector("nav");
-      const threshold = 12;
-      function toggleNavGlass() {
-        if (window.scrollY > threshold) {
-          nav.classList.add("nav-glass");
-        } else {
-          nav.classList.remove("nav-glass");
-        }
-      }
-      window.addEventListener("scroll", toggleNavGlass, { passive: true });
-      window.addEventListener("load", toggleNavGlass);
-    })();
-  </script>
-
-  <script>
-  (() => {
-    // Dataset de ejemplo (reemplaza src/poster con tus archivos)
-    const DATA = [
-      { 
-  id: 1,
-  title: "Respira: técnica 4-7-8 para ansiedad",
-  tags: ["ansiedad","tips"],
-  duration: "0:28",
-  src: "15/video/ansiedad1.mp4",            // ← slashes y nombre correcto
-  poster: ""
-},
-
-      { id: 2, title: "3 micro hábitos para autoestima", tags:["autoestima","tips"], duration:"0:32",
-        src:"media/shorts/autoestima_habitos.mp4", poster:"media/shorts/posters/autoestima.jpg" },
-      { id: 3, title: "Señales rojas en pareja (parte 1)", tags:["pareja"], duration:"0:29",
-        src:"media/shorts/pareja_redflags.mp4", poster:"media/shorts/posters/pareja.jpg" },
-      { id: 4, title: "Ansiedad vs. estrés: ¿en qué se diferencian?", tags:["ansiedad"], duration:"0:34",
-        src:"media/shorts/ansiedad_vs_estres.mp4", poster:"media/shorts/posters/estres.jpg" },
-      { id: 5, title: "Mini rutina matutina de 2 minutos", tags:["tips"], duration:"0:21",
-        src:"media/shorts/rutina_2min.mp4", poster:"media/shorts/posters/rutina.jpg" },
-    ];
-
-    // Estado e IDs
-    const grid = document.getElementById("shortsGrid");
-    const chips = document.getElementById("chips");
-    const search = document.getElementById("shortsSearch");
-    const btnMore = document.getElementById("btnMore");
-
-    const modal = document.getElementById("shortsModal");
-    const playerBox = modal.querySelector(".shorts-player");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalTags = document.getElementById("modalTags");
-
-    let page = 1, perPage = 8, currentTag = "all", q = "";
-
-    // Render tarjeta
-    function cardTemplate(item){
-      return `
-        <article class="short-card" tabindex="0" role="button" aria-label="${item.title}"
-                 data-id="${item.id}" data-src="${item.src}" data-title="${item.title}" data-tags="${item.tags.join(',')}">
-          <img class="thumb" src="${item.poster}" alt="" loading="lazy" />
-          <div class="short-overlay"></div>
-          <div class="short-info">
-            <span class="short-badge">${item.duration}</span>
-            <h3 class="short-title">${item.title}</h3>
+    <!-- NAV -->
+    <nav>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <div class="menu">
+        <a href="index.html">Inicio</a>
+        <a href="especialistas.html">Especialistas</a>
+        <div class="has-submenu-container">
+          <a href="#" class="has-submenu">Servicios</a>
+          <div class="submenu">
+            <a href="terapia_individual.html">Terapia Individual</a>
+            <a href="terapia_pareja.html">Terapia de Pareja</a>
+            <a href="terapia_adolescente.html">Terapia para Adolescentes</a>
+            <a href="terapia_infantil.html">Terapia Infantil y de Lenguaje</a>
+            <a href="terapia_familiar.html">Terapia Familiar</a>
+            <a href="terapia_grupal.html">Terapia Grupal</a>
+            <a href="terapia_alternativa.html">Terapia Alternativa</a>
+            <a href="orientacion_vocacional.html">Orientación Vocacional</a>
+            <a href="peritaje_psicologico.html">Dictamen Psicológico</a>
           </div>
-        </article>`;
-    }
+        </div>
+        <a href="blog.html">Blog</a>
+        <a href="convenios.html">Convenios</a>
+        <a href="factura.html">Facturación</a>
+      </div>
+    </nav>
+ <div class="video-container">
+  <div class="video" data-src="https://www.youtube.com/embed/HkiXHGuH6xQ">
+    <iframe
+      src="https://www.youtube.com/embed/HkiXHGuH6xQ"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
 
-    // Filtro + búsqueda
-    function applyFilters(items){
-      let out = items;
-      if(currentTag !== "all"){
-        out = out.filter(x => x.tags.includes(currentTag));
-      }
-      if(q.trim()){
-        const s = q.trim().toLowerCase();
-        out = out.filter(x => x.title.toLowerCase().includes(s) || x.tags.join(" ").includes(s));
-      }
-      return out;
-    }
+  <div class="video" data-src="https://www.youtube.com/embed/-HqNLWU841c">
+<iframe
+  width="315"
+  height="560"
+  src="https://www.youtube.com/embed/KYEhvfFfoVU"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+  </div>
 
-    // Paginación simple
-    function getPage(items, page, perPage){
-      const start = (page-1)*perPage;
-      return items.slice(start, start+perPage);
-    }
+  <div class="video" data-src="https://www.youtube.com/embed/w0jAhGFHIX4">
+    <iframe
+      src="https://www.youtube.com/embed/w0jAhGFHIX4"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
 
-    function render(){
-      const filtered = applyFilters(DATA);
-      const pageItems = getPage(filtered, page, perPage);
-      if(page === 1) grid.innerHTML = "";
-      grid.insertAdjacentHTML("beforeend", pageItems.map(cardTemplate).join(""));
-      // Mostrar/ocultar Ver más
-      const totalPages = Math.ceil(filtered.length / perPage);
-      btnMore.style.display = page < totalPages ? "inline-flex" : "none";
-    }
+  <div class="video" data-src="https://www.youtube.com/embed/OTgk6z_WUoU">
+   <iframe
+  width="315"
+  height="560"
+  src="https://www.youtube.com/embed/2hXi0uJEppg"
+  title="Título del video"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+  </div>
+</div>
 
-    // Handlers
-    chips.addEventListener("click", (e)=>{
-      const btn = e.target.closest(".chip");
-      if(!btn) return;
-      chips.querySelectorAll(".chip").forEach(c => c.classList.remove("is-active"));
-      btn.classList.add("is-active");
-      currentTag = btn.dataset.tag || "all";
-      page = 1; render();
-    });
 
-    search.addEventListener("input", ()=>{
-      q = search.value;
-      page = 1; render();
-    });
+    <!-- Modal -->
+    <div class="modal" id="videoModal">
+      <div class="modal-content">
+        <button class="close-btn" data-close>&times;</button>
+        <iframe
+          id="modalVideo"
+          src=""
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
 
-    btnMore.addEventListener("click", ()=>{
-      page += 1; render();
-    });
+    <script>
+      (function () {
+        const videos = document.querySelectorAll(".video");
+        const modal = document.getElementById("videoModal");
+        const modalVideo = document.getElementById("modalVideo");
+        const closeBtn = modal.querySelector("[data-close]");
+        const modalContent = modal.querySelector(".modal-content");
 
-    // Abrir modal
-    function openModal(data){
-      modal.classList.add("is-open");
-      modal.setAttribute("aria-hidden","false");
-
-      // Limpiar player y montar video
-      playerBox.innerHTML = "";
-      const v = document.createElement("video");
-      v.src = data.src;
-      v.autoplay = true; v.muted = true; v.playsInline = true; v.loop = true; v.controls = true;
-      playerBox.appendChild(v);
-
-      modalTitle.textContent = data.title;
-      modalTags.innerHTML = "";
-      data.tags.forEach(t=>{
-        const span = document.createElement("span");
-        span.className = "chip";
-        span.textContent = `#${t}`;
-        modalTags.appendChild(span);
-      });
-    }
-
-    function closeModal(){
-      modal.classList.remove("is-open");
-      modal.setAttribute("aria-hidden","true");
-      // Pausar/limpiar para liberar memoria
-      const v = playerBox.querySelector("video");
-      if(v){ v.pause(); v.src = ""; }
-      playerBox.innerHTML = "";
-    }
-
-    grid.addEventListener("click", (e)=>{
-      const card = e.target.closest(".short-card");
-      if(!card) return;
-      openModal({
-        id: +card.dataset.id,
-        title: card.dataset.title,
-        src: card.dataset.src,
-        tags: (card.dataset.tags||"").split(",").filter(Boolean)
-      });
-    });
-
-    grid.addEventListener("keydown", (e)=>{
-      if(e.key === "Enter"){
-        const card = e.target.closest(".short-card");
-        if(card){
-          openModal({
-            id: +card.dataset.id,
-            title: card.dataset.title,
-            src: card.dataset.src,
-            tags: (card.dataset.tags||"").split(",").filter(Boolean)
-          });
+        // Función para abrir modal
+        function openModal(src) {
+          modalVideo.src = src + "?autoplay=1";
+          modal.classList.add("is-open");
         }
+
+        // Función para cerrar modal
+        function closeModal() {
+          modalVideo.src = "";
+          modal.classList.remove("is-open");
+        }
+
+        // Click en los videos
+        videos.forEach((video) => {
+          video.addEventListener("click", () => {
+            const src = video.dataset.src;
+            openModal(src);
+          });
+        });
+
+        // Click en botón de cerrar
+        closeBtn.addEventListener("click", closeModal);
+
+        // Click fuera del contenido
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal || (modalContent.contains(e.target) && !modalVideo.contains(e.target))) {
+            closeModal();
+          }
+        });
+
+        // Cerrar con Escape
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && modal.classList.contains("is-open")) {
+            closeModal();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-logo">
+        <img
+          src="https://eligehoyaepsicologos.com/img/Frame-4.png"
+          alt="Logo"
+        />
+      </div>
+      <h2>Síguenos en redes sociales</h2>
+      <div class="social-icons">
+        <a
+          href="https://www.facebook.com/eligehoyarmoniaemocional/about/?_rdr"
+          target="_blank"
+          ><i class="fab fa-facebook"></i
+        ></a>
+        <a href="https://www.instagram.com/elige_hoy/" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.youtube.com/@eligehoyaepsicologos8712/featured"
+          target="_blank"
+          ><i class="fab fa-youtube"></i
+        ></a>
+        <a href="https://www.tiktok.com/@eligehoyaepsiclog" target="_blank"
+          ><i class="fab fa-tiktok"></i
+        ></a>
+        <a
+          href="https://www.doctoralia.com.mx/clinicas/psicologos-elige-hoy"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+          aria-label="Doctoralia"
+          ><i class="fa-solid fa-user-doctor"></i
+        ></a>
+      </div>
+      <p><a href="./aviso.html">Aviso de privacidad</a></p>
+      <p><a href="./politicas.html">Consulta Nuestras Políticas</a></p>
+      <p>
+        Copyright 2025 Elige Hoy A.E. Psicólogos. Todos los derechos reservados.
+      </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      function toggleMenu() {
+        const menu = document.querySelector(".menu");
+        menu.classList.toggle("show");
       }
-    });
 
-    /* ====== LISTENER DEL MODAL (REEMPLAZADO) ======
-       Cierra con: click en backdrop, botón [data-close], click fuera del video,
-       y tecla Escape. */
-    modal.addEventListener("click", (e) => {
-      const backdrop = modal.querySelector(".shorts-modal__backdrop");
-      const content  = modal.querySelector(".shorts-modal__content");
-      const player   = modal.querySelector(".shorts-player");
+      document.addEventListener("DOMContentLoaded", () => {
+        const submenuBtn = document.querySelector(".has-submenu");
+        const submenuContainer = submenuBtn.closest(".has-submenu-container");
 
-      // 1) Click en backdrop o en elementos marcados con data-close
-      if (e.target === backdrop || e.target.closest("[data-close]")) {
-        closeModal();
-        return;
-      }
-      // 2) Click dentro del contenido del modal pero FUERA del reproductor
-      if (content.contains(e.target) && !player.contains(e.target)) {
-        closeModal();
-      }
-    });
+        submenuBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          submenuContainer.classList.toggle("active");
+        });
+      });
 
-    // Escape para cerrar
-    window.addEventListener("keydown", (e)=>{ 
-      if(e.key === "Escape" && modal.classList.contains("is-open")) closeModal(); 
-    });
-
-    // Primera carga
-    render();
-  })();
-  </script>
-
-</body>
+      (function () {
+        const nav = document.querySelector("nav");
+        const threshold = 12;
+        function toggleNavGlass() {
+          if (window.scrollY > threshold) {
+            nav.classList.add("nav-glass");
+          } else {
+            nav.classList.remove("nav-glass");
+          }
+        }
+        window.addEventListener("scroll", toggleNavGlass, { passive: true });
+        window.addEventListener("load", toggleNavGlass);
+      })();
+    </script>
+  </body>
 </html>

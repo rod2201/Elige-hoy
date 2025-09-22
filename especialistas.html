@@ -185,6 +185,70 @@
       font-weight:600;
     }
     @media print{ .whatsapp-pill-float{ display:none !important; } }
+
+    /* Centrar lista y cambiar viñetas por paloma morada */
+.hover-card ul.mini{
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;          /* sin bullets */
+  text-align: center;        /* centro del bloque */
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.hover-card ul.mini li{
+  margin: 6px 0;
+  padding: 0;
+  display: inline-flex;       /* para centrar icono + texto como bloque */
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;                   /* espacio entre paloma y texto */
+  text-align: left;           /* el texto multilínea queda prolijo */
+  max-width: 22rem;           /* opcional: limita ancho para que quiebre bonito */
+}
+
+.hover-card ul.mini li::before{
+  content: "\f00c";                           /* fa-check */
+  font-family: "Font Awesome 6 Free";         /* ya lo cargas en tu HTML */
+  font-weight: 900;                            /* sólido */
+  color: var(--morado);                        /* #522c84 */
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+/* Forzar lista en columna (uno debajo de otro) */
+.hover-card ul.mini{
+  display: flex;
+  flex-direction: column;   /* apíla verticalmente */
+  align-items: center;      /* centra cada ítem como bloque */
+  gap: 6px;                 /* espacio entre ítems */
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.hover-card ul.mini li{
+  display: flex;            /* (sobrescribe inline-flex si quedó antes) */
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 22rem;         /* opcional para cortes bonitos */
+  text-align: left;         /* texto multilínea ordenado */
+  margin: 0;
+  padding: 0;
+}
+
+/* Paloma morada (Font Awesome) */
+.hover-card ul.mini li::before{
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: var(--morado, #522c84);
+  font-size: 14px;
+  line-height: 1.2;
+  margin-right: 8px;
+}
+
   </style>
 </head>
 <body>
@@ -210,12 +274,13 @@
           <a href="terapia_grupal.html">Terapia Grupal</a>
           <a href="terapia_alternativa.html">Terapia Alternativa</a>
           <a href="orientacion_vocacional.html">Orientación Vocacional</a>
-          <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
+          <a href="peritaje_psicologico.html">Dictamen Psicológico</a>
         </div>
       </div>
-      <a href="#blog">Blog</a>
+      <a href="blog.html">Blog</a>
       <a href="convenios.html">Convenios</a>
       <a href="factura.html">Facturación</a>
+      <a href="videos.html">Videos</a>
     </div>
   </nav>
 
@@ -278,6 +343,7 @@
           <div class="hover-card" aria-hidden="true">
             <div class="role">Licenciada en Sociología y Maestra en Crimología</div>
             <ul class="mini">
+              <li>Corriente cognitivo conductual</li>
               <li>Especialista en Terapia Neural</li>
               <li>Ansiedad · Trastorno de ansiedad generalizada</li>
             </ul>
@@ -309,7 +375,7 @@
           </div>
         </div>
         <h3>Mtra Viviana Gómez</h3>
-        <p>Terapeuta Complementario</p>
+        <p>Terapia Alternativa Complementaria</p>
       </div>
 
       <!-- Coach Azul -->
@@ -329,7 +395,7 @@
           </div>
         </div>
         <h3>Coach Arlette Azul Gómez</h3>
-        <p>Terapeuta Complementario</p>
+        <p>Terapia Alternativa Complementaria</p>
       </div>
 
     </div>
@@ -371,9 +437,11 @@
 
 
   <!-- Botón WhatsApp flotante -->
-  <a href="https://wa.me/5217291797345" class="whatsapp-pill-float" target="_blank" aria-label="Agendar una cita">
-    <i class="fa-brands fa-whatsapp" style="margin-right:8px"></i> Agendar una cita
-  </a>
+  <a href="https://wa.me/5217291797345?text=Hola%2C%20estoy%20interesado%20en%20recibir%20m%C3%A1s%20informaci%C3%B3n%2C%20%C2%BFme%20podr%C3%ADa%20apoyar%3F" 
+   class="whatsapp-pill-float" target="_blank" aria-label="Agendar una cita">
+   <i class="fa-brands fa-whatsapp" style="margin-right:8px"></i> Agendar una cita
+</a>
+
 
   <!-- ==================== JS ==================== -->
   <script>

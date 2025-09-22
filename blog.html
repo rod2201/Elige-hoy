@@ -23,7 +23,7 @@
 
     <style>
       :root {
-        --morado: #6c63ff;
+        --morado: #522c84;
         --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.1);
         --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
         --shadow-brand-sm: 0 2px 8px rgba(108, 99, 255, 0.4);
@@ -47,6 +47,8 @@
         z-index: 1000;
         border-radius: 0;
         box-shadow: var(--shadow-sm);
+        transition: background-color 0.25s ease, backdrop-filter 0.25s ease,
+          box-shadow 0.25s ease;
       }
       .menu {
         margin: 0;
@@ -57,7 +59,7 @@
       }
       nav a {
         display: inline-block;
-        color: #275f34;
+        color: #f7f7f7;
         text-align: center;
         padding: 14px 20px;
         text-decoration: none;
@@ -173,6 +175,28 @@
         letter-spacing: 1px;
       }
 
+      /* LOGO PALPITANTE */
+      .logo-container {
+        text-align: center;
+        margin: 20px 0;
+      }
+      .logo-pulse {
+        width: 120px;
+        height: auto;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
       /* TARJETAS */
       .blog-card {
         cursor: pointer;
@@ -221,20 +245,29 @@
         border-radius: 10px;
         margin: 15px 0;
       }
-      nav {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        transition: background-color 0.25s ease, backdrop-filter 0.25s ease,
-          box-shadow 0.25s ease;
-      }
 
+      /* NAV GLASS */
       .nav-glass {
-        background: rgba(82, 44, 132, 0.55); /* #522c84 con transparencia */
+        background: rgba(82, 44, 132, 0.55);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.12); /* opcional */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 480px) {
+        body {
+          font-size: 14px;
+        }
+        nav {
+          flex-direction: column;
+          padding: 8px;
+        }
+        nav a {
+          padding: 10px 12px;
+          font-size: 14px;
+        }
       }
     </style>
   </head>
@@ -259,11 +292,16 @@
             <a href="peritaje_psicologico.html">Peritaje Psicológico</a>
           </div>
         </div>
-        <a href="#">Blog</a>
+        <a href="blog.html">Blog</a>
         <a href="convenios.html">Convenios</a>
         <a href="factura.html">Facturación</a>
       </div>
     </nav>
+
+    <!-- LOGO CON PALPITACIÓN -->
+    <div class="logo-container">
+      <img src="img/elige_hoy.png" alt="Logo Elige Hoy" class="logo-pulse" />
+    </div>
 
     <!-- HEADER -->
     <header data-aos="fade-down">
@@ -367,6 +405,21 @@
         );
         modal.show();
       }
+
+      // NAV GLASS
+      (function () {
+        const nav = document.querySelector("nav");
+        const threshold = 12;
+        function toggleNavGlass() {
+          if (window.scrollY > threshold) {
+            nav.classList.add("nav-glass");
+          } else {
+            nav.classList.remove("nav-glass");
+          }
+        }
+        window.addEventListener("scroll", toggleNavGlass, { passive: true });
+        window.addEventListener("load", toggleNavGlass);
+      })();
     </script>
 
     <!-- Bootstrap JS -->
@@ -375,23 +428,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
       AOS.init({ duration: 800, once: true });
-    </script>
-    <script>
-      (function () {
-        const nav = document.querySelector("nav");
-        const threshold = 12; // píxeles de scroll para activar
-
-        function toggleNavGlass() {
-          if (window.scrollY > threshold) {
-            nav.classList.add("nav-glass");
-          } else {
-            nav.classList.remove("nav-glass");
-          }
-        }
-
-        window.addEventListener("scroll", toggleNavGlass, { passive: true });
-        window.addEventListener("load", toggleNavGlass);
-      })();
     </script>
   </body>
 </html>

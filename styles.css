@@ -1672,14 +1672,14 @@ nav.nav-glass a:focus-visible {
 /* Quitar subrayado y color azul en enlaces del blog */
 #blog a,
 #blog a:visited {
-  color: var(--morado);        /* o el color que quieras */
+  color: var(--morado); /* o el color que quieras */
   text-decoration: none !important;
 }
 
 #blog a:hover,
 #blog a:focus-visible {
-  color: var(--verde);         /* color al pasar el mouse */
-  text-decoration: underline;  /* o 'none' si no quieres nada */
+  color: var(--verde); /* color al pasar el mouse */
+  text-decoration: underline; /* o 'none' si no quieres nada */
 }
 
 /* SOLO en móviles: mantener enlaces del menú hamburguesa en verde */
@@ -1865,73 +1865,106 @@ nav.nav-glass a:focus-visible {
 }
 
 /* --- Submenú estable (desktop) y usable (móvil) --- */
-nav .has-submenu-container{ position: relative; }
+nav .has-submenu-container {
+  position: relative;
+}
 
 /* “Puente” invisible para que no se pierda el hover al bajar al submenú */
-nav .has-submenu-container::after{
-  content:"";
-  position:absolute; left:0; right:0; top:100%;
-  height:0; /* sin puente por defecto */
+nav .has-submenu-container::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 0; /* sin puente por defecto */
 }
-nav .has-submenu-container:hover::after{ height:10px; } /* puente de 10px */
+nav .has-submenu-container:hover::after {
+  height: 10px;
+} /* puente de 10px */
 
 /* Panel del submenú */
-nav .submenu{
-  position:absolute; left:0; top:100%;
+nav .submenu {
+  position: absolute;
+  left: 0;
+  top: 100%;
   min-width: 240px;
-  background:#fff;
-  border-radius:12px;
-  padding:8px 0;
-  margin:0;                    /* ¡sin margenes que abran huecos! */
-  box-shadow:0 12px 28px rgba(0,0,0,.14);
-  border:1px solid rgba(82,44,132,.12);
-  opacity:0; visibility:hidden; transform: translateY(8px);
-  transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
-  pointer-events:none;
+  background: #fff;
+  border-radius: 12px;
+  padding: 8px 0;
+  margin: 0; /* ¡sin margenes que abran huecos! */
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(82, 44, 132, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.18s ease, transform 0.18s ease,
+    visibility 0s linear 0.18s;
+  pointer-events: none;
   z-index: 2000;
 }
-nav .submenu a{
-  display:block; padding:10px 16px; white-space: nowrap;
-  color:#275f34; text-decoration:none;
+nav .submenu a {
+  display: block;
+  padding: 10px 16px;
+  white-space: nowrap;
+  color: #275f34;
+  text-decoration: none;
 }
-nav .submenu a:hover{
-  background: #522c84; color:#fff;
+nav .submenu a:hover {
+  background: #522c84;
+  color: #fff;
 }
 
 /* Mostrar en DESKTOP por hover y por focus (accesible) */
-@media (hover:hover){
+@media (hover: hover) {
   nav .has-submenu-container:hover > .submenu,
-  nav .has-submenu-container:focus-within > .submenu{
-    opacity:1; visibility:visible; transform: translateY(0); pointer-events:auto;
+  nav .has-submenu-container:focus-within > .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
     transition-delay: 0s;
   }
 }
 
 /* MÓVIL: el submenú se hace “estático” y solo se abre con .active */
-@media (max-width: 980px){
-  nav .submenu{
-    position: static; top:auto; left:auto;
-    box-shadow:none; border:none; background:transparent;
-    padding: 0; transform:none; opacity:1; visibility:visible;
-    pointer-events:auto; display:none;
+@media (max-width: 980px) {
+  nav .submenu {
+    position: static;
+    top: auto;
+    left: auto;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    display: none;
   }
-  nav .has-submenu-container.active > .submenu{ display:block; }
+  nav .has-submenu-container.active > .submenu {
+    display: block;
+  }
 }
 
 /* ===== Nuestros Valores (mismo estilo que mission-vision) ===== */
-.valores .card { text-align: left; } /* títulos centrados por la card, pero texto/lista a la izquierda */
+.valores .card {
+  text-align: left;
+} /* títulos centrados por la card, pero texto/lista a la izquierda */
 
-.values-list{
+.values-list {
   list-style: none;
   margin: 16px 0 0;
   padding: 0;
   columns: 1;
   column-gap: 28px;
 }
-@media (min-width: 900px){
-  .values-list{ columns: 2; } /* 2 columnas en pantallas grandes */
+@media (min-width: 900px) {
+  .values-list {
+    columns: 2;
+  } /* 2 columnas en pantallas grandes */
 }
-.values-list li{
+.values-list li {
   break-inside: avoid;
   margin: 8px 0 10px;
   line-height: 1.55;
@@ -1942,32 +1975,35 @@ nav .submenu a:hover{
   position: relative;
   color: #444;
 }
-.values-list li::before{
+.values-list li::before {
   content: "\f00c"; /* check de Font Awesome */
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   position: absolute;
-  left: 0; top: 0.1rem;
+  left: 0;
+  top: 0.1rem;
   font-size: 0.95rem;
   color: var(--morado);
-  text-shadow: 0 0 10px rgba(82,44,132,.25);
+  text-shadow: 0 0 10px rgba(82, 44, 132, 0.25);
 }
 
 /* Icono superior coherente con M/V */
-.valores .card .icon{
+.valores .card .icon {
   font-size: 2.6rem;
   color: var(--morado);
   margin-bottom: 10px;
-  filter: drop-shadow(0 6px 16px rgba(82,44,132,.25));
+  filter: drop-shadow(0 6px 16px rgba(82, 44, 132, 0.25));
 }
 
 /* Texto blanco al pasar el cursor en "Nuestros valores",
    igual que en Misión / Visión */
-.valores .glass-card * { transition: color .2s ease; } /* suaviza cambio */
+.valores .glass-card * {
+  transition: color 0.2s ease;
+} /* suaviza cambio */
 
 .valores .glass-card:hover,
-.valores .glass-card:focus-within { 
-  color: #fff;                   /* color por defecto dentro de la card */
+.valores .glass-card:focus-within {
+  color: #fff; /* color por defecto dentro de la card */
 }
 
 /* Fuerza blanco en elementos que tenían color propio */
@@ -1982,12 +2018,60 @@ nav .submenu a:hover{
 }
 
 /* Icono superior y checks de la lista en blanco también */
-.valores .glass-card:hover .icon { 
-  color: #fff; 
-  filter: drop-shadow(0 0 14px rgba(255,255,255,.35));
+.valores .glass-card:hover .icon {
+  color: #fff;
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.35));
 }
-.valores .glass-card:hover .values-list li::before{
-  color:#fff;
-  text-shadow: 0 0 10px rgba(255,255,255,.35);
+.valores .glass-card:hover .values-list li::before {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
 }
 
+/* ==================== AJUSTES RESPONSIVE ==================== */
+
+/* Teléfonos muy pequeños */
+@media (max-width: 576px) {
+  body {
+    font-size: 14px;
+  }
+  nav {
+    flex-direction: column;
+    padding: 10px;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    text-align: center;
+  }
+  section {
+    padding: 30px 15px;
+  }
+  h1,
+  h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  body {
+    font-size: 15px;
+  }
+  .container {
+    padding: 0 15px;
+  }
+}
+
+/* Pantallas grandes */
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1500px;
+  }
+  body {
+    font-size: 18px;
+  }
+  section {
+    padding: 80px 40px;
+  }
+}
