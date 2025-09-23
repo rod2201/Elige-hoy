@@ -787,7 +787,7 @@
           target="_blank"
           ><i class="fab fa-youtube"></i
         ></a>
-        <a href="https://www.tiktok.com/@eligehoyaepsiclog" target="_blank"
+        <a href="https://www.tiktok.com/@armoniaemocional?_t=ZS-8zxNyJu6ovC&_r=1" target="_blank"
           ><i class="fab fa-tiktok"></i
         ></a>
         <a
@@ -998,12 +998,6 @@
         images.forEach((img) => observer.observe(img));
       });
     </script>
-
-    <a href="https://wa.me/527291797345?text=Hola%2C%20estoy%20interesado%20en%20recibir%20m%C3%A1s%20informaci%C3%B3n%2C%20%C2%BFme%20podr%C3%ADa%20apoyar%3F" class="btn btn-success mt-2">Solicitar información por WhatsApp</a>
-
-      <i class="fab fa-whatsapp"></i>
-      Chatea con nosotros
-    </a>
 
     <script>
       window.addEventListener("scroll", () => {
@@ -1326,5 +1320,78 @@
         cards.forEach((card) => cardObserver.observe(card));
       });
     </script>
+
+    <!-- FAB + menú WhatsApp / Business -->
+<div class="wa-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999">
+  <button class="whatsapp-float" type="button" id="waMainBtn">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span>Chatea con nosotros</span>
+  </button>
+
+  <div class="wa-menu">
+    <button type="button" onclick="openWA('personal')">
+      <i class="fa-brands fa-whatsapp"></i> WhatsApp
+    </button>
+    <button type="button" onclick="openWA('business')">
+      <i class="fa-brands fa-whatsapp"></i> WhatsApp Business
+    </button>
+  </div>
+</div>
+
+<style>
+  .wa-menu{
+    position:absolute;right:0;bottom:60px;
+    display:none;                    /* 👈 OCULTO por defecto */
+    flex-direction:column;min-width:220px;
+    background:#fff;border-radius:12px;
+    box-shadow:0 10px 24px rgba(0,0,0,.22);overflow:hidden
+  }
+  .wa-menu.show{ display:flex; }     /* 👈 ESTA REGLA FALTABA */
+  .wa-menu button{ display:flex;gap:.5rem;align-items:center;
+    padding:10px 12px;border:0;background:#fff;cursor:pointer;font-weight:600 }
+  .wa-menu button:hover{ background:#f4f4f4 }
+</style>
+
+<script>
+  // Toggle del menú
+  const waMainBtn = document.getElementById('waMainBtn');
+  const waMenu = document.querySelector('.wa-menu');
+  waMainBtn.addEventListener('click', () => waMenu.classList.toggle('show'));
+
+  // Cerrar si clic fuera
+  document.addEventListener('click', (e)=>{
+    const fab = document.querySelector('.wa-fab');
+    if (!fab.contains(e.target)) waMenu.classList.remove('show');
+  });
+
+  // Abrir WA según plataforma
+  function openWA(kind){
+    const phone = '5217291797345'; // MX 52 + 1 + número móvil
+    const text  = encodeURIComponent('Hola, estoy interesado(a) en recibir más información. ¿Me pueden apoyar?');
+    const ua    = navigator.userAgent || '';
+    const isAndroid = /Android/i.test(ua);
+    const isMobile  = /Android|iPhone|iPad|iPod/i.test(ua);
+
+    if (isAndroid) {
+      // Forzar app específica en Android
+      const pkg = (kind === 'business') ? 'com.whatsapp.w4b' : 'com.whatsapp';
+      window.location.href = `intent://send/?phone=${phone}&text=${text}#Intent;scheme=whatsapp;package=${pkg};end`;
+      // Fallback si no está instalada
+      setTimeout(()=> window.location.href = `https://wa.me/${phone}?text=${text}`, 1200);
+      return;
+    }
+
+    if (isMobile) {
+      // iOS: no se puede forzar Business
+      window.location.href = `whatsapp://send?phone=${phone}&text=${text}`;
+      setTimeout(()=> window.location.href = `https://wa.me/${phone}?text=${text}`, 1200);
+      return;
+    }
+
+    // Escritorio: abre WhatsApp Web en la MISMA pestaña (menos bloqueos)
+    window.location.href = `https://web.whatsapp.com/send?phone=${phone}&text=${text}`;
+  }
+</script>
+
   </body>
 </html>
