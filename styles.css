@@ -833,6 +833,7 @@ nav a:focus-visible {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .mission-vision .section-title {
   width: 100%;
   text-align: center;
@@ -855,27 +856,28 @@ nav a:focus-visible {
   color: #333;
 }
 
-.mission-vision .cards {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  flex-wrap: wrap;
+/* ---- GRID 3-2-1 en lugar de flex-wrap ---- */
+.mission-vision .cards{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columnas desktop */
   gap: 30px;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;   /* más ancho para que quepan las 3 */
   margin: 0 auto;
 }
+
 .mission-vision .card {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(4px);
   padding: 26px;
   border-radius: 16px;
   width: 100%;
-  max-width: 400px;
+  max-width: none;                 /* ← sin tope de 400px */
   text-align: center;
   box-shadow: var(--shadow-brand-sm);
-  /* FIX: opacity 50 -> eliminado (era inválido) */
   animation: palpitar 5s infinite ease-in-out;
+  display: flex;                   /* alturas más parejas */
+  flex-direction: column;
 }
 .mission-vision .card:hover {
   transform: translateY(-6px);
@@ -897,12 +899,17 @@ nav a:focus-visible {
   color: #555;
   line-height: 1.6;
   font-family: "Lato", sans-serif;
+  flex: 1;                         /* el texto ocupa el alto disponible */
 }
-@media (max-width: 768px) {
-  .mission-vision .card {
-    margin: 0 auto;
-  }
+
+/* Responsivo: 2 columnas en tablet, 1 en móvil */
+@media (max-width: 1024px){
+  .mission-vision .cards{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+@media (max-width: 640px){
+  .mission-vision .cards{ grid-template-columns: 1fr; }
+}
+
 
 /* ===============  FOOTER  =============== */
 footer {
@@ -2110,3 +2117,14 @@ nav .submenu a:hover {
   .top-slogan{ font-size:20px; padding:12px 16px; }
 }
 
+
+/* Centrar la única card de #valores */
+.valores .cards{
+  display: flex;              /* override al grid de mission-vision */
+  justify-content: center;    /* centra horizontalmente */
+}
+
+.valores .card{
+  max-width: 900px;           /* el ancho que ya venías usando */
+  margin: 0 auto;             /* seguridad extra para centrar */
+}
