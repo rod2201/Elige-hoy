@@ -2091,3 +2091,18 @@ nav .submenu a:hover {
     padding: 80px 40px;
   }
 }
+
+/* Barra de eslogan superior */
+.top-slogan{
+  display:flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:10px 14px;
+  background:#fff;                 /* o #f8f4fb si quieres muy sutil */
+  color:#522c84;
+  font-family:'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight:600; font-size:15px; line-height:1.2; text-align:center;
+  border-bottom:2px solid #522c84; /* la línea morada que se ve en tu captura */
+}
+.top-slogan i{ opacity:.9; font-size:.9em }
+@media (max-width:480px){
+  .top-slogan{ font-size:13px; padding:8px 10px; }
+}
