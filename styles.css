@@ -2128,3 +2128,23 @@ nav .submenu a:hover {
   max-width: 900px;           /* el ancho que ya venías usando */
   margin: 0 auto;             /* seguridad extra para centrar */
 }
+
+.eslogan-script{
+  font-family: "Great Vibes", cursive; /* caligrafía elegante */
+  font-size: 2rem;                     /* ajusta a tu diseño */
+  line-height: 1.1;
+  letter-spacing: .5px;                /* opcional: suaviza el trazo */
+  font-weight: 400;
+}
+
+.top-slogan i{ 
+  margin: 0 .4rem; 
+  transform: translateY(2px);          /* alinea comillas con el texto */
+}
+
+/* Opcional: tamaño un poco menor en móvil */
+@media (max-width: 480px){
+  .eslogan-script{ font-size: 1.6rem; }
+}
+
+
